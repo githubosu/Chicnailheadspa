@@ -722,7 +722,7 @@
 
 
     /* ─────────────────────────────────────────────
-       TESTIMONIALS — The Lane style
+       TESTIMONIALS
     ───────────────────────────────────────────── */
     #testimonials {
       background: var(--charcoal);
@@ -738,8 +738,24 @@
       text-transform: uppercase;
       color: rgba(255,255,255,.35);
       display: block;
-      margin-bottom: 3.5rem;
+      margin-bottom: 2.5rem;
     }
+    /* Overall rating summary bar */
+    .reviews-summary {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .reviews-summary.visible { display: flex; }
+    .reviews-stars-row { display: flex; align-items: center; gap: .5rem; }
+    .reviews-stars-glyph { color: #f6b84b; font-size: 1.05rem; letter-spacing: .05em; line-height: 1; }
+    .reviews-score { font-family: var(--font-serif); font-size: 1.55rem; font-weight: 200; color: rgba(255,255,255,.85); }
+    .reviews-count-text { font-size: .72rem; font-weight: 300; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+    .reviews-google-link { font-size: .7rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid rgba(201,169,110,.3); padding-bottom: 2px; transition: border-color .2s; }
+    .reviews-google-link:hover { border-color: var(--gold); }
     /* Carousel wrapper */
     .quote-carousel {
       max-width: 780px;
@@ -1425,11 +1441,15 @@
   </section>
 
   <!-- ══════════════════════════════════════════
-       TESTIMONIALS — From Our Clients
+       TESTIMONIALS — Live Google Reviews
   ══════════════════════════════════════════ -->
   <section id="testimonials">
     <span class="testimonials-label">From Our Clients</span>
 
+    <!-- Overall rating bar — shown once Places API loads -->
+    <div class="reviews-summary" id="reviewsSummary"></div>
+
+    <!-- Carousel — static fallback slides replaced by live reviews on load -->
     <div class="quote-carousel" id="quoteCarousel">
 
       <div class="quote-slide active">
@@ -1614,23 +1634,29 @@
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
 
-    // ── Quote carousel ──
-    const slides = document.querySelectorAll('.quote-slide');
-    const dots   = document.querySelectorAll('.quote-dot');
-    let current  = 0, timer;
-
-    function showSlide(n) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = (n + slides.length) % slides.length;
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
+    // ── Quote carousel (re-entrant — safe to call after DOM update) ──
+    let _carouselTimer;
+    function startCarousel() {
+      clearInterval(_carouselTimer);
+      const slides = document.querySelectorAll('.quote-slide');
+      const dots   = document.querySelectorAll('.quote-dot');
+      let current  = 0;
+      if (!slides.length) return;
+      function showSlide(n) {
+        slides[current].classList.remove('active');
+        if (dots[current]) dots[current].classList.remove('active');
+        current = (n + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        if (dots[current]) dots[current].classList.add('active');
+      }
+      _carouselTimer = setInterval(() => showSlide(current + 1), 5500);
+      dots.forEach((dot, i) => dot.addEventListener('click', () => {
+        showSlide(i);
+        clearInterval(_carouselTimer);
+        _carouselTimer = setInterval(() => showSlide(current + 1), 5500);
+      }));
     }
-    function startAuto() { timer = setInterval(() => showSlide(current + 1), 5500); }
-    function resetAuto()  { clearInterval(timer); startAuto(); }
-
-    dots.forEach((dot, i) => dot.addEventListener('click', () => { showSlide(i); resetAuto(); }));
-    startAuto();
+    startCarousel();
 
     // Service accordion — More Details toggle
     document.querySelectorAll('.more-details-btn').forEach(btn => {
@@ -1641,6 +1667,86 @@
         if (details) details.classList.toggle('open', isOpen);
       });
     });
+  </script>
+
+  <!-- ══════════════════════════════════════════
+       GOOGLE PLACES REVIEWS
+       1. Paste your API key into GOOGLE_MAPS_KEY
+       2. Paste your Place ID into GOOGLE_PLACE_ID
+          (find it at: developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)
+  ══════════════════════════════════════════ -->
+  <script>
+    const GOOGLE_MAPS_KEY = 'YOUR_API_KEY_HERE';   // ← replace
+    const GOOGLE_PLACE_ID = 'YOUR_PLACE_ID_HERE';  // ← replace
+
+    // Called automatically by the Maps JS API once loaded
+    window.initReviews = function() {
+      if (!GOOGLE_PLACE_ID || GOOGLE_PLACE_ID === 'YOUR_PLACE_ID_HERE') return;
+      const dummy = document.createElement('div');
+      const svc   = new google.maps.places.PlacesService(dummy);
+      svc.getDetails(
+        { placeId: GOOGLE_PLACE_ID, fields: ['reviews', 'rating', 'user_ratings_total'] },
+        function(place, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK && place.reviews && place.reviews.length) {
+            _renderReviews(place.reviews, place.rating, place.user_ratings_total);
+          }
+        }
+      );
+    };
+
+    function _renderReviews(reviews, rating, total) {
+      const carousel  = document.getElementById('quoteCarousel');
+      const dotsEl    = document.getElementById('quoteDots');
+      const summaryEl = document.getElementById('reviewsSummary');
+
+      // Overall rating bar
+      if (summaryEl && rating) {
+        const filled = Math.round(rating);
+        const stars  = '★'.repeat(filled) + '☆'.repeat(5 - filled);
+        summaryEl.innerHTML =
+          '<span class="reviews-stars-row">' +
+            '<span class="reviews-stars-glyph">' + stars + '</span>' +
+            '<span class="reviews-score">' + rating.toFixed(1) + '</span>' +
+          '</span>' +
+          '<span class="reviews-count-text">' + total.toLocaleString() + ' Google reviews</span>' +
+          '<a href="https://maps.app.goo.gl/8KmWubmG9RsnXehW9?g_st=ic" target="_blank" rel="noopener" class="reviews-google-link">Read all reviews ↗</a>';
+        summaryEl.classList.add('visible');
+      }
+
+      // Top 5 — highest rated first, then most recent
+      const top5 = [...reviews]
+        .sort((a, b) => b.rating - a.rating || b.time - a.time)
+        .slice(0, 5);
+
+      carousel.innerHTML = top5.map(function(r, i) {
+        return '<div class="quote-slide' + (i === 0 ? ' active' : '') + '">' +
+          '<p class="quote-text">' + _esc(r.text) + '</p>' +
+          '<p class="quote-attribution">' + _esc(r.author_name) +
+            ' &nbsp;|&nbsp; <a href="https://maps.app.goo.gl/8KmWubmG9RsnXehW9?g_st=ic" target="_blank" rel="noopener">Google Review</a></p>' +
+          '</div>';
+      }).join('');
+
+      dotsEl.innerHTML = top5.map(function(_, i) {
+        return '<button class="quote-dot' + (i === 0 ? ' active' : '') + '" aria-label="Review ' + (i + 1) + '"></button>';
+      }).join('');
+
+      startCarousel();
+    }
+
+    function _esc(str) {
+      const d = document.createElement('div');
+      d.appendChild(document.createTextNode(str));
+      return d.innerHTML;
+    }
+
+    // Dynamically inject the Maps JS API only when keys are configured
+    if (GOOGLE_MAPS_KEY && GOOGLE_MAPS_KEY !== 'YOUR_API_KEY_HERE') {
+      const s   = document.createElement('script');
+      s.src     = 'https://maps.googleapis.com/maps/api/js?key=' + GOOGLE_MAPS_KEY + '&libraries=places&callback=initReviews&loading=async';
+      s.async   = true;
+      s.defer   = true;
+      document.head.appendChild(s);
+    }
   </script>
 </body>
 </html>
