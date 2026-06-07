@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meet Our Artists — Chic Nail &amp; Head Spa</title>
+  <meta name="description" content="Meet the talented artists at Chic Nail And Head Spa — nail technicians, head spa therapists, and specialists dedicated to your experience." />
+  <meta property="og:title" content="Meet Our Artists — Chic Nail &amp; Head Spa" />
+  <meta property="og:description" content="Meet the nail technicians and head spa therapists dedicated to your experience at Chic Nail &amp; Head Spa in Plain City, Ohio." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232c2420'/><text x='16' y='24' font-size='20' font-family='Georgia%2C serif' font-style='italic' text-anchor='middle' fill='%23c9a96e'>C</text></svg>" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --blush:      #f5ddd6;
+      --cream:      #fdf8f4;
+      --warm-white: #fff9f6;
+      --gold:       #c9a96e;
+      --gold-text:  #8a6322;
+      --gold-light: #e8d5b0;
+      --charcoal:   #2c2420;
+      --muted:      #8a7570;
+      --border:     #eeddd5;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Jost', system-ui, sans-serif;
+      --text-xs:    .75rem;
+      --text-sm:    .75rem;
+      --text-base:  .875rem;
+      --text-md:    1rem;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: var(--font-sans); background: var(--cream); color: var(--charcoal); line-height: 1.65; font-size: 16px; }
+    img  { max-width: 100%; display: block; }
+    a    { color: inherit; text-decoration: none; }
+
+    /* ── NAV — always solid on interior pages ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 0 1.75rem;
+      background: rgba(253,248,244,.97);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 20px rgba(44,36,32,.06);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: none;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    @media (min-width: 700px) { .nav-links { display: flex; } }
+    .nav-links a {
+      font-size: .75rem;
+      font-weight: 400;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a.active { color: var(--charcoal); }
+    .nav-book {
+      font-family: var(--font-sans);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: .6rem 1.4rem;
+      background: var(--charcoal);
+      border: none;
+      color: #fff;
+      border-radius: 3px;
+      transition: background .25s, transform .15s;
+      box-shadow: 0 2px 12px rgba(44,36,32,.25);
+    }
+    .nav-book:hover { background: #3e2e28; transform: translateY(-1px); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--charcoal);
+      padding: 7rem 1.25rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 700px) { .page-hero { padding: 9rem 1.75rem 6rem; } }
+    /* subtle grain texture via pseudo-element */
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-label {
+      font-family: var(--font-sans);
+      font-size: .75rem;
+      font-weight: 400;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .page-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3.2rem, 10vw, 6.5rem);
+      font-weight: 200;
+      color: rgba(255,255,255,.9);
+      line-height: 1.0;
+      letter-spacing: -.01em;
+      margin-bottom: 1.75rem;
+    }
+    .page-hero-title em { font-style: italic; color: var(--gold-light); }
+    .page-hero-sub {
+      font-size: .82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.38);
+      letter-spacing: .06em;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.9;
+    }
+    /* decorative rule */
+    .page-hero-rule {
+      width: 36px;
+      height: 1px;
+      background: rgba(201,169,110,.4);
+      margin: 1.75rem auto 0;
+    }
+
+    /* ── ARTISTS SECTION ── */
+    .artists-section {
+      background: var(--warm-white);
+      padding: 4.5rem 1.25rem 5rem;
+    }
+    @media (min-width: 700px) { .artists-section { padding: 6rem 1.75rem 7rem; } }
+    .artists-section-inner { max-width: 1100px; margin: 0 auto; }
+    .artists-intro {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .artists-intro .section-label {
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+      font-weight: 400;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .artists-intro .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 200;
+      color: var(--charcoal);
+      line-height: 1.1;
+    }
+    .artists-intro .section-title em { font-style: italic; color: var(--gold-text); }
+
+    /* Grid */
+    .artists-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem 2rem;
+    }
+    @media (min-width: 500px) {
+      .artists-grid { grid-template-columns: 1fr 1fr; gap: 4rem 2rem; }
+    }
+    @media (min-width: 900px) {
+      .artists-grid { grid-template-columns: repeat(3, 1fr); gap: 5rem 2.5rem; }
+    }
+
+    /* Artist card */
+    .artist-card { display: flex; flex-direction: column; }
+    .artist-photo {
+      aspect-ratio: 3 / 4;
+      background: var(--blush);
+      overflow: hidden;
+      margin-bottom: 1.4rem;
+    }
+    .artist-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .7s ease;
+    }
+    .artist-card:hover .artist-photo img { transform: scale(1.04); }
+    .artist-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--muted);
+    }
+    .artist-photo-placeholder .ap-icon {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: var(--gold-light);
+      opacity: .5;
+    }
+    .artist-photo-placeholder .ap-text {
+      font-size: .75rem;
+      font-weight: 300;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .4;
+    }
+    .artist-name {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      letter-spacing: .01em;
+      margin-bottom: .3rem;
+      line-height: 1.1;
+    }
+
+    /* ── BOOKING CTA ── */
+    .team-cta {
+      background: var(--charcoal);
+      padding: 5rem 1.25rem;
+      text-align: center;
+    }
+    @media (min-width: 700px) { .team-cta { padding: 7rem 1.75rem; } }
+    .team-cta-eyebrow {
+      font-size: .75rem;
+      font-weight: 400;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .team-cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 200;
+      font-style: italic;
+      color: rgba(255,255,255,.9);
+      line-height: 1.08;
+      margin-bottom: 2.75rem;
+    }
+    .btn-book {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      padding: 1.1rem 3rem;
+      background: var(--gold);
+      color: var(--charcoal);
+      border-radius: 3px;
+      transition: background .25s, transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(201,169,110,.35);
+    }
+    .btn-book:hover { background: #d4b47a; transform: translateY(-2px); box-shadow: 0 6px 28px rgba(201,169,110,.5); }
+
+    /* ── COMBINED FOOTER ── */
+    footer { background: #1a110d; }
+    .footer-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3.5rem 1.25rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 700px) {
+      .footer-main { grid-template-columns: 1.4fr 1fr 1fr; padding: 5rem 1.75rem 3.5rem; gap: 3rem; }
+    }
+    .footer-logo { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .3rem; }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline { font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-bottom: 1.75rem; }
+    .footer-social { display: flex; gap: .65rem; align-items: center; }
+    .footer-social-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.07); transition: background .2s; }
+    .footer-social-btn:hover { background: rgba(255,255,255,.15); }
+    .footer-col-label { font-size: .75rem; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .9rem; }
+    .footer-contact-item { margin-bottom: 1rem; }
+    .footer-contact-item p { font-size: .83rem; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.7; }
+    .footer-contact-item a { color: rgba(255,255,255,.5); transition: color .2s; }
+    .footer-contact-item a:hover { color: var(--gold); }
+    .footer-hours { width: 100%; border-collapse: collapse; }
+    .footer-hours td { padding: .22rem 0; font-size: .76rem; font-weight: 300; color: rgba(255,255,255,.45); }
+    .footer-hours td:first-child { color: rgba(255,255,255,.25); width: 85px; font-size: .7rem; letter-spacing: .04em; }
+    .footer-book-btn { display: inline-flex; align-items: center; font-size: .75rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: .85rem 1.5rem; background: var(--gold); color: var(--charcoal); border-radius: 3px; transition: background .2s; }
+    .footer-book-btn:hover { background: #d4b47a; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.06); margin: 0; }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; padding: 1.25rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: .9rem; text-align: center; }
+    @media (min-width: 700px) { .footer-bottom { flex-direction: row; justify-content: space-between; padding: 1.25rem 1.75rem; text-align: left; } }
+    .footer-nav { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; justify-content: center; }
+    .footer-nav a { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.22); transition: color .2s; }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-copy { font-size: .75rem; letter-spacing: .06em; color: rgba(255,255,255,.18); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ── FOCUS RING ── */
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ── HAMBURGER BUTTON ── */
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 44px; height: 44px;   /* 44×44 touch target */
+      padding: 15px 11px;          /* centers 22×14 visual inside */
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    @media (min-width: 700px) { .nav-hamburger { display: none; } }
+    .ham-line {
+      display: block;
+      width: 100%; height: 1.5px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      transition: transform .3s ease, opacity .3s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open .ham-line:nth-child(1) { transform: translateY(6.25px) rotate(45deg); }
+    .nav-hamburger.open .ham-line:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open .ham-line:nth-child(3) { transform: translateY(-6.25px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(253,248,244,.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s cubic-bezier(.4,0,.2,1);
+      z-index: 199;
+    }
+    .mobile-menu.open { max-height: 420px; }
+    .mobile-menu-link {
+      display: block;
+      padding: 1rem 1.75rem;
+      font-size: var(--text-xs);
+      font-weight: 400;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      transition: color .2s;
+    }
+    .mobile-menu-link:last-child { border-bottom: none; }
+    .mobile-menu-link:hover,
+    .mobile-menu-link:active  { color: var(--charcoal); }
+
+    @media (max-width: 699px) {
+      .nav-book { display: none; }
+    }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</a>
+      <ul class="nav-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#why">About</a></li>
+        <li><a href="team.html" class="active">Team</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
+      <a class="nav-book" href="https://manage2.mangoforsalon.com/nextview/onlinebooking/online.html?RVCNo=1552" target="_blank" rel="noopener">
+        Book Now
+      </a>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="index.html#services" class="mobile-menu-link">Services</a>
+    <a href="index.html#why" class="mobile-menu-link">About</a>
+    <a href="team.html" class="mobile-menu-link">Team</a>
+    <a href="gallery.html" class="mobile-menu-link">Gallery</a>
+    <a href="#contact" class="mobile-menu-link">Contact</a>
+    <a href="https://manage2.mangoforsalon.com/nextview/onlinebooking/online.html?RVCNo=1552" target="_blank" rel="noopener" class="mobile-menu-link" style="color:var(--charcoal);font-weight:500;">Book Now</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PAGE HERO
+  ══════════════════════════════════════════ -->
+  <div class="page-hero">
+    <h1 class="page-hero-title">Meet Our<br><em>Team</em></h1>
+    <p class="page-hero-sub">Talented technicians, one shared passion — making every visit feel exceptional.</p>
+    <div class="page-hero-rule"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       ARTISTS GRID
+  ══════════════════════════════════════════ -->
+  <section class="artists-section">
+    <div class="artists-section-inner">
+
+      <div class="artists-grid">
+
+        <!-- Card 1 -->
+        <div class="artist-card reveal">
+          <div class="artist-photo">
+            <img src="https://static.wixstatic.com/media/e11bb1_e5354d0fa37b441cb2d795a112c7cfb0~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0352.jpg" alt="Stevie Lane">
+          </div>
+          <h2 class="artist-name">Stevie Lane</h2>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="artist-card reveal reveal-delay-1">
+          <div class="artist-photo">
+            <img src="https://static.wixstatic.com/media/e11bb1_77acd09d544641449d2d40328a18f316~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0019.jpg" alt="Frank Lane">
+          </div>
+          <h2 class="artist-name">Frank Lane</h2>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="artist-card reveal reveal-delay-2">
+          <div class="artist-photo">
+            <img src="https://static.wixstatic.com/media/e11bb1_71d4400a818643a49d6452123c08f015~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0144.jpg" alt="Lacey Leeder">
+          </div>
+          <h2 class="artist-name">Lacey Leeder</h2>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="artist-card reveal">
+          <div class="artist-photo">
+            <img src="https://static.wixstatic.com/media/e11bb1_420070c248924f8ea520d53f91454515~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0696.jpg" alt="Becca Rogers">
+          </div>
+          <h2 class="artist-name">Becca Rogers</h2>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="artist-card reveal reveal-delay-1">
+          <div class="artist-photo">
+            <img src="https://static.wixstatic.com/media/e11bb1_ba5fa694c0a744a5a8c76cffa9e1fc5d~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0804.jpg" alt="Todd Okimura-Strelitz">
+          </div>
+          <h2 class="artist-name">Todd Okimura-Strelitz</h2>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="artist-card reveal reveal-delay-2">
+          <div class="artist-photo">
+            <img src="https://static.wixstatic.com/media/e11bb1_efbca3ba30f4409683fdc6c9b37945c5~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS1058.jpg" alt="Lindsey Kanakis">
+          </div>
+          <h2 class="artist-name">Lindsey Kanakis</h2>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="artist-card reveal">
+          <div class="artist-photo">
+            <img src="https://static.wixstatic.com/media/e11bb1_e7095455be4648d1942f3dc0364dd4b6~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0548.jpg" alt="Tanya Amador">
+          </div>
+          <h2 class="artist-name">Tanya Amador</h2>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="artist-card reveal reveal-delay-1">
+          <div class="artist-photo">
+            <img src="https://static.wixstatic.com/media/e11bb1_0b791c7d198c46d2a2927b59808e3e67~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS1186.jpg" alt="David Yepremian">
+          </div>
+          <h2 class="artist-name">David Yepremian</h2>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       BOOKING CTA
+  ══════════════════════════════════════════ -->
+  <section class="team-cta">
+    <span class="team-cta-eyebrow">Ready to Book?</span>
+    <h2 class="team-cta-title">Your perfect appointment awaits.</h2>
+    <a href="https://manage2.mangoforsalon.com/nextview/onlinebooking/online.html?RVCNo=1552" target="_blank" rel="noopener" class="btn-book">
+      Book Online Now
+    </a>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer id="contact">
+    <div class="footer-main">
+
+      <!-- Brand + Social -->
+      <div>
+        <div class="footer-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</div>
+        <p class="footer-tagline">Luxury · Care · Serenity</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/chicnailandheadspa" target="_blank" rel="noopener" aria-label="Facebook" class="footer-social-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047v-2.66c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.265h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" fill="rgba(255,255,255,.55)"/></svg>
+          </a>
+          <a href="https://www.instagram.com/chicnailandheadspa/" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="rgba(255,255,255,.55)"/></svg>
+          </a>
+          <a href="YOUR_GOOGLE_BUSINESS_URL" target="_blank" rel="noopener" aria-label="Google Business" class="footer-social-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09zM12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23zM5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62zM12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="rgba(255,255,255,.55)"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Visit / Hours -->
+      <div>
+        <span class="footer-col-label">Visit Us</span>
+        <div class="footer-contact-item">
+          <p>12076 Sycamore Trace<br>Plain City, Ohio 43064</p>
+        </div>
+        <div class="footer-contact-item">
+          <table class="footer-hours">
+            <tr><td>Mon – Fri</td><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><td>Saturday</td><td>9:00 AM – 6:00 PM</td></tr>
+            <tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr>
+          </table>
+        </div>
+        <div class="footer-contact-item" style="margin-top:1rem;">
+          <iframe src="https://www.google.com/maps?q=12076+Sycamore+Trace,+Plain+City,+OH+43064&output=embed&z=15" width="100%" height="160" style="border:0;border-radius:4px;opacity:.85;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Chic Nail &amp; Head Spa location"></iframe>
+        </div>
+      </div>
+
+      <!-- Contact / Book -->
+      <div>
+        <span class="footer-col-label">Get In Touch</span>
+        <div class="footer-contact-item">
+          <p><a href="tel:+16143899999">(614) 389-9999</a></p>
+        </div>
+        <div class="footer-contact-item">
+          <p><a href="mailto:hello@chicnailspa.com">hello@chicnailspa.com</a></p>
+        </div>
+        <div class="footer-contact-item" style="margin-top:1.75rem;">
+          <a href="https://manage2.mangoforsalon.com/nextview/onlinebooking/online.html?RVCNo=1552" target="_blank" rel="noopener" class="footer-book-btn">
+            Book Now
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="footer-divider">
+
+    <div class="footer-bottom">
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <p class="footer-copy">&copy; 2026 Chic Nail And Head Spa. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    } else {
+      const observer = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0, rootMargin: '-70px 0px -40px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    // Mobile menu
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+        mobileMenu.setAttribute('aria-hidden', !open);
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          hamburger.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+        });
+      });
+      document.addEventListener('click', e => {
+        if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.remove('open');
+          hamburger.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
