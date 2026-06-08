@@ -1,0 +1,178 @@
+{
+  "business": {
+    "name": "Chic Nail & Head Spa",
+    "tagline": "Luxury · Care · Serenity",
+    "phone": "(614) 389-9999",
+    "phone_link": "tel:+16143899999",
+    "email": "Chicnailheadspa@gmail.com",
+    "address_line1": "12076 Sycamore Trace",
+    "address_line2": "Plain City, Ohio 43064",
+    "booking_url": "https://manage2.mangoforsalon.com/nextview/onlinebooking/online.html?RVCNo=1552"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/chicnailandheadspa",
+    "instagram": "https://www.instagram.com/chicnailandheadspa/",
+    "google_business": "https://maps.app.goo.gl/8KmWubmG9RsnXehW9?g_st=ic"
+  },
+  "hours": [
+    { "days": "Mon – Fri", "time": "9:00 AM – 7:00 PM" },
+    { "days": "Saturday",      "time": "9:00 AM – 6:00 PM" },
+    { "days": "Sunday",        "time": "10:00 AM – 5:00 PM" }
+  ],
+  "services": [
+    {
+      "id": "manicure",
+      "title": "Manicure",
+      "groups": [
+        {
+          "title": "Base Services",
+          "items": [
+            { "name": "Chic Manicure",  "price": "$30", "note": "Soak, shape, cuticle care & polish" },
+            { "name": "Chic Gel",        "price": "$46", "note": "Long-wear gel color, up to 3 weeks" },
+            { "name": "Polish Change",   "price": "$20", "note": "Color refresh, hands or toes" },
+            { "name": "Gel Change",      "price": "$40", "note": "Gel color refresh, hands or toes" }
+          ]
+        },
+        {
+          "title": "Dip Powder",
+          "items": [
+            { "name": "Dip Powder",           "price": "$56", "note": "Natural nails — odorless, durable, no UV needed" },
+            { "name": "Dip Full Set / With Tips", "price": "$66", "note": "Dip with tip extensions" },
+            { "name": "Dip Pink & White",     "price": "$66", "note": "Classic French effect in dip powder" }
+          ]
+        },
+        {
+          "title": "Acrylic",
+          "items": [
+            { "name": "Acrylic Full Set",   "price": "$66+", "note": "Custom length & shape" },
+            { "name": "Acrylic Fill",        "price": "$56+", "note": "2–3 week maintenance fill" },
+            { "name": "Ombré Full Set",      "price": "$72+", "note": "Baby boomer / gradient powder effect" },
+            { "name": "Ombré Fill",          "price": "$67+", "note": "Fill for existing ombré set" },
+            { "name": "Pink & White Full Set", "price": "$76+", "note": "Classic sculpted French" },
+            { "name": "Pink Only",           "price": "$56+", "note": "Pink acrylic, no white tip" }
+          ]
+        },
+        {
+          "title": "Gel Extensions",
+          "items": [
+            { "name": "Builder Gel Full Set", "price": "$66+", "note": "Hard gel, flexible & strong" },
+            { "name": "Builder Gel Fill",     "price": "$60+", "note": "Fill for existing builder gel set" },
+            { "name": "Tap Gel Full Set",     "price": "$70+", "note": "Structured gel with natural flexibility" },
+            { "name": "Tap Gel Fill",         "price": "$60+", "note": "Fill for existing tap gel set" },
+            { "name": "Gel X Full Set",       "price": "$66+", "note": "Soft gel press-on extension" },
+            { "name": "Gel X Fill",           "price": "$60+", "note": "Fill for existing Gel X set" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pedicure",
+      "title": "Pedicure",
+      "section_note": "Gel color available on all pedicures · +$20",
+      "groups": [
+        {
+          "title": null,
+          "items": [
+            { "name": "Chic Classic",   "price": "$48", "note": "Soak, trim, exfoliate & polish" },
+            { "name": "Chic Relax",     "price": "$60", "note": "Classic + callus treatment, extended massage & hot towel wrap" },
+            { "name": "Chic Ritual",    "price": "$65", "note": "Relax + scrub, mask & cream", "badge": "Popular" },
+            { "name": "Chic Luxe",      "price": "$80", "note": "Ritual + paraffin wax" },
+            { "name": "Chic Signature", "price": "$90", "note": "Luxe + healing herbal neck wrap & hot stone massage" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "head-spa",
+      "title": "Head Spa",
+      "groups": [
+        {
+          "title": null,
+          "items": [
+            { "name": "Scalp Massage",      "price": "$45", "note": "30-min scalp & tension relief" },
+            { "name": "Scalp Treatment",    "price": "$65", "note": "Nourishing oil treatment + deep massage" },
+            { "name": "Scalp Detox",        "price": "$75", "note": "Deep cleanse for healthy hair growth · 50 min" },
+            { "name": "Signature Head Spa", "price": "$95", "note": "Scrub, mask, steam & extended massage · 60 min" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "add-ons",
+      "title": "Add-Ons",
+      "groups": [
+        {
+          "title": null,
+          "items": [
+            { "name": "Paraffin",       "price": "$14",       "note": "Hands or feet — deep moisture treatment" },
+            { "name": "Nail Art",       "price": "$7+ / nail", "note": "Custom designs, foils, gems, ombré" },
+            { "name": "Cat Eye",        "price": "$17+",      "note": "Magnetic chrome effect" },
+            { "name": "Chrome",         "price": "$15",       "note": "Mirror-finish powder effect" },
+            { "name": "French",         "price": "$7",        "note": "Classic or ombré tip" },
+            { "name": "Design French",  "price": "$10+",      "note": "Decorated or colored French tip" },
+            { "name": "Special Shape",  "price": "$7",        "note": "Non-standard nail shape — coffin, stiletto, etc." },
+            { "name": "Nail Repair",    "price": "$8+",       "note": "Per nail repair" },
+            { "name": "Gel Removal",    "price": "$17",       "note": "Safe soak-off removal" },
+            { "name": "Dip Removal",    "price": "$17",       "note": "Safe soak-off removal" },
+            { "name": "Acrylic Removal","price": "$25",       "note": "Gentle removal" },
+            { "name": "Matte Top Coat", "price": "$3",        "note": "Velvety matte finish on any service" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kids",
+      "title": "Kids",
+      "groups": [
+        {
+          "title": "Manicure",
+          "items": [
+            { "name": "Kid Mani",                   "price": "$20", "note": "Shape & regular polish — ages 12 & under" },
+            { "name": "Kid Mani Gel",               "price": "$35", "note": "Shape & gel polish" },
+            { "name": "Kid Polish Change (Hands)",  "price": "$12", "note": "Regular polish · Gel $27" }
+          ]
+        },
+        {
+          "title": "Pedicure",
+          "items": [
+            { "name": "Kid Pedi",                  "price": "$30", "note": "Soak, trim & regular polish" },
+            { "name": "Kid Pedi Gel",              "price": "$45", "note": "Soak, trim & gel polish" },
+            { "name": "Kid Polish Change (Toes)",  "price": "$14", "note": "Regular polish · Gel $29" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "waxing",
+      "title": "Waxing",
+      "groups": [
+        {
+          "title": "Face",
+          "items": [
+            { "name": "Eyebrows",                  "price": "$17+" },
+            { "name": "Eyebrow Tinting",           "price": "$25+" },
+            { "name": "Eyebrow Wax & Tint Combo",  "price": "$40+" },
+            { "name": "Lips",                      "price": "$9"   },
+            { "name": "Chin",                      "price": "$10+" },
+            { "name": "Sideburn",                  "price": "$15+" },
+            { "name": "Full Face",                 "price": "$45+" }
+          ]
+        },
+        {
+          "title": "Body",
+          "items": [
+            { "name": "Under Arms",  "price": "$35+" },
+            { "name": "Half Arms",   "price": "$45+" },
+            { "name": "Full Arms",   "price": "$65+" },
+            { "name": "Lower Legs",  "price": "$50+" },
+            { "name": "Upper Legs",  "price": "$55+" },
+            { "name": "Full Legs",   "price": "$85+" },
+            { "name": "Back / Chest","price": "$50+" },
+            { "name": "Bikini",      "price": "$45+" },
+            { "name": "Brazilian",   "price": "$75+" }
+          ]
+        }
+      ]
+    }
+  ]
+}
