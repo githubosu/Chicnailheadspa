@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 108">
+  <title>Chic Nail &amp; Head Spa</title>
+  <!-- Geometric 4-petal mark — larger, centered -->
+  <ellipse cx="80" cy="36" rx="13" ry="23" fill="none" stroke="#c9a96e" stroke-width="1.2"/>
+  <ellipse cx="80" cy="36" rx="23" ry="13" fill="none" stroke="#c9a96e" stroke-width="1.2"/>
+  <circle cx="80" cy="36" r="4.8" fill="none" stroke="#c9a96e" stroke-width="1.2"/>
+  <!-- Hairline rule -->
+  <line x1="40" y1="70" x2="120" y2="70" stroke="#c9a96e" stroke-width="0.75" opacity="0.5"/>
+  <!-- CHIC NAIL -->
+  <text x="80" y="85" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="17" font-weight="400" letter-spacing="3" fill="#2c2420">CHIC NAIL</text>
+  <!-- &amp; HEAD SPA -->
+  <text x="80" y="101" text-anchor="middle" font-family="Jost,system-ui,sans-serif" font-size="9" font-weight="300" letter-spacing="5" fill="#8a7570">&amp; HEAD SPA</text>
+</svg>
