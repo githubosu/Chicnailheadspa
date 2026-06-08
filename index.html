@@ -114,8 +114,18 @@
       border: none;
       color: #fff;
       border-radius: 3px;
-      transition: background .25s, transform .15s;
+      transition: background .25s, transform .15s, color .25s, box-shadow .25s;
       box-shadow: 0 2px 12px rgba(44,36,32,.28);
+    }
+    nav:not(.scrolled) .nav-book {
+      background: var(--gold);
+      color: var(--charcoal);
+      box-shadow: 0 2px 12px rgba(201,169,110,.4);
+    }
+    nav:not(.scrolled) .nav-book:hover {
+      background: #d4b47a !important;
+      color: var(--charcoal) !important;
+      box-shadow: 0 4px 16px rgba(201,169,110,.55) !important;
     }
     .nav-book:hover {
       background: #1a0e0b !important;
@@ -126,6 +136,11 @@
     /* ─────────────────────────────────────────────
        HERO — ambient video / animated-gradient fallback
     ───────────────────────────────────────────── */
+    /* TODO: replace the animated-gradient fallback with a real static hero photo once
+       one is available (a styled salon interior or a flat-lay of nail tools shot on
+       cream/linen). Drop it in as: background-image: url('hero-fallback.jpg');
+       background-size: cover; background-position: center;  — then remove the
+       gradient and ambientShift animation below. */
     .hero {
       position: relative;
       height: 100svh;
@@ -135,7 +150,7 @@
       justify-content: center;
       text-align: center;
       overflow: hidden;
-      /* animated gradient fallback — shows when no video is present */
+      /* animated gradient fallback — shows when video fails to load/autoplay */
       background: linear-gradient(135deg, #1e1410 0%, #2d1d16 30%, #3a2820 55%, #231712 80%, #190f0b 100%);
       background-size: 300% 300%;
       animation: ambientShift 18s ease infinite;
