@@ -7,7 +7,7 @@
   <meta name="description" content="Luxury nail and head spa services. Book your appointment online today." />
   <meta property="og:title" content="Chic Nail &amp; Head Spa — Luxury Nail Art &amp; Scalp Spa" />
   <meta property="og:description" content="Luxury nail art and head spa services in Plain City, Ohio. Book your appointment online today." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232c2420'/><circle cx='16' cy='16' r='11' fill='none' stroke='%23c9a96e' stroke-width='1.5'/><text x='16' y='22' font-size='17' font-family='Georgia%2C serif' font-style='italic' text-anchor='middle' fill='%23c9a96e'>C</text></svg>" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232c2420'/><text x='16' y='24' font-size='20' font-family='Georgia%2C serif' font-style='italic' text-anchor='middle' fill='%23c9a96e'>C</text></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
@@ -73,13 +73,18 @@
       height: 68px;
     }
     /* Logo */
-    .nav-logo { display: flex; align-items: center; line-height: 1; }
-    .logo-text-main { transition: fill .4s ease; }
-    .logo-text-sub  { transition: fill .4s ease; }
-    nav:not(.scrolled) .logo-text-main { fill: rgba(255,255,255,.88); }
-    nav:not(.scrolled) .logo-text-sub  { fill: rgba(201,169,110,.72); }
-    nav.scrolled .logo-text-main { fill: #2c2420; }
-    nav.scrolled .logo-text-sub  { fill: #8a7570; }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.9);
+      transition: color .4s;
+      line-height: 1;
+    }
+    nav.scrolled .nav-logo { color: var(--charcoal); }
+    .nav-logo span { color: var(--gold); }
     /* Links */
     .nav-links {
       display: none;
@@ -989,15 +994,7 @@
   ══════════════════════════════════════════ -->
   <nav id="site-nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo" aria-label="Chic Nail &amp; Head Spa">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 46" height="34" aria-hidden="true" focusable="false" style="display:block;overflow:visible">
-          <circle cx="23" cy="23" r="19" fill="none" stroke="#c9a96e" stroke-width="1"/>
-          <text x="23" y="30" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="26" font-style="italic" font-weight="300" fill="#c9a96e">C</text>
-          <line x1="50" y1="11" x2="50" y2="35" stroke="#c9a96e" stroke-width="0.75" opacity="0.4"/>
-          <text x="58" y="20" font-family="Cormorant Garamond,Georgia,serif" font-size="13" font-weight="400" letter-spacing="2.5" fill="#2c2420" class="logo-text-main">CHIC NAIL</text>
-          <text x="59" y="35" font-family="Jost,system-ui,sans-serif" font-size="7.5" font-weight="300" letter-spacing="4" fill="#8a7570" class="logo-text-sub">&amp; HEAD SPA</text>
-        </svg>
-      </a>
+      <a href="index.html" class="nav-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</a>
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
         <li><a href="#why">About</a></li>
