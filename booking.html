@@ -592,17 +592,19 @@
       { id:'anna',   name:'Anna',    role:'Nail Tech',      initials:'A' },
     ];
 
-    /* add-ons allowed per service category (null = all) */
-    const COMPAT = {
-      'manicure':       null,
-      'dip-powder':     ['Paraffin','Nail Art','French','Design French','Special Shape','Nail Repair','Dip Removal','Matte Top Coat'],
-      'acrylic':        ['Paraffin','Nail Art','Cat Eye','Chrome','French','Design French','Special Shape','Nail Repair','Acrylic Removal','Matte Top Coat'],
-      'gel-extensions': ['Paraffin','Nail Art','Cat Eye','Chrome','French','Design French','Special Shape','Nail Repair','Gel Removal','Matte Top Coat'],
-      'pedicure':       ['Paraffin','Nail Art','Gel Removal','Matte Top Coat'],
-      'head-spa':       [],
-      'kids':           ['Nail Art','Matte Top Coat'],
-      'waxing':         [],
-    };
+    /* Gel Color is a pedicure-specific add-on (not in the master ADDONS list) */
+    const GEL_COLOR = { name: 'Gel Color', price: '+$20', note: 'Long-wear gel color on any pedicure' };
+
+    /* Returns the add-on list for a given service card */
+    function getAddonsForService(categoryId, serviceName) {
+      if (serviceName === 'Chic Manicure') {
+        return ADDONS.filter(a => ['Paraffin', 'Gel Removal'].includes(a.name));
+      }
+      if (categoryId === 'pedicure') {
+        return [GEL_COLOR];
+      }
+      return [];
+    }
 
     /* ── STATE ── */
     const S = {
@@ -678,11 +680,6 @@
       $('section-note-wrap').innerHTML = cat.section_note
         ? `<div class="section-note">${cat.section_note}</div>` : '';
 
-      const compat = COMPAT[S.categoryId];
-      const availAddons = compat === null ? ADDONS
-        : (compat || []).length ? ADDONS.filter(a => compat.includes(a.name))
-        : [];
-
       cat.groups.forEach(g => {
         if (g.title) {
           const lbl = document.createElement('div');
@@ -705,7 +702,8 @@
             <div class="svc-price">${item.price}</div>`;
           card.appendChild(header);
 
-          /* inline add-ons drawer */
+          /* inline add-ons drawer — per-service list */
+          const availAddons = getAddonsForService(S.categoryId, item.name);
           if (availAddons.length) {
             const drawer = document.createElement('div');
             drawer.className = 'svc-card-addons';
