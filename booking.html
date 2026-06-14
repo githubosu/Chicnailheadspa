@@ -138,17 +138,18 @@
 
     /* ── SERVICE CARDS ── */
     .service-cards { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.5rem; }
+    .svc-group-label { font-size: .68rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); padding: .75rem 0 .35rem; }
     .svc-card {
       background: var(--white);
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
       padding: .9rem 1.1rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
       cursor: pointer;
       transition: border-color .2s, background .2s, box-shadow .2s;
     }
     .svc-card:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(201,169,110,.15); }
     .svc-card.selected { border-color: var(--gold); background: var(--gold-light); box-shadow: 0 2px 16px rgba(201,169,110,.2); }
+    .svc-card-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     .svc-card-left { flex: 1; min-width: 0; }
     .svc-name { font-family: var(--serif); font-size: 1.25rem; font-weight: 300; color: var(--charcoal); line-height: 1.2; margin-bottom: .15rem; }
     .svc-note { font-size: .8rem; font-weight: 300; color: var(--muted); line-height: 1.5; }
@@ -156,34 +157,28 @@
     .svc-price { font-family: var(--serif); font-size: 1.2rem; font-weight: 300; color: var(--charcoal); white-space: nowrap; flex-shrink: 0; }
     .svc-card.selected .svc-price { color: var(--gold-text); }
 
-    /* ── ADD-ONS ── */
-    .addons-section {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem 1.1rem 1.1rem;
-      margin-bottom: 1.5rem;
-      overflow: hidden;
+    /* ── INLINE ADD-ONS (inside card) ── */
+    .svc-card-addons {
       max-height: 0;
-      opacity: 0;
-      border-width: 0;
-      padding: 0;
-      transition: max-height .4s cubic-bezier(.4,0,.2,1), opacity .3s ease, padding .3s, border-width .3s;
+      overflow: hidden;
+      transition: max-height .38s cubic-bezier(.4,0,.2,1), margin-top .3s, padding-top .3s;
+      margin-top: 0; padding-top: 0;
+      border-top: 1px solid transparent;
     }
-    .addons-section.visible {
-      max-height: 400px;
-      opacity: 1;
-      border-width: 1.5px;
-      padding: 1rem 1.1rem 1.1rem;
+    .svc-card-addons.open {
+      max-height: 320px;
+      margin-top: .85rem;
+      padding-top: .85rem;
+      border-top-color: rgba(201,169,110,.25);
     }
-    .addons-label {
-      font-size: .7rem; font-weight: 500; letter-spacing: .22em;
+    .svc-addons-label {
+      font-size: .65rem; font-weight: 500; letter-spacing: .2em;
       text-transform: uppercase; color: var(--gold-text);
-      margin-bottom: .75rem; display: block;
+      margin-bottom: .55rem; display: block;
     }
     .addon-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
     .addon-chip {
-      padding: .4rem .8rem;
+      padding: .38rem .78rem;
       border-radius: 20px;
       border: 1.5px solid var(--border);
       background: var(--cream);
@@ -477,10 +472,6 @@
       <div class="category-tabs" id="category-tabs"></div>
       <div id="section-note-wrap"></div>
       <div class="service-cards" id="service-cards"></div>
-      <div class="addons-section" id="addons-section">
-        <span class="addons-label">Add-ons</span>
-        <div class="addon-chips" id="addon-chips"></div>
-      </div>
       <div class="staff-section">
         <span class="staff-label">Your technician</span>
         <div class="staff-row" id="staff-row"></div>
@@ -574,8 +565,24 @@
     /* ── DATA ── */
     const res  = await fetch('content.json');
     const data = await res.json();
-    const SERVICES = data.services.filter(s => s.id !== 'add-ons');
-    const ADDONS   = data.services.find(s => s.id === 'add-ons').groups[0].items;
+    const ADDONS = data.services.find(s => s.id === 'add-ons').groups[0].items;
+
+    /* Expand Manicure sub-groups into top-level categories */
+    const SERVICES = [];
+    data.services.filter(s => s.id !== 'add-ons').forEach(cat => {
+      if (cat.id === 'manicure') {
+        const base = cat.groups.find(g => g.title === 'Base Services');
+        if (base) SERVICES.push({ id:'manicure',       title:'Manicure',       groups:[{ title:null, items:base.items }] });
+        const dip  = cat.groups.find(g => g.title === 'Dip Powder');
+        if (dip)  SERVICES.push({ id:'dip-powder',     title:'Dip Powder',     groups:[{ title:null, items:dip.items  }] });
+        const acr  = cat.groups.find(g => g.title === 'Acrylic');
+        if (acr)  SERVICES.push({ id:'acrylic',        title:'Acrylic',        groups:[{ title:null, items:acr.items  }] });
+        const gel  = cat.groups.find(g => g.title === 'Gel Extensions');
+        if (gel)  SERVICES.push({ id:'gel-extensions', title:'Gel Extensions', groups:[{ title:null, items:gel.items  }] });
+      } else {
+        SERVICES.push(cat);
+      }
+    });
 
     const STAFF = [
       { id:'anyone', name:'Anyone',  role:'Best Available', icon:true },
@@ -587,11 +594,14 @@
 
     /* add-ons allowed per service category (null = all) */
     const COMPAT = {
-      'manicure':  null,
-      'pedicure':  ['Paraffin','Nail Art','Gel Removal','Matte Top Coat'],
-      'head-spa':  [],
-      'kids':      ['Nail Art','Matte Top Coat'],
-      'waxing':    [],
+      'manicure':       null,
+      'dip-powder':     ['Paraffin','Nail Art','French','Design French','Special Shape','Nail Repair','Dip Removal','Matte Top Coat'],
+      'acrylic':        ['Paraffin','Nail Art','Cat Eye','Chrome','French','Design French','Special Shape','Nail Repair','Acrylic Removal','Matte Top Coat'],
+      'gel-extensions': ['Paraffin','Nail Art','Cat Eye','Chrome','French','Design French','Special Shape','Nail Repair','Gel Removal','Matte Top Coat'],
+      'pedicure':       ['Paraffin','Nail Art','Gel Removal','Matte Top Coat'],
+      'head-spa':       [],
+      'kids':           ['Nail Art','Matte Top Coat'],
+      'waxing':         [],
     };
 
     /* ── STATE ── */
@@ -653,7 +663,6 @@
           wrap.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           buildServiceCards();
-          updateAddons();
           $('btn-next-1').disabled = true;
         });
         wrap.appendChild(btn);
@@ -662,76 +671,90 @@
 
     /* ── BUILD SERVICE CARDS ── */
     function buildServiceCards() {
-      const cat   = SERVICES.find(c => c.id === S.categoryId);
-      const wrap  = $('service-cards');
+      const cat  = SERVICES.find(c => c.id === S.categoryId);
+      const wrap = $('service-cards');
       wrap.innerHTML = '';
 
-      /* section note */
       $('section-note-wrap').innerHTML = cat.section_note
         ? `<div class="section-note">${cat.section_note}</div>` : '';
+
+      const compat = COMPAT[S.categoryId];
+      const availAddons = compat === null ? ADDONS
+        : (compat || []).length ? ADDONS.filter(a => compat.includes(a.name))
+        : [];
 
       cat.groups.forEach(g => {
         if (g.title) {
           const lbl = document.createElement('div');
-          lbl.style.cssText = 'font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:.75rem 0 .4rem;';
+          lbl.className = 'svc-group-label';
           lbl.textContent = g.title;
           wrap.appendChild(lbl);
         }
         g.items.forEach(item => {
           const card = document.createElement('div');
           card.className = 'svc-card';
-          card.innerHTML = `
+
+          /* header row */
+          const header = document.createElement('div');
+          header.className = 'svc-card-header';
+          header.innerHTML = `
             <div class="svc-card-left">
               <div class="svc-name">${item.name}${item.badge ? `<span class="svc-badge">${item.badge}</span>` : ''}</div>
               ${item.note ? `<div class="svc-note">${item.note}</div>` : ''}
             </div>
             <div class="svc-price">${item.price}</div>`;
+          card.appendChild(header);
+
+          /* inline add-ons drawer */
+          if (availAddons.length) {
+            const drawer = document.createElement('div');
+            drawer.className = 'svc-card-addons';
+            const lbl = document.createElement('span');
+            lbl.className = 'svc-addons-label';
+            lbl.textContent = 'Add-ons';
+            drawer.appendChild(lbl);
+            const chipsWrap = document.createElement('div');
+            chipsWrap.className = 'addon-chips';
+            availAddons.forEach(addon => {
+              const chip = document.createElement('button');
+              chip.type = 'button';
+              chip.className = 'addon-chip';
+              chip.innerHTML = `${addon.name} <span class="addon-chip-price">${addon.price}</span>`;
+              chip.addEventListener('click', e => {
+                e.stopPropagation();
+                const idx = S.addons.findIndex(a => a.name === addon.name);
+                if (idx > -1) { S.addons.splice(idx, 1); chip.classList.remove('selected'); }
+                else           { S.addons.push(addon);    chip.classList.add('selected');    }
+              });
+              chipsWrap.appendChild(chip);
+            });
+            drawer.appendChild(chipsWrap);
+            card.appendChild(drawer);
+          }
+
           card.addEventListener('click', () => {
-            wrap.querySelectorAll('.svc-card').forEach(c => c.classList.remove('selected'));
+            if (S.service && S.service.name === item.name) return;
+            /* close all other drawers */
+            wrap.querySelectorAll('.svc-card').forEach(c => {
+              c.classList.remove('selected');
+              c.querySelector('.svc-card-addons')?.classList.remove('open');
+            });
             card.classList.add('selected');
+            card.querySelector('.svc-card-addons')?.classList.add('open');
             S.service = item;
             S.addons  = [];
-            updateAddons();
+            /* reset chip selections on this card */
+            card.querySelectorAll('.addon-chip').forEach(ch => ch.classList.remove('selected'));
             $('btn-next-1').disabled = false;
           });
-          if (S.service && S.service.name === item.name) card.classList.add('selected');
+
+          if (S.service && S.service.name === item.name) {
+            card.classList.add('selected');
+            card.querySelector('.svc-card-addons')?.classList.add('open');
+          }
           wrap.appendChild(card);
         });
       });
-    }
-
-    /* ── UPDATE ADD-ONS ── */
-    function updateAddons() {
-      const allowed = COMPAT[S.categoryId];
-      const section = $('addons-section');
-
-      if (!S.service || (allowed && allowed.length === 0)) {
-        section.classList.remove('visible');
-        return;
-      }
-
-      const visible = allowed === null
-        ? ADDONS
-        : ADDONS.filter(a => allowed.includes(a.name));
-
-      if (!visible.length) { section.classList.remove('visible'); return; }
-
-      const chips = $('addon-chips');
-      chips.innerHTML = '';
-      visible.forEach(addon => {
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'addon-chip' + (S.addons.find(a => a.name === addon.name) ? ' selected' : '');
-        chip.innerHTML = `${addon.name} <span class="addon-chip-price">${addon.price}</span>`;
-        chip.addEventListener('click', () => {
-          const idx = S.addons.findIndex(a => a.name === addon.name);
-          if (idx > -1) { S.addons.splice(idx, 1); chip.classList.remove('selected'); }
-          else           { S.addons.push(addon);     chip.classList.add('selected');    }
-        });
-        chips.appendChild(chip);
-      });
-
-      section.classList.add('visible');
     }
 
     /* ── BUILD STAFF ── */
@@ -947,7 +970,6 @@
     /* ── INIT ── */
     buildCategoryTabs();
     buildServiceCards();
-    updateAddons();
     buildStaff();
     renderCalendar();
 
