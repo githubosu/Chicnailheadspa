@@ -394,6 +394,30 @@
     }
     .btn-again:hover { background: var(--charcoal); color: #fff; }
 
+    /* ── SELECTIONS STRIP ── */
+    .selections-strip {
+      display: flex; flex-wrap: wrap; gap: .45rem;
+      margin-bottom: 1rem;
+      padding: .75rem .9rem;
+      background: var(--white);
+      border: 1.5px solid var(--gold);
+      border-radius: var(--radius);
+    }
+    .sel-chip {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .32rem .75rem;
+      border-radius: 20px;
+      background: var(--gold);
+      color: #fff;
+      font-size: .78rem; font-weight: 400;
+    }
+    .sel-chip-remove {
+      background: none; border: none; color: rgba(255,255,255,.8);
+      font-size: .75rem; line-height: 1; padding: 0;
+      cursor: pointer; transition: color .15s;
+    }
+    .sel-chip-remove:hover { color: #fff; }
+
     .hidden { display: none !important; }
 
     /* ── SECTION NOTE ── */
@@ -476,6 +500,7 @@
         <span class="staff-label">Your technician</span>
         <div class="staff-row" id="staff-row"></div>
       </div>
+      <div id="selections-strip" class="selections-strip hidden"></div>
       <button class="btn-next-solo" id="btn-next-1" disabled>Next: Choose a Time →</button>
     </div>
 
@@ -598,7 +623,7 @@
     /* Returns the add-on list for a given service card */
     function getAddonsForService(categoryId, serviceName) {
       if (serviceName === 'Chic Manicure') {
-        return ADDONS.filter(a => ['Paraffin', 'Gel Removal'].includes(a.name));
+        return ADDONS.filter(a => a.name === 'Gel Removal');
       }
       if (categoryId === 'pedicure') {
         return [GEL_COLOR];
@@ -608,14 +633,13 @@
 
     /* ── STATE ── */
     const S = {
-      categoryId: SERVICES[0].id,
-      service:    null,
-      addons:     [],
-      staffId:    'anyone',
-      date:       null,
-      time:       null,
-      calYear:    new Date().getFullYear(),
-      calMonth:   new Date().getMonth(),
+      categoryId:  SERVICES[0].id,
+      selections:  [],   /* [{ service, categoryId, addons:[] }] */
+      staffId:     'anyone',
+      date:        null,
+      time:        null,
+      calYear:     new Date().getFullYear(),
+      calMonth:    new Date().getMonth(),
     };
 
     /* ── HELPERS ── */
@@ -627,11 +651,37 @@
     function hasPlus(p)  { return (p||'').includes('+'); }
 
     function totalStr() {
-      if (!S.service) return '';
-      let n = priceNum(S.service.price);
-      let plus = hasPlus(S.service.price);
-      S.addons.forEach(a => { n += priceNum(a.price); if (hasPlus(a.price)) plus = true; });
+      if (!S.selections.length) return '';
+      let n = 0, plus = false;
+      S.selections.forEach(sel => {
+        n += priceNum(sel.service.price);
+        if (hasPlus(sel.service.price)) plus = true;
+        sel.addons.forEach(a => { n += priceNum(a.price); if (hasPlus(a.price)) plus = true; });
+      });
       return '$' + n + (plus ? '+' : '');
+    }
+
+    /* renders the selected-services strip above the Next button */
+    function refreshSelectionsStrip() {
+      const strip = $('selections-strip');
+      if (!S.selections.length) { strip.classList.add('hidden'); return; }
+      strip.classList.remove('hidden');
+      strip.innerHTML = S.selections.map((sel, i) =>
+        `<span class="sel-chip">
+          ${sel.service.name}
+          <button class="sel-chip-remove" data-idx="${i}" aria-label="Remove ${sel.service.name}">&#x2715;</button>
+        </span>`
+      ).join('');
+      strip.querySelectorAll('.sel-chip-remove').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const idx = parseInt(btn.dataset.idx);
+          S.selections.splice(idx, 1);
+          refreshSelectionsStrip();
+          buildServiceCards();
+          $('btn-next-1').disabled = S.selections.length === 0;
+        });
+      });
     }
 
     /* ── STEP MANAGER ── */
@@ -660,12 +710,9 @@
         btn.textContent = cat.title;
         btn.addEventListener('click', () => {
           S.categoryId = cat.id;
-          S.service = null;
-          S.addons  = [];
           wrap.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           buildServiceCards();
-          $('btn-next-1').disabled = true;
         });
         wrap.appendChild(btn);
       });
@@ -704,6 +751,8 @@
 
           /* inline add-ons drawer — per-service list */
           const availAddons = getAddonsForService(S.categoryId, item.name);
+          const existingSel = () => S.selections.find(s => s.service.name === item.name);
+
           if (availAddons.length) {
             const drawer = document.createElement('div');
             drawer.className = 'svc-card-addons';
@@ -717,12 +766,17 @@
               const chip = document.createElement('button');
               chip.type = 'button';
               chip.className = 'addon-chip';
+              /* restore selected state if this service is already in selections */
+              const sel = existingSel();
+              if (sel && sel.addons.find(a => a.name === addon.name)) chip.classList.add('selected');
               chip.innerHTML = `${addon.name} <span class="addon-chip-price">${addon.price}</span>`;
               chip.addEventListener('click', e => {
                 e.stopPropagation();
-                const idx = S.addons.findIndex(a => a.name === addon.name);
-                if (idx > -1) { S.addons.splice(idx, 1); chip.classList.remove('selected'); }
-                else           { S.addons.push(addon);    chip.classList.add('selected');    }
+                const sel = existingSel();
+                if (!sel) return;
+                const idx = sel.addons.findIndex(a => a.name === addon.name);
+                if (idx > -1) { sel.addons.splice(idx, 1); chip.classList.remove('selected'); }
+                else           { sel.addons.push(addon);    chip.classList.add('selected');    }
               });
               chipsWrap.appendChild(chip);
             });
@@ -731,22 +785,26 @@
           }
 
           card.addEventListener('click', () => {
-            if (S.service && S.service.name === item.name) return;
-            /* close all other drawers */
-            wrap.querySelectorAll('.svc-card').forEach(c => {
-              c.classList.remove('selected');
-              c.querySelector('.svc-card-addons')?.classList.remove('open');
-            });
-            card.classList.add('selected');
-            card.querySelector('.svc-card-addons')?.classList.add('open');
-            S.service = item;
-            S.addons  = [];
-            /* reset chip selections on this card */
-            card.querySelectorAll('.addon-chip').forEach(ch => ch.classList.remove('selected'));
-            $('btn-next-1').disabled = false;
+            const idx = S.selections.findIndex(s => s.service.name === item.name);
+            if (idx > -1) {
+              /* deselect */
+              S.selections.splice(idx, 1);
+              card.classList.remove('selected');
+              card.querySelector('.svc-card-addons')?.classList.remove('open');
+            } else {
+              /* select */
+              S.selections.push({ service: item, categoryId: S.categoryId, addons: [] });
+              card.classList.add('selected');
+              card.querySelector('.svc-card-addons')?.classList.add('open');
+              /* reset chips on this card (fresh selection) */
+              card.querySelectorAll('.addon-chip').forEach(ch => ch.classList.remove('selected'));
+            }
+            $('btn-next-1').disabled = S.selections.length === 0;
+            refreshSelectionsStrip();
           });
 
-          if (S.service && S.service.name === item.name) {
+          /* restore selected + open state when rebuilding cards */
+          if (existingSel()) {
             card.classList.add('selected');
             card.querySelector('.svc-card-addons')?.classList.add('open');
           }
@@ -864,13 +922,16 @@
         ? `${days[S.date.getDay()]}, ${MONTHS[S.date.getMonth()]} ${S.date.getDate()}`
         : '';
 
-      let addonsStr = S.addons.length
-        ? '+ ' + S.addons.map(a => a.name).join(' · ')
-        : '';
+      const servicesHtml = S.selections.map(sel => {
+        let subtotal = priceNum(sel.service.price);
+        let plus     = hasPlus(sel.service.price);
+        sel.addons.forEach(a => { subtotal += priceNum(a.price); if (hasPlus(a.price)) plus = true; });
+        const addStr = sel.addons.length ? ' + ' + sel.addons.map(a => a.name).join(' · ') : '';
+        return `<div class="summary-service">${sel.service.name}<span style="font-size:.82rem;opacity:.5;margin-left:.5rem;">$${subtotal}${plus?'+':''}</span>${addStr ? `<div class="summary-addons">${addStr}</div>` : ''}</div>`;
+      }).join('');
 
       $('booking-summary').innerHTML = `
-        <div class="summary-service">${S.service.name} <span style="font-size:.85rem;opacity:.55;">${S.service.price}</span></div>
-        ${addonsStr ? `<div class="summary-addons">${addonsStr}</div>` : ''}
+        ${servicesHtml}
         <div class="summary-meta">With ${staff.name} &nbsp;·&nbsp; ${dateStr} &nbsp;·&nbsp; ${S.time}</div>
         <div class="summary-total">Est. Total: ${totalStr()}</div>`;
     }
@@ -886,14 +947,16 @@
       const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
       const dateStr = `${days[S.date.getDay()]}, ${MONTHS[S.date.getMonth()]} ${S.date.getDate()}, ${S.calYear}`;
 
-      const addonLines = S.addons.map(a => `  - ${a.name} (${a.price})`).join('\n');
+      const serviceLines = S.selections.map(sel => {
+        const addonLines = sel.addons.map(a => `    + ${a.name} (${a.price})`).join('\n');
+        return `  ${sel.service.name} (${sel.service.price})${addonLines ? '\n' + addonLines : ''}`;
+      }).join('\n');
       const body = [
         `Name: ${fn} ${ln}`,
         `Phone: ${ph}`,
         `Email: ${em}`,
         ``,
-        `Service: ${S.service.name} (${S.service.price})`,
-        S.addons.length ? `Add-ons:\n${addonLines}` : '',
+        `Services:\n${serviceLines}`,
         `Technician: ${staff.name}`,
         `Requested Date: ${dateStr}`,
         `Requested Time: ${S.time}`,
@@ -969,6 +1032,7 @@
     buildCategoryTabs();
     buildServiceCards();
     buildStaff();
+    refreshSelectionsStrip();
     renderCalendar();
 
   })();
