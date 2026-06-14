@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meet Our Artists — Chic Nail &amp; Head Spa</title>
-  <meta name="description" content="Meet the talented artists at Chic Nail And Head Spa — nail technicians, head spa therapists, and specialists dedicated to your experience." />
-  <meta property="og:title" content="Meet Our Artists — Chic Nail &amp; Head Spa" />
-  <meta property="og:description" content="Meet the nail technicians and head spa therapists dedicated to your experience at Chic Nail &amp; Head Spa in Plain City, Ohio." />
+  <title>About Us — Chic Nail &amp; Head Spa</title>
+  <meta name="description" content="A calm, detail-driven beauty space for nails, head spa rituals, and everyday renewal in Plain City, Ohio." />
+  <meta property="og:title" content="About Us — Chic Nail &amp; Head Spa" />
+  <meta property="og:description" content="Our philosophy: beauty should feel restorative. Luxury nail and head spa services in Plain City, Ohio." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232c2420'/><text x='16' y='24' font-size='20' font-family='Georgia%2C serif' font-style='italic' text-anchor='middle' fill='%23c9a96e'>C</text></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,17 +18,14 @@
       --cream:      #fdf8f4;
       --warm-white: #fff9f6;
       --gold:       #c9a96e;
-      --gold-text:  #8a6322;
       --gold-light: #e8d5b0;
+      --gold-text:  #8a6322;
       --charcoal:   #2c2420;
       --muted:      #8a7570;
       --border:     #eeddd5;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans:  'Jost', system-ui, sans-serif;
-      --text-xs:    .75rem;
-      --text-sm:    .75rem;
-      --text-base:  .875rem;
-      --text-md:    1rem;
+      --shadow:     0 4px 32px rgba(44,36,32,.07);
     }
 
     /* ── RESET ── */
@@ -37,8 +34,11 @@
     body { font-family: var(--font-sans); background: var(--cream); color: var(--charcoal); line-height: 1.65; font-size: 16px; }
     img  { max-width: 100%; display: block; }
     a    { color: inherit; text-decoration: none; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-    /* ── NAV — always solid on interior pages ── */
+    /* ── NAV — solid on interior pages ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -68,11 +68,7 @@
       line-height: 1;
     }
     .nav-logo span { color: var(--gold); }
-    .nav-links {
-      display: none;
-      gap: 2.5rem;
-      list-style: none;
-    }
+    .nav-links { display: none; gap: 2.5rem; list-style: none; }
     @media (min-width: 700px) { .nav-links { display: flex; } }
     .nav-links a {
       font-size: 1rem;
@@ -100,246 +96,13 @@
     }
     .nav-book:hover { background: #3e2e28; transform: translateY(-1px); }
 
-    /* ── PAGE HERO ── */
-    .page-hero {
-      background: var(--charcoal);
-      padding: 7rem 1.25rem 5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    @media (min-width: 700px) { .page-hero { padding: 9rem 1.75rem 6rem; } }
-    /* subtle grain texture via pseudo-element */
-    .page-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .page-hero-label {
-      font-family: var(--font-sans);
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: .35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    .page-hero-title {
-      font-family: var(--font-serif);
-      font-size: clamp(3.2rem, 10vw, 6.5rem);
-      font-weight: 200;
-      color: rgba(255,255,255,.9);
-      line-height: 1.0;
-      letter-spacing: -.01em;
-      margin-bottom: 1.75rem;
-    }
-    .page-hero-title em { font-style: italic; color: var(--gold-light); }
-    .page-hero-sub {
-      font-size: 1rem;
-      font-weight: 300;
-      color: rgba(255,255,255,.38);
-      letter-spacing: .06em;
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.9;
-    }
-    /* decorative rule */
-    .page-hero-rule {
-      width: 36px;
-      height: 1px;
-      background: rgba(201,169,110,.4);
-      margin: 1.75rem auto 0;
-    }
-
-    /* ── ARTISTS SECTION ── */
-    .artists-section {
-      background: var(--warm-white);
-      padding: 4.5rem 1.25rem 5rem;
-    }
-    @media (min-width: 700px) { .artists-section { padding: 6rem 1.75rem 7rem; } }
-    .artists-section-inner { max-width: 1100px; margin: 0 auto; }
-    .artists-intro {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-    .artists-intro .section-label {
-      font-family: var(--font-sans);
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: .35em;
-      text-transform: uppercase;
-      color: var(--gold-text);
-      display: block;
-      margin-bottom: 1rem;
-    }
-    .artists-intro .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 200;
-      color: var(--charcoal);
-      line-height: 1.1;
-    }
-    .artists-intro .section-title em { font-style: italic; color: var(--gold-text); }
-
-    /* Grid */
-    .artists-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3.5rem 2rem;
-    }
-    @media (min-width: 500px) {
-      .artists-grid { grid-template-columns: 1fr 1fr; gap: 4rem 2rem; }
-    }
-    @media (min-width: 900px) {
-      .artists-grid { grid-template-columns: repeat(3, 1fr); gap: 5rem 2.5rem; }
-    }
-
-    /* Artist card */
-    .artist-card { display: flex; flex-direction: column; }
-    .artist-photo {
-      aspect-ratio: 3 / 4;
-      background: var(--blush);
-      overflow: hidden;
-      margin-bottom: 1.4rem;
-    }
-    .artist-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform .7s ease;
-    }
-    .artist-card:hover .artist-photo img { transform: scale(1.04); }
-    .artist-photo-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      color: var(--muted);
-    }
-    .artist-photo-placeholder .ap-icon {
-      font-family: var(--font-serif);
-      font-size: 2.5rem;
-      color: var(--gold-light);
-      opacity: .5;
-    }
-    .artist-photo-placeholder .ap-text {
-      font-size: .75rem;
-      font-weight: 300;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      opacity: .4;
-    }
-    .artist-name {
-      font-family: var(--font-serif);
-      font-size: 1.55rem;
-      font-weight: 300;
-      color: var(--charcoal);
-      letter-spacing: .01em;
-      margin-bottom: .3rem;
-      line-height: 1.1;
-    }
-
-    /* ── BOOKING CTA ── */
-    .team-cta {
-      background: var(--charcoal);
-      padding: 5rem 1.25rem;
-      text-align: center;
-    }
-    @media (min-width: 700px) { .team-cta { padding: 7rem 1.75rem; } }
-    .team-cta-eyebrow {
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: .38em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    .team-cta-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      font-weight: 200;
-      font-style: italic;
-      color: rgba(255,255,255,.9);
-      line-height: 1.08;
-      margin-bottom: 2.75rem;
-    }
-    .btn-book {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-sans);
-      font-size: 1rem;
-      font-weight: 500;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      padding: 1.1rem 3rem;
-      background: var(--gold);
-      color: var(--charcoal);
-      border-radius: 3px;
-      transition: background .25s, transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(201,169,110,.35);
-    }
-    .btn-book:hover { background: #d4b47a; transform: translateY(-2px); box-shadow: 0 6px 28px rgba(201,169,110,.5); }
-
-    /* ── COMBINED FOOTER ── */
-    footer { background: #1a110d; }
-    .footer-main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3.5rem 1.25rem 2.5rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    @media (min-width: 700px) {
-      .footer-main { grid-template-columns: 1.4fr 1fr 1fr; padding: 5rem 1.75rem 3.5rem; gap: 3rem; }
-    }
-    .footer-logo { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .3rem; }
-    .footer-logo span { color: var(--gold); }
-    .footer-tagline { font-size: 1rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-bottom: 1.75rem; }
-    .footer-social { display: flex; gap: .65rem; align-items: center; }
-    .footer-social-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.07); transition: background .2s; }
-    .footer-social-btn:hover { background: rgba(255,255,255,.15); }
-    .footer-col-label { font-size: 1rem; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .9rem; }
-    .footer-contact-item { margin-bottom: 1rem; }
-    .footer-contact-item p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.7; }
-    .footer-contact-item a { color: rgba(255,255,255,.5); transition: color .2s; }
-    .footer-contact-item a:hover { color: var(--gold); }
-    .footer-hours { width: 100%; border-collapse: collapse; }
-    .footer-hours td { padding: .22rem 0; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.45); }
-    .footer-hours td:first-child { color: rgba(255,255,255,.25); width: 85px; font-size: 1rem; letter-spacing: .04em; }
-    .footer-book-btn { display: inline-flex; align-items: center; font-size: 1rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: .85rem 1.5rem; background: var(--gold); color: var(--charcoal); border-radius: 3px; transition: background .2s; }
-    .footer-book-btn:hover { background: #d4b47a; }
-    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.06); margin: 0; }
-    .footer-bottom { max-width: 1100px; margin: 0 auto; padding: 1.25rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: .9rem; text-align: center; }
-    @media (min-width: 700px) { .footer-bottom { flex-direction: row; justify-content: space-between; padding: 1.25rem 1.75rem; text-align: left; } }
-    .footer-nav { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; justify-content: center; }
-    .footer-nav a { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.22); transition: color .2s; }
-    .footer-nav a:hover { color: var(--gold); }
-    .footer-copy { font-size: 1rem; letter-spacing: .06em; color: rgba(255,255,255,.18); }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-
-    /* ── FOCUS RING ── */
-    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
-    :focus:not(:focus-visible) { outline: none; }
-
-    /* ── HAMBURGER BUTTON ── */
+    /* ── HAMBURGER ── */
     .nav-hamburger {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 44px; height: 44px;   /* 44×44 touch target */
-      padding: 15px 11px;          /* centers 22×14 visual inside */
+      width: 44px; height: 44px;
+      padding: 15px 11px;
       background: none;
       border: none;
       cursor: pointer;
@@ -383,12 +146,347 @@
       transition: color .2s;
     }
     .mobile-menu-link:last-child { border-bottom: none; }
-    .mobile-menu-link:hover,
-    .mobile-menu-link:active  { color: var(--charcoal); }
+    .mobile-menu-link:hover, .mobile-menu-link:active { color: var(--charcoal); }
+    @media (max-width: 699px) { .nav-book { display: none; } }
 
-    @media (max-width: 699px) {
-      .nav-book { display: none; }
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--charcoal);
+      padding: 7rem 1.25rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+    @media (min-width: 700px) { .page-hero { padding: 9rem 1.75rem 6rem; } }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-label {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .page-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3.2rem, 10vw, 6.5rem);
+      font-weight: 200;
+      color: rgba(255,255,255,.9);
+      line-height: 1.0;
+      letter-spacing: -.01em;
+      margin-bottom: 1.75rem;
+    }
+    .page-hero-title em { font-style: italic; color: var(--gold-light); }
+    .page-hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .04em;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.9;
+    }
+    .page-hero-rule {
+      width: 36px;
+      height: 1px;
+      background: rgba(201,169,110,.4);
+      margin: 1.75rem auto 0;
+    }
+
+    /* ── SHARED SECTION STYLE ── */
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 200;
+      color: var(--charcoal);
+      line-height: 1.08;
+    }
+    .section-title em { font-style: italic; color: var(--gold-text); }
+    .section-title-light {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 200;
+      color: rgba(255,255,255,.9);
+      line-height: 1.08;
+    }
+    .section-title-light em { font-style: italic; color: var(--gold-light); }
+    .section-body {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      letter-spacing: .025em;
+    }
+
+    /* ── STORY SECTION ── */
+    .about-story {
+      padding: 5.5rem 1.25rem;
+      background: var(--warm-white);
+    }
+    @media (min-width: 700px) { .about-story { padding: 7.5rem 1.75rem; } }
+    .about-story-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    @media (min-width: 800px) {
+      .about-story-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+      }
+    }
+    .about-story-copy .section-label { margin-bottom: 1.25rem; }
+    .about-story-copy .section-title { margin-bottom: 1.75rem; }
+    .about-story-copy p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      letter-spacing: .025em;
+      margin-bottom: 1.25rem;
+    }
+    .about-story-copy p:last-child { margin-bottom: 0; }
+    .about-story-image {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: var(--blush);
+    }
+    .about-story-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .9s ease;
+    }
+    .about-story-image:hover img { transform: scale(1.04); }
+
+    /* ── VALUES SECTION ── */
+    .about-values {
+      padding: 5.5rem 1.25rem;
+      background: var(--cream);
+    }
+    @media (min-width: 700px) { .about-values { padding: 7.5rem 1.75rem; } }
+    .about-values-inner { max-width: 1100px; margin: 0 auto; }
+    .about-values-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .about-values-header .section-label { margin-bottom: 1.25rem; }
+    .about-values-header .section-title { max-width: 640px; margin: 0 auto; }
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 600px) { .values-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .values-grid { grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem; } }
+    .value-card {
+      padding: 2.25rem 2rem;
+      border: 1px solid var(--border);
+      background: var(--warm-white);
+    }
+    .value-card-num {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 200;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      letter-spacing: -.01em;
+    }
+    .value-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: .75rem;
+      line-height: 1.2;
+    }
+    .value-card p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── TEAM PREVIEW SECTION ── */
+    .about-team-preview {
+      padding: 5.5rem 1.25rem;
+      background: var(--warm-white);
+    }
+    @media (min-width: 700px) { .about-team-preview { padding: 7.5rem 1.75rem; } }
+    .about-team-preview-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    @media (min-width: 800px) {
+      .about-team-preview-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+      }
+    }
+    .team-preview-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .team-preview-images .img-tall {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--blush);
+      margin-top: 0;
+    }
+    .team-preview-images .img-tall:last-child {
+      margin-top: 2.5rem;
+    }
+    .team-preview-images img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .9s ease;
+    }
+    .team-preview-images .img-tall:hover img { transform: scale(1.04); }
+    .team-preview-copy .section-label { margin-bottom: 1.25rem; }
+    .team-preview-copy .section-title { margin-bottom: 1.5rem; }
+    .team-preview-copy p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      letter-spacing: .025em;
+      margin-bottom: 2rem;
+    }
+    .team-preview-link {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      border-bottom: 1px solid var(--charcoal);
+      padding-bottom: .15rem;
+      transition: color .25s, border-color .25s;
+    }
+    .team-preview-link:hover { color: var(--gold-text); border-color: var(--gold-text); }
+
+    /* ── CTA SECTION ── */
+    .about-cta {
+      background: var(--charcoal);
+      padding: 5.5rem 1.25rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 700px) { .about-cta { padding: 7.5rem 1.75rem; } }
+    .about-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,110,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .about-cta-eyebrow {
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .about-cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 200;
+      font-style: italic;
+      color: rgba(255,255,255,.9);
+      line-height: 1.1;
+      margin-bottom: 2.75rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-book {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 1.1rem 3rem;
+      background: var(--gold);
+      color: var(--charcoal);
+      border-radius: 3px;
+      transition: background .25s, transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(201,169,110,.35);
+    }
+    .btn-book:hover { background: #d4b47a; transform: translateY(-2px); box-shadow: 0 6px 28px rgba(201,169,110,.5); }
+
+    /* ── FOOTER ── */
+    footer { background: #1a110d; }
+    .footer-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3.5rem 1.25rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 700px) {
+      .footer-main { grid-template-columns: 1.4fr 1fr 1fr; padding: 5rem 1.75rem 3.5rem; gap: 3rem; }
+    }
+    .footer-logo { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .3rem; }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline { font-size: 1rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-bottom: 1.75rem; }
+    .footer-social { display: flex; gap: .65rem; align-items: center; }
+    .footer-social-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.07); transition: background .2s; }
+    .footer-social-btn:hover { background: rgba(255,255,255,.15); }
+    .footer-col-label { font-size: 1rem; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .9rem; }
+    .footer-contact-item { margin-bottom: 1rem; }
+    .footer-contact-item p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.7; }
+    .footer-contact-item a { color: rgba(255,255,255,.5); transition: color .2s; }
+    .footer-contact-item a:hover { color: var(--gold); }
+    .footer-hours { width: 100%; border-collapse: collapse; }
+    .footer-hours td { padding: .22rem 0; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.45); }
+    .footer-hours td:first-child { color: rgba(255,255,255,.25); width: 85px; font-size: 1rem; letter-spacing: .04em; }
+    .footer-book-btn { display: inline-flex; align-items: center; font-size: 1rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: .85rem 1.5rem; background: var(--gold); color: var(--charcoal); border-radius: 3px; transition: background .2s; }
+    .footer-book-btn:hover { background: #d4b47a; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.06); margin: 0; }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; padding: 1.25rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: .9rem; text-align: center; }
+    @media (min-width: 700px) { .footer-bottom { flex-direction: row; justify-content: space-between; padding: 1.25rem 1.75rem; text-align: left; } }
+    .footer-nav { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; justify-content: center; }
+    .footer-nav a { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.22); transition: color .2s; }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-copy { font-size: 1rem; letter-spacing: .06em; color: rgba(255,255,255,.18); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .15s; }
+    .reveal-delay-2 { transition-delay: .3s; }
 
     /* ── REDUCED MOTION ── */
     @media (prefers-reduced-motion: reduce) {
@@ -410,9 +508,9 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</a>
       <ul class="nav-links">
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="team.html" class="active">Team</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="team.html">Team</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -421,14 +519,12 @@
         <span class="ham-line"></span>
         <span class="ham-line"></span>
       </button>
-      <a class="nav-book" href="booking.html">
-        Book Now
-      </a>
+      <a class="nav-book" href="booking.html">Book Now</a>
     </div>
   </nav>
 
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <a href="index.html#services" class="mobile-menu-link">Services</a>
+    <a href="services.html" class="mobile-menu-link">Services</a>
     <a href="about.html" class="mobile-menu-link">About</a>
     <a href="team.html" class="mobile-menu-link">Team</a>
     <a href="gallery.html" class="mobile-menu-link">Gallery</a>
@@ -440,81 +536,62 @@
        PAGE HERO
   ══════════════════════════════════════════ -->
   <div class="page-hero">
-    <h1 class="page-hero-title">Meet Our<br><em>Team</em></h1>
-    <p class="page-hero-sub">Talented technicians, one shared passion — making every visit feel exceptional.</p>
+    <span class="page-hero-label">Our Story</span>
+    <h1 class="page-hero-title">About<br><em>Chic</em></h1>
+    <p class="page-hero-sub">A calm, detail-driven beauty space for nails, head spa rituals, and everyday renewal.</p>
     <div class="page-hero-rule"></div>
   </div>
 
   <!-- ══════════════════════════════════════════
-       ARTISTS GRID
+       STORY SECTION
   ══════════════════════════════════════════ -->
-  <section class="artists-section">
-    <div class="artists-section-inner">
+  <section class="about-story">
+    <div class="about-story-inner">
 
-      <div class="artists-grid">
+      <div class="about-story-copy reveal">
+        <span class="section-label">Our Philosophy</span>
+        <h2 class="section-title">Beauty should feel <em>restorative.</em></h2>
+        <br>
+        <p>At Chic Nail &amp; Head Spa, we believe every appointment should feel like a genuine pause — not just a service, but a moment of calm in your day. We bring together skilled technique and unhurried attention so that you leave not just looking great, but feeling renewed.</p>
+        <p>From our nail work to our scalp rituals, every detail is considered. We use quality products, take our time, and treat each guest as an individual — because no two people, or nails, are exactly alike.</p>
+      </div>
 
-        <!-- Card 1 -->
-        <div class="artist-card reveal">
-          <div class="artist-photo">
-            <img src="https://static.wixstatic.com/media/e11bb1_e5354d0fa37b441cb2d795a112c7cfb0~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0352.jpg" alt="Stevie Lane">
-          </div>
-          <h2 class="artist-name">Stevie Lane</h2>
+      <div class="about-story-image reveal reveal-delay-1">
+        <img src="gallery-purple-floral.jpeg" alt="Intricate floral nail art" loading="lazy" />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       VALUES SECTION
+  ══════════════════════════════════════════ -->
+  <section class="about-values">
+    <div class="about-values-inner">
+
+      <div class="about-values-header reveal">
+        <span class="section-label">What We Care About</span>
+        <h2 class="section-title">The <em>experience</em> matters as much as the result.</h2>
+      </div>
+
+      <div class="values-grid">
+
+        <div class="value-card reveal">
+          <div class="value-card-num">01</div>
+          <h3 class="value-card-title">Careful Technique</h3>
+          <p>Precision and skill on every nail, every time. We take the time to do it right rather than just do it fast.</p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="artist-card reveal reveal-delay-1">
-          <div class="artist-photo">
-            <img src="https://static.wixstatic.com/media/e11bb1_77acd09d544641449d2d40328a18f316~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0019.jpg" alt="Frank Lane">
-          </div>
-          <h2 class="artist-name">Frank Lane</h2>
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-card-num">02</div>
+          <h3 class="value-card-title">Calm Atmosphere</h3>
+          <p>Our space is designed to feel peaceful and unhurried — a place where you can actually relax from the moment you walk in.</p>
         </div>
 
-        <!-- Card 3 -->
-        <div class="artist-card reveal reveal-delay-2">
-          <div class="artist-photo">
-            <img src="https://static.wixstatic.com/media/e11bb1_71d4400a818643a49d6452123c08f015~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0144.jpg" alt="Lacey Leeder">
-          </div>
-          <h2 class="artist-name">Lacey Leeder</h2>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="artist-card reveal">
-          <div class="artist-photo">
-            <img src="https://static.wixstatic.com/media/e11bb1_420070c248924f8ea520d53f91454515~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0696.jpg" alt="Becca Rogers">
-          </div>
-          <h2 class="artist-name">Becca Rogers</h2>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="artist-card reveal reveal-delay-1">
-          <div class="artist-photo">
-            <img src="https://static.wixstatic.com/media/e11bb1_ba5fa694c0a744a5a8c76cffa9e1fc5d~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0804.jpg" alt="Todd Okimura-Strelitz">
-          </div>
-          <h2 class="artist-name">Todd Okimura-Strelitz</h2>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="artist-card reveal reveal-delay-2">
-          <div class="artist-photo">
-            <img src="https://static.wixstatic.com/media/e11bb1_efbca3ba30f4409683fdc6c9b37945c5~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS1058.jpg" alt="Lindsey Kanakis">
-          </div>
-          <h2 class="artist-name">Lindsey Kanakis</h2>
-        </div>
-
-        <!-- Card 7 -->
-        <div class="artist-card reveal">
-          <div class="artist-photo">
-            <img src="https://static.wixstatic.com/media/e11bb1_e7095455be4648d1942f3dc0364dd4b6~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS0548.jpg" alt="Tanya Amador">
-          </div>
-          <h2 class="artist-name">Tanya Amador</h2>
-        </div>
-
-        <!-- Card 8 -->
-        <div class="artist-card reveal reveal-delay-1">
-          <div class="artist-photo">
-            <img src="https://static.wixstatic.com/media/e11bb1_0b791c7d198c46d2a2927b59808e3e67~mv2.jpg/v1/crop/x_0,y_0,w_2400,h_2334/fill/w_600,h_800,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/_UOS1186.jpg" alt="David Yepremian">
-          </div>
-          <h2 class="artist-name">David Yepremian</h2>
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-card-num">03</div>
+          <h3 class="value-card-title">Personal Detail</h3>
+          <p>We listen. Your preferences, your style, your comfort — all of it shapes the service you receive, every visit.</p>
         </div>
 
       </div>
@@ -522,14 +599,38 @@
   </section>
 
   <!-- ══════════════════════════════════════════
-       BOOKING CTA
+       TEAM PREVIEW SECTION
   ══════════════════════════════════════════ -->
-  <section class="team-cta">
-    <span class="team-cta-eyebrow">Ready to Book?</span>
-    <h2 class="team-cta-title">Your perfect appointment awaits.</h2>
-    <a href="booking.html" class="btn-book">
-      Book Online Now
-    </a>
+  <section class="about-team-preview">
+    <div class="about-team-preview-inner">
+
+      <div class="team-preview-images reveal">
+        <div class="img-tall">
+          <img src="gallery-french-floral.jpeg" alt="Elegant nail art detail" loading="lazy" />
+        </div>
+        <div class="img-tall">
+          <img src="gallery-pearl-dots.jpeg" alt="Pearl nail art detail" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="team-preview-copy reveal reveal-delay-1">
+        <span class="section-label">Our Team</span>
+        <h2 class="section-title">Skilled hands, <em>gentle presence.</em></h2>
+        <br>
+        <p>Our technicians bring not just expertise in nails and scalp care, but a genuine warmth that makes every appointment feel easy. We stay current on techniques and trends so you always have options.</p>
+        <a href="team.html" class="team-preview-link">Meet The Team &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CTA SECTION
+  ══════════════════════════════════════════ -->
+  <section class="about-cta">
+    <span class="about-cta-eyebrow">Ready to Visit?</span>
+    <h2 class="about-cta-title">Let your next appointment feel like a pause.</h2>
+    <a href="booking.html" class="btn-book">Book Online Now</a>
   </section>
 
   <!-- ══════════════════════════════════════════
@@ -549,7 +650,7 @@
           <a id="footer-ig" href="https://www.instagram.com/chicnailandheadspa/" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="rgba(255,255,255,.55)"/></svg>
           </a>
-          <a href="https://maps.app.goo.gl/8KmWubmG9RsnXehW9?g_st=ic" target="_blank" rel="noopener" aria-label="Google Business" class="footer-social-btn">
+          <a id="footer-google" href="https://maps.app.goo.gl/8KmWubmG9RsnXehW9?g_st=ic" target="_blank" rel="noopener" aria-label="Google Business" class="footer-social-btn">
             <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09zM12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23zM5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62zM12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="rgba(255,255,255,.55)"/></svg>
           </a>
         </div>
@@ -564,9 +665,9 @@
         <div class="footer-contact-item">
           <table class="footer-hours">
             <tbody id="footer-hours-table">
-            <tr><td>Mon – Fri</td><td>9:00 AM – 7:00 PM</td></tr>
-            <tr><td>Saturday</td><td>9:00 AM – 6:00 PM</td></tr>
-            <tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr>
+              <tr><td>Mon – Fri</td><td>9:00 AM – 7:00 PM</td></tr>
+              <tr><td>Saturday</td><td>9:00 AM – 6:00 PM</td></tr>
+              <tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr>
             </tbody>
           </table>
         </div>
@@ -585,9 +686,7 @@
           <p><a id="footer-email" href="mailto:Chicnailheadspa@gmail.com">Chicnailheadspa@gmail.com</a></p>
         </div>
         <div class="footer-contact-item" style="margin-top:1.75rem;">
-          <a data-booking-url href="booking.html" class="footer-book-btn">
-            Book Now
-          </a>
+          <a data-booking-url href="booking.html" class="footer-book-btn">Book Now</a>
         </div>
       </div>
 
@@ -598,7 +697,8 @@
     <div class="footer-bottom">
       <ul class="footer-nav">
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#services">Services</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="team.html">Team</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="#contact">Contact</a></li>
