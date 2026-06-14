@@ -113,31 +113,52 @@
     }
     .step-heading em { font-style: italic; color: var(--gold-text); }
 
-    /* ── CATEGORY TABS ── */
+    /* ── STEP 1 LAYOUT ── */
+    .step1-body {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 0 .85rem;
+      margin-bottom: 1.5rem;
+      align-items: start;
+    }
+    .step1-right { min-width: 0; }
+
+    /* ── CATEGORY TABS (vertical) ── */
     .category-tabs {
-      display: flex; gap: .5rem;
-      overflow-x: auto; -webkit-overflow-scrolling: touch;
-      padding-bottom: .25rem;
-      margin-bottom: 1.25rem;
-      scrollbar-width: none;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      position: sticky;
+      top: 80px;
     }
-    .category-tabs::-webkit-scrollbar { display: none; }
     .cat-tab {
-      flex: 0 0 auto;
-      padding: .45rem 1rem;
-      border-radius: 20px;
-      border: 1.5px solid var(--border);
-      background: var(--white);
-      font-size: .78rem; font-weight: 500; letter-spacing: .12em;
+      width: 100%;
+      padding: .55rem .8rem;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      font-size: .75rem; font-weight: 500; letter-spacing: .08em;
       text-transform: uppercase; color: var(--muted);
-      transition: all .2s;
+      text-align: left;
+      transition: background .18s, color .18s;
       white-space: nowrap;
+      position: relative;
     }
-    .cat-tab:hover { border-color: var(--gold); color: var(--gold-text); }
-    .cat-tab.active { border-color: var(--gold); background: var(--gold); color: #fff; }
+    .cat-tab::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 2.5px; border-radius: 2px;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity .18s;
+    }
+    .cat-tab:hover { background: var(--gold-light); color: var(--gold-text); }
+    .cat-tab.active { background: var(--gold-light); color: var(--gold-text); font-weight: 600; }
+    .cat-tab.active::before { opacity: 1; }
 
     /* ── SERVICE CARDS ── */
-    .service-cards { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.5rem; }
+    .service-cards { display: flex; flex-direction: column; gap: .6rem; }
     .svc-group-label { font-size: .68rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); padding: .75rem 0 .35rem; }
     .svc-card {
       background: var(--white);
@@ -493,9 +514,13 @@
     <!-- STEP 1: WHAT -->
     <div id="step-1" class="booking-step active">
       <h1 class="step-heading">What would you<br><em>like?</em></h1>
-      <div class="category-tabs" id="category-tabs"></div>
-      <div id="section-note-wrap"></div>
-      <div class="service-cards" id="service-cards"></div>
+      <div class="step1-body">
+        <div class="category-tabs" id="category-tabs"></div>
+        <div class="step1-right">
+          <div id="section-note-wrap"></div>
+          <div class="service-cards" id="service-cards"></div>
+        </div>
+      </div>
       <div class="staff-section">
         <span class="staff-label">Your technician</span>
         <div class="staff-row" id="staff-row"></div>
