@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us — Chic Nail &amp; Head Spa</title>
-  <meta name="description" content="A calm, detail-driven beauty space for nails, head spa rituals, and everyday renewal in Plain City, Ohio." />
-  <meta property="og:title" content="About Us — Chic Nail &amp; Head Spa" />
-  <meta property="og:description" content="Our philosophy: beauty should feel restorative. Luxury nail and head spa services in Plain City, Ohio." />
+  <title>Contact — Chic Nail &amp; Head Spa</title>
+  <meta name="description" content="Questions, appointments, or visit details — contact Chic Nail &amp; Head Spa in Plain City, Ohio. Call, email, or book online." />
+  <meta property="og:title" content="Contact — Chic Nail &amp; Head Spa" />
+  <meta property="og:description" content="Reach out for appointments, questions, or visit details. We're happy to help." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232c2420'/><text x='16' y='24' font-size='20' font-family='Georgia%2C serif' font-style='italic' text-anchor='middle' fill='%23c9a96e'>C</text></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +25,6 @@
       --border:     #eeddd5;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans:  'Jost', system-ui, sans-serif;
-      --shadow:     0 4px 32px rgba(44,36,32,.07);
     }
 
     /* ── RESET ── */
@@ -38,7 +37,7 @@
     :focus:not(:focus-visible) { outline: none; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-    /* ── NAV — solid on interior pages ── */
+    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -201,7 +200,17 @@
       margin: 1.75rem auto 0;
     }
 
-    /* ── SHARED SECTION STYLE ── */
+    /* ── INTRO SECTION ── */
+    .contact-intro {
+      background: var(--warm-white);
+      padding: 5.5rem 1.25rem;
+    }
+    @media (min-width: 700px) { .contact-intro { padding: 7rem 1.75rem; } }
+    .contact-intro-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
     .section-label {
       font-family: var(--font-sans);
       font-size: 1rem;
@@ -210,25 +219,18 @@
       text-transform: uppercase;
       color: var(--gold-text);
       display: block;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
-    .section-title {
+    .contact-intro-title {
       font-family: var(--font-serif);
       font-size: clamp(2.4rem, 6vw, 3.8rem);
       font-weight: 200;
       color: var(--charcoal);
-      line-height: 1.08;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
     }
-    .section-title em { font-style: italic; color: var(--gold-text); }
-    .section-title-light {
-      font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
-      font-weight: 200;
-      color: rgba(255,255,255,.9);
-      line-height: 1.08;
-    }
-    .section-title-light em { font-style: italic; color: var(--gold-light); }
-    .section-body {
+    .contact-intro-title em { font-style: italic; color: var(--gold-text); }
+    .contact-intro-body {
       font-size: 1.2rem;
       font-weight: 300;
       color: var(--muted);
@@ -236,149 +238,119 @@
       letter-spacing: .025em;
     }
 
-    /* ── STORY SECTION ── */
-    .about-story {
-      padding: 5.5rem 1.25rem;
-      background: var(--warm-white);
-    }
-    @media (min-width: 700px) { .about-story { padding: 7.5rem 1.75rem; } }
-    .about-story-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
-      align-items: center;
-    }
-    @media (min-width: 800px) {
-      .about-story-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 5rem;
-      }
-    }
-    .about-story-copy .section-label { margin-bottom: 1.25rem; }
-    .about-story-copy .section-title { margin-bottom: 1.75rem; }
-    .about-story-copy p {
-      font-size: 1.2rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.85;
-      letter-spacing: .025em;
-      margin-bottom: 1.25rem;
-    }
-    .about-story-copy p:last-child { margin-bottom: 0; }
-    .about-story-image {
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background: var(--blush);
-    }
-    .about-story-image img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform .9s ease;
-    }
-    .about-story-image:hover img { transform: scale(1.04); }
-
-    /* ── VALUES SECTION ── */
-    .about-values {
-      padding: 5.5rem 1.25rem;
+    /* ── CONTACT METHODS ── */
+    .contact-methods {
       background: var(--cream);
+      padding: 5.5rem 1.25rem;
     }
-    @media (min-width: 700px) { .about-values { padding: 7.5rem 1.75rem; } }
-    .about-values-inner { max-width: 1100px; margin: 0 auto; }
-    .about-values-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-    .about-values-header .section-label { margin-bottom: 1.25rem; }
-    .about-values-header .section-title { max-width: 640px; margin: 0 auto; }
-    .values-grid {
+    @media (min-width: 700px) { .contact-methods { padding: 7rem 1.75rem; } }
+    .contact-methods-inner { max-width: 1100px; margin: 0 auto; }
+    .contact-methods-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
     }
-    @media (min-width: 600px) { .values-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px) { .values-grid { grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem; } }
-    .value-card {
-      padding: 2.25rem 2rem;
+    @media (min-width: 700px) {
+      .contact-methods-grid { grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+    }
+    .contact-method-card {
+      padding: 2.5rem 2rem;
       border: 1px solid var(--border);
       background: var(--warm-white);
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
     }
-    .value-card-num {
+    .contact-method-icon {
       font-family: var(--font-serif);
-      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-size: 2rem;
       font-weight: 200;
-      color: var(--gold-light);
+      color: var(--gold);
       line-height: 1;
-      margin-bottom: 1.25rem;
-      letter-spacing: -.01em;
     }
-    .value-card-title {
+    .contact-method-label {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+    .contact-method-value {
       font-family: var(--font-serif);
       font-size: 1.65rem;
       font-weight: 300;
       color: var(--charcoal);
-      margin-bottom: .75rem;
       line-height: 1.2;
     }
-    .value-card p {
+    .contact-method-value a { transition: color .2s; }
+    .contact-method-value a:hover { color: var(--gold-text); }
+    .contact-method-note {
       font-size: 1rem;
       font-weight: 300;
       color: var(--muted);
-      line-height: 1.75;
+      line-height: 1.6;
     }
 
-    /* ── TEAM PREVIEW SECTION ── */
-    .about-team-preview {
-      padding: 5.5rem 1.25rem;
+    /* ── HOURS + MAP ── */
+    .contact-visit {
       background: var(--warm-white);
+      padding: 5.5rem 1.25rem;
     }
-    @media (min-width: 700px) { .about-team-preview { padding: 7.5rem 1.75rem; } }
-    .about-team-preview-inner {
+    @media (min-width: 700px) { .contact-visit { padding: 7rem 1.75rem; } }
+    .contact-visit-inner {
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3.5rem;
-      align-items: center;
+      gap: 4rem;
+      align-items: start;
     }
     @media (min-width: 800px) {
-      .about-team-preview-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 5rem;
-      }
+      .contact-visit-inner { grid-template-columns: 1fr 1fr; gap: 5rem; }
     }
-    .team-preview-images {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+    .visit-hours-label {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      display: block;
+      margin-bottom: 1.25rem;
     }
-    .team-preview-images .img-tall {
-      aspect-ratio: 3 / 4;
-      overflow: hidden;
-      background: var(--blush);
-      margin-top: 0;
+    .visit-hours-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 200;
+      color: var(--charcoal);
+      line-height: 1.1;
+      margin-bottom: 2.5rem;
     }
-    .team-preview-images .img-tall:last-child {
-      margin-top: 2.5rem;
-    }
-    .team-preview-images img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform .9s ease;
-    }
-    .team-preview-images .img-tall:hover img { transform: scale(1.04); }
-    .team-preview-copy .section-label { margin-bottom: 1.25rem; }
-    .team-preview-copy .section-title { margin-bottom: 1.5rem; }
-    .team-preview-copy p {
-      font-size: 1.2rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.85;
-      letter-spacing: .025em;
+    .visit-hours-title em { font-style: italic; color: var(--gold-text); }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
       margin-bottom: 2rem;
     }
-    .team-preview-link {
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td {
+      padding: 1rem 0;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+    }
+    .hours-table td:first-child {
+      color: var(--charcoal);
+      font-weight: 400;
+      letter-spacing: .04em;
+      padding-right: 2rem;
+    }
+    .visit-book-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
       font-family: var(--font-sans);
       font-size: 1rem;
       font-weight: 400;
@@ -389,25 +361,84 @@
       padding-bottom: .15rem;
       transition: color .25s, border-color .25s;
     }
-    .team-preview-link:hover { color: var(--gold-text); border-color: var(--gold-text); }
+    .visit-book-link:hover { color: var(--gold-text); border-color: var(--gold-text); }
+    .visit-map-label {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    .visit-map-address {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.3;
+      margin-bottom: 1.75rem;
+    }
+    .visit-map-frame {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border: 0;
+      border-radius: 3px;
+      opacity: .9;
+    }
 
-    /* ── CTA SECTION ── */
-    .about-cta {
+    /* ── INFO CALLOUT ── */
+    .contact-callout {
+      background: var(--cream);
+      padding: 0 1.25rem 5.5rem;
+    }
+    @media (min-width: 700px) { .contact-callout { padding: 0 1.75rem 7rem; } }
+    .contact-callout-inner { max-width: 1100px; margin: 0 auto; }
+    .callout-block {
+      background: rgba(201,169,110,.07);
+      border-left: 3px solid var(--gold);
+      padding: 1.75rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .callout-icon {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .callout-block p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .callout-block strong {
+      font-weight: 400;
+      color: var(--charcoal);
+    }
+
+    /* ── CTA ── */
+    .contact-cta {
       background: var(--charcoal);
       padding: 5.5rem 1.25rem;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
-    @media (min-width: 700px) { .about-cta { padding: 7.5rem 1.75rem; } }
-    .about-cta::before {
+    @media (min-width: 700px) { .contact-cta { padding: 7.5rem 1.75rem; } }
+    .contact-cta::before {
       content: '';
       position: absolute;
       inset: 0;
       background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,110,.06) 0%, transparent 70%);
       pointer-events: none;
     }
-    .about-cta-eyebrow {
+    .contact-cta-eyebrow {
       font-size: 1rem;
       font-weight: 400;
       letter-spacing: .35em;
@@ -416,17 +447,21 @@
       display: block;
       margin-bottom: 1.5rem;
     }
-    .about-cta-title {
+    .contact-cta-title {
       font-family: var(--font-serif);
       font-size: clamp(2.4rem, 6vw, 4.2rem);
       font-weight: 200;
       font-style: italic;
       color: rgba(255,255,255,.9);
       line-height: 1.1;
+      margin-bottom: .75rem;
+    }
+    .contact-cta-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .05em;
       margin-bottom: 2.75rem;
-      max-width: 680px;
-      margin-left: auto;
-      margin-right: auto;
     }
     .btn-book {
       display: inline-flex;
@@ -501,18 +536,16 @@
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════
-       NAV
-  ══════════════════════════════════════════ -->
+  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</a>
       <ul class="nav-links">
         <li><a href="services.html">Services</a></li>
-        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="team.html">Team</a></li>
         <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
         <span class="ham-line"></span>
@@ -532,114 +565,115 @@
     <a href="booking.html" class="mobile-menu-link" style="color:var(--charcoal);font-weight:500;">Book Now</a>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       PAGE HERO
-  ══════════════════════════════════════════ -->
+  <!-- PAGE HERO -->
   <div class="page-hero">
-    <span class="page-hero-label">Our Story</span>
-    <h1 class="page-hero-title">About<br><em>Chic</em></h1>
-    <p class="page-hero-sub">A calm, detail-driven beauty space for nails, head spa rituals, and everyday renewal.</p>
+    <span class="page-hero-label">Visit Chic</span>
+    <h1 class="page-hero-title">Contact <em>Us</em></h1>
+    <p class="page-hero-sub">Questions, appointments, or visit details — we are happy to help.</p>
     <div class="page-hero-rule"></div>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       STORY SECTION
-  ══════════════════════════════════════════ -->
-  <section class="about-story">
-    <div class="about-story-inner">
-
-      <div class="about-story-copy reveal">
-        <span class="section-label">Our Philosophy</span>
-        <h2 class="section-title">Beauty should feel <em>restorative.</em></h2>
-        <br>
-        <p>At Chic Nail &amp; Head Spa, we believe every appointment should feel like a genuine pause — not just a service, but a moment of calm in your day. We bring together skilled technique and unhurried attention so that you leave not just looking great, but feeling renewed.</p>
-        <p>From our nail work to our scalp rituals, every detail is considered. We use quality products, take our time, and treat each guest as an individual — because no two people, or nails, are exactly alike.</p>
-      </div>
-
-      <div class="about-story-image reveal reveal-delay-1">
-        <img src="gallery-purple-floral.jpeg" alt="Intricate floral nail art" loading="lazy" />
-      </div>
-
+  <!-- INTRO -->
+  <section class="contact-intro">
+    <div class="contact-intro-inner reveal">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="contact-intro-title">Your calm beauty appointment <em>starts here.</em></h2>
+      <br>
+      <p class="contact-intro-body">Whether you have questions about a specific service, want to know what to expect on your first visit, or are ready to book — reach out and we'll take care of the rest. We're here to make every step feel easy.</p>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
-       VALUES SECTION
-  ══════════════════════════════════════════ -->
-  <section class="about-values">
-    <div class="about-values-inner">
+  <!-- CONTACT METHODS -->
+  <section class="contact-methods">
+    <div class="contact-methods-inner">
+      <div class="contact-methods-grid">
 
-      <div class="about-values-header reveal">
-        <span class="section-label">What We Care About</span>
-        <h2 class="section-title">The <em>experience</em> matters as much as the result.</h2>
-      </div>
-
-      <div class="values-grid">
-
-        <div class="value-card reveal">
-          <div class="value-card-num">01</div>
-          <h3 class="value-card-title">Careful Technique</h3>
-          <p>Precision and skill on every nail, every time. We take the time to do it right rather than just do it fast.</p>
+        <div class="contact-method-card reveal">
+          <div class="contact-method-icon">✆</div>
+          <div class="contact-method-label">Call</div>
+          <div class="contact-method-value">
+            <a id="contact-phone" href="tel:+16143899999">(614) 389-9999</a>
+          </div>
+          <p class="contact-method-note">Speak directly with our team — we're happy to answer questions and help you plan your visit.</p>
         </div>
 
-        <div class="value-card reveal reveal-delay-1">
-          <div class="value-card-num">02</div>
-          <h3 class="value-card-title">Calm Atmosphere</h3>
-          <p>Our space is designed to feel peaceful and unhurried — a place where you can actually relax from the moment you walk in.</p>
+        <div class="contact-method-card reveal reveal-delay-1">
+          <div class="contact-method-icon">✉</div>
+          <div class="contact-method-label">Email</div>
+          <div class="contact-method-value">
+            <a id="contact-email" href="mailto:Chicnailheadspa@gmail.com">Chicnailheadspa@gmail.com</a>
+          </div>
+          <p class="contact-method-note">Send us a note anytime and we'll get back to you as soon as possible.</p>
         </div>
 
-        <div class="value-card reveal reveal-delay-2">
-          <div class="value-card-num">03</div>
-          <h3 class="value-card-title">Personal Detail</h3>
-          <p>We listen. Your preferences, your style, your comfort — all of it shapes the service you receive, every visit.</p>
+        <div class="contact-method-card reveal reveal-delay-2">
+          <div class="contact-method-icon">⌖</div>
+          <div class="contact-method-label">Location</div>
+          <div class="contact-method-value">
+            <a href="https://maps.app.goo.gl/8KmWubmG9RsnXehW9?g_st=ic" target="_blank" rel="noopener" id="contact-address">12076 Sycamore Trace<br>Plain City, Ohio 43064</a>
+          </div>
+          <p class="contact-method-note">Located in Plain City, Ohio. Free parking is available on site.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
-       TEAM PREVIEW SECTION
-  ══════════════════════════════════════════ -->
-  <section class="about-team-preview">
-    <div class="about-team-preview-inner">
+  <!-- HOURS + MAP -->
+  <section class="contact-visit">
+    <div class="contact-visit-inner">
 
-      <div class="team-preview-images reveal">
-        <div class="img-tall">
-          <img src="gallery-french-floral.jpeg" alt="Elegant nail art detail" loading="lazy" />
-        </div>
-        <div class="img-tall">
-          <img src="gallery-pearl-dots.jpeg" alt="Pearl nail art detail" loading="lazy" />
-        </div>
+      <div class="reveal">
+        <span class="visit-hours-label">Hours</span>
+        <h2 class="visit-hours-title">Plan your <em>visit.</em></h2>
+        <table class="hours-table">
+          <tbody id="contact-hours-table">
+            <tr><td>Mon – Fri</td><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><td>Saturday</td><td>9:00 AM – 6:00 PM</td></tr>
+            <tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr>
+          </tbody>
+        </table>
+        <a href="booking.html" class="visit-book-link">Book Online &rarr;</a>
       </div>
 
-      <div class="team-preview-copy reveal reveal-delay-1">
-        <span class="section-label">Our Team</span>
-        <h2 class="section-title">Skilled hands, <em>gentle presence.</em></h2>
-        <br>
-        <p>Our technicians bring not just expertise in nails and scalp care, but a genuine warmth that makes every appointment feel easy. We stay current on techniques and trends so you always have options.</p>
-        <a href="team.html" class="team-preview-link">Meet The Team &rarr;</a>
+      <div class="reveal reveal-delay-1">
+        <span class="visit-map-label">Find Us</span>
+        <div class="visit-map-address">12076 Sycamore Trace<br>Plain City, Ohio 43064</div>
+        <iframe
+          class="visit-map-frame"
+          src="https://www.google.com/maps?q=12076+Sycamore+Trace,+Plain+City,+OH+43064&output=embed&z=15"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Chic Nail &amp; Head Spa location">
+        </iframe>
       </div>
 
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
-       CTA SECTION
-  ══════════════════════════════════════════ -->
-  <section class="about-cta">
-    <span class="about-cta-eyebrow">Ready to Visit?</span>
-    <h2 class="about-cta-title">Let your next appointment feel like a pause.</h2>
+  <!-- INFO CALLOUT -->
+  <div class="contact-callout">
+    <div class="contact-callout-inner reveal">
+      <div class="callout-block">
+        <div class="callout-icon">✦</div>
+        <p><strong>For the smoothest visit,</strong> please arrive a few minutes early and let us know in advance about any allergies, sensitivities, or special requests. We want your experience to be as comfortable as possible.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="contact-cta">
+    <span class="contact-cta-eyebrow">Ready when you are</span>
+    <h2 class="contact-cta-title">Reserve your time with us.</h2>
+    <p class="contact-cta-sub">Online booking is quick and easy — pick your service and we'll take it from there.</p>
     <a href="booking.html" class="btn-book">Book Online Now</a>
   </section>
 
-  <!-- ══════════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════════ -->
-  <footer id="contact">
+  <!-- FOOTER -->
+  <footer id="footer">
     <div class="footer-main">
 
-      <!-- Brand + Social -->
       <div>
         <div class="footer-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</div>
         <p class="footer-tagline">Luxury · Care · Serenity</p>
@@ -656,7 +690,6 @@
         </div>
       </div>
 
-      <!-- Visit / Hours -->
       <div>
         <span class="footer-col-label">Visit Us</span>
         <div class="footer-contact-item">
@@ -676,7 +709,6 @@
         </div>
       </div>
 
-      <!-- Contact / Book -->
       <div>
         <span class="footer-col-label">Get In Touch</span>
         <div class="footer-contact-item">
@@ -708,7 +740,6 @@
   </footer>
 
   <script>
-    // Scroll reveal
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     } else {
@@ -719,7 +750,6 @@
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
 
-    // Mobile menu
     const hamburger = document.getElementById('nav-hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     if (hamburger && mobileMenu) {
@@ -746,6 +776,24 @@
         }
       });
     }
+
+    fetch('content.json')
+      .then(r => r.json())
+      .then(data => {
+        const tbl = document.getElementById('contact-hours-table');
+        if (tbl && data.hours) {
+          tbl.innerHTML = data.hours.map(h =>
+            `<tr><td>${h.days}</td><td>${h.time}</td></tr>`
+          ).join('');
+        }
+        const phone = document.getElementById('contact-phone');
+        if (phone && data.business) { phone.href = data.business.phone_link; phone.textContent = data.business.phone; }
+        const email = document.getElementById('contact-email');
+        if (email && data.business) { email.href = 'mailto:' + data.business.email; email.textContent = data.business.email; }
+        const addr = document.getElementById('contact-address');
+        if (addr && data.business) { addr.innerHTML = data.business.address_line1 + '<br>' + data.business.address_line2; }
+      })
+      .catch(() => {});
   </script>
   <script src="content-loader.js"></script>
 </body>
