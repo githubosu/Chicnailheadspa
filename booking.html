@@ -8,9 +8,8 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232c2420'/><text x='16' y='24' font-size='20' font-family='Georgia%2C serif' font-style='italic' text-anchor='middle' fill='%23c9a96e'>C</text></svg>" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ── TOKENS ── */
     :root {
       --cream:      #fdf8f4;
       --warm-white: #fff9f6;
@@ -26,19 +25,23 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); background: #f0ece8; color: var(--charcoal); line-height: 1.65; font-size: 16px; }
-    img  { max-width: 100%; display: block; }
-    a    { color: inherit; text-decoration: none; }
+    body {
+      font-family: var(--font-sans);
+      background: #f0ece8;
+      color: var(--charcoal);
+      line-height: 1.65;
+      font-size: 16px;
+      min-height: 100vh;
+    }
+    img { max-width: 100%; display: block; }
+    a   { color: inherit; text-decoration: none; }
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       padding: 0 1.75rem;
       background: rgba(253,248,244,.97);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       box-shadow: 0 1px 20px rgba(44,36,32,.06);
     }
@@ -49,7 +52,7 @@
     }
     .nav-logo {
       font-family: var(--font-serif); font-size: 1rem; font-weight: 400;
-      letter-spacing: .18em; text-transform: uppercase; color: var(--charcoal); line-height: 1;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--charcoal);
     }
     .nav-logo span { color: var(--gold); }
     .nav-links { display: none; gap: 2.5rem; list-style: none; }
@@ -66,12 +69,11 @@
       padding: .6rem 1.4rem; background: var(--gold); color: var(--charcoal);
       border: none; border-radius: 3px;
       transition: background .25s, transform .15s;
-      box-shadow: 0 2px 12px rgba(201,169,110,.35);
+      box-shadow: 0 2px 12px rgba(201,169,110,.35); cursor: pointer;
     }
     .nav-book:hover { background: #d4b47a; transform: translateY(-1px); }
     @media (max-width: 699px) { .nav-book { display: none; } }
 
-    /* ── HAMBURGER ── */
     .nav-hamburger {
       display: flex; flex-direction: column; justify-content: space-between;
       width: 44px; height: 44px; padding: 15px 11px;
@@ -87,13 +89,12 @@
     .nav-hamburger.open .ham-line:nth-child(2) { opacity: 0; }
     .nav-hamburger.open .ham-line:nth-child(3) { transform: translateY(-6.25px) rotate(-45deg); }
 
-    /* ── MOBILE MENU ── */
     .mobile-menu {
-      position: fixed; top: 68px; left: 0; right: 0;
+      position: fixed; top: 68px; left: 0; right: 0; z-index: 199;
       background: rgba(253,248,244,.97); backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
       max-height: 0; overflow: hidden;
-      transition: max-height .35s cubic-bezier(.4,0,.2,1); z-index: 199;
+      transition: max-height .35s cubic-bezier(.4,0,.2,1);
     }
     .mobile-menu.open { max-height: 420px; }
     .mobile-menu-link {
@@ -104,10 +105,10 @@
     .mobile-menu-link:last-child { border-bottom: none; }
     .mobile-menu-link:hover { color: var(--charcoal); }
 
-    /* ── BOOKING LAYOUT ── */
+    /* ── PAGE WRAPPER ── */
     .booking-page {
+      padding: 90px 1rem 4rem;
       min-height: 100vh;
-      padding: 100px 1.25rem 4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -116,16 +117,17 @@
     /* ── BOOKING CARD ── */
     .booking-card {
       width: 100%;
-      max-width: 780px;
+      max-width: 640px;
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 8px 60px rgba(44,36,32,.10), 0 2px 12px rgba(44,36,32,.05);
       overflow: hidden;
+      position: relative;
     }
 
     /* ── CARD HEADER ── */
     .booking-card-header {
-      padding: 2rem 2rem 1.5rem;
+      padding: 1.5rem 1.75rem 1.25rem;
       border-bottom: 1px solid #f0ece8;
       display: flex;
       align-items: center;
@@ -134,50 +136,263 @@
     }
     .booking-brand {
       font-family: var(--font-serif);
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       font-weight: 300;
-      letter-spacing: .08em;
+      letter-spacing: .06em;
       color: var(--charcoal);
-      line-height: 1.1;
     }
-    .booking-brand em {
-      font-style: italic;
-      color: var(--gold-text);
-    }
-    .booking-powered {
-      font-size: .68rem;
+    .booking-brand em { font-style: italic; color: var(--gold-text); }
+    .booking-location {
+      font-size: .65rem;
       font-weight: 400;
-      letter-spacing: .18em;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: #bbb;
       text-align: right;
-      line-height: 1.5;
       flex-shrink: 0;
     }
 
-    /* ── FRAME ── */
-    .booking-card iframe {
+    /* ── STEP 1: SERVICE SELECTION ── */
+    #step-select { display: block; }
+    #step-schedule { display: none; }
+
+    .booking-prompt {
+      padding: 1.1rem 1.75rem;
+      font-size: .82rem;
+      font-weight: 400;
+      color: #666;
+      letter-spacing: .01em;
+      border-bottom: 1px solid #f0ece8;
+    }
+
+    /* Category accordion rows */
+    .cat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.75rem;
+      border-bottom: 1px solid #f0ece8;
+      cursor: pointer;
+      transition: background .15s;
+      user-select: none;
+    }
+    .cat-row:hover { background: #faf8f6; }
+    .cat-row.open  { background: #fdf9f6; }
+    .cat-name {
+      font-family: var(--font-sans);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+    .cat-row.open .cat-name { color: var(--gold-text); }
+    .cat-chevron {
+      width: 18px; height: 18px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform .25s ease;
+      color: #bbb;
+    }
+    .cat-row.open .cat-chevron { transform: rotate(90deg); color: var(--gold); }
+
+    /* Service items inside expanded category */
+    .cat-body {
+      display: none;
+      border-bottom: 1px solid #f0ece8;
+    }
+    .cat-body.open { display: block; }
+
+    .cat-note {
+      padding: .6rem 1.75rem;
+      font-size: .72rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: .04em;
+      background: #fdf9f6;
+      border-bottom: 1px solid #f5f0ec;
+    }
+
+    .group-label {
+      padding: .75rem 1.75rem .3rem;
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: .7;
+    }
+
+    .svc-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: .9rem 1.75rem;
+      border-top: 1px solid #f5f0ec;
+      cursor: pointer;
+      transition: background .15s;
+      gap: 1rem;
+    }
+    .svc-row:hover { background: #fdf8f4; }
+    .svc-row.selected {
+      background: #fdf3e6;
+      border-left: 3px solid var(--gold);
+      padding-left: calc(1.75rem - 3px);
+    }
+    .svc-left { flex: 1 1 auto; min-width: 0; }
+    .svc-name {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.25;
+    }
+    .svc-row.selected .svc-name { color: var(--gold-text); }
+    .svc-note {
+      font-size: .72rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: .18rem;
+      letter-spacing: .02em;
+    }
+    .svc-badge {
+      display: inline-block;
+      font-size: .58rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      background: rgba(201,169,110,.12);
+      border: 1px solid rgba(201,169,110,.3);
+      border-radius: 2px;
+      padding: .1em .45em;
+      margin-left: .4em;
+      vertical-align: middle;
+    }
+    .svc-price {
+      font-family: var(--font-sans);
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding-top: .15rem;
+    }
+    .svc-row.selected .svc-price { color: var(--gold-text); }
+
+    /* ── STICKY CTA FOOTER ── */
+    .booking-cta {
+      padding: 1rem 1.75rem;
+      background: #fff;
+      border-top: 1px solid #f0ece8;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      box-shadow: 0 -4px 20px rgba(44,36,32,.06);
+    }
+    .booking-cta.visible { display: flex; }
+    .cta-info { min-width: 0; }
+    .cta-label {
+      font-size: .65rem;
+      font-weight: 400;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: .15rem;
+    }
+    .cta-svc {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cta-price {
+      font-size: .78rem;
+      font-weight: 400;
+      color: var(--gold-text);
+    }
+    .cta-btn {
+      flex-shrink: 0;
+      font-family: var(--font-sans);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: .75rem 1.5rem;
+      background: var(--gold);
+      color: var(--charcoal);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .cta-btn:hover { background: #d4b47a; transform: translateY(-1px); }
+
+    /* ── STEP 2: SCHEDULE ── */
+    .step-back {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .9rem 1.75rem;
+      font-size: .75rem;
+      font-weight: 400;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 1px solid #f0ece8;
+      transition: color .2s;
+    }
+    .step-back:hover { color: var(--charcoal); }
+    .step-back svg { flex-shrink: 0; }
+
+    .step-selected-banner {
+      padding: .9rem 1.75rem;
+      background: #fdf3e6;
+      border-bottom: 1px solid #f5e8d0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .step-selected-banner .svc-name {
+      color: var(--gold-text);
+      font-size: 1.15rem;
+    }
+    .step-selected-banner .svc-note { color: #b08040; }
+    .step-selected-banner .svc-price { color: var(--gold-text); font-size: .9rem; }
+
+    .schedule-frame {
       display: block;
       width: 100%;
-      min-height: 750px;
+      min-height: 740px;
       border: none;
     }
 
-    /* ── META ROW ── */
+    /* ── META ROW BELOW CARD ── */
     .booking-meta {
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem 2.5rem;
+      gap: .75rem 2rem;
     }
     .booking-meta-item {
       display: flex;
       align-items: center;
-      gap: .5rem;
-      font-size: .8rem;
+      gap: .4rem;
+      font-size: .75rem;
       font-weight: 300;
-      letter-spacing: .06em;
+      letter-spacing: .04em;
       color: #7a6e6a;
     }
     .booking-meta-item svg { opacity: .5; flex-shrink: 0; }
@@ -186,7 +401,7 @@
     .booking-meta-item a:hover { color: var(--gold-text); }
 
     /* ── FOOTER ── */
-    footer { background: #1a110d; }
+    footer { background: #1a110d; margin-top: 3rem; }
     .footer-main {
       max-width: 1100px; margin: 0 auto;
       padding: 3.5rem 1.25rem 2.5rem;
@@ -209,8 +424,6 @@
     .footer-hours { width: 100%; border-collapse: collapse; }
     .footer-hours td { padding: .22rem 0; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.45); }
     .footer-hours td:first-child { color: rgba(255,255,255,.25); width: 85px; font-size: 1rem; letter-spacing: .04em; }
-    .footer-book-btn { display: inline-flex; align-items: center; font-size: 1rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: .85rem 1.5rem; background: var(--gold); color: var(--charcoal); border-radius: 3px; transition: background .2s; }
-    .footer-book-btn:hover { background: #d4b47a; }
     .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.06); margin: 0; }
     .footer-bottom { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; align-items: center; gap: .9rem; text-align: center; }
     @media (min-width: 700px) { .footer-bottom { flex-direction: row; justify-content: space-between; padding: 1.25rem 1.75rem; text-align: left; } }
@@ -219,7 +432,6 @@
     .footer-nav a:hover { color: var(--gold); }
     .footer-copy { font-size: 1rem; letter-spacing: .06em; color: rgba(255,255,255,.18); }
 
-    /* ── FOCUS / MOTION ── */
     :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
     :focus:not(:focus-visible) { outline: none; }
     @media (prefers-reduced-motion: reduce) {
@@ -229,7 +441,7 @@
 </head>
 <body>
 
-  <!-- ── NAV ── -->
+  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</a>
@@ -241,14 +453,11 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
-        <span class="ham-line"></span>
-        <span class="ham-line"></span>
-        <span class="ham-line"></span>
+        <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
       </button>
       <a class="nav-book active" href="booking.html">Book Now</a>
     </div>
   </nav>
-
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <a href="index.html#services" class="mobile-menu-link">Services</a>
     <a href="about.html" class="mobile-menu-link">About</a>
@@ -258,51 +467,77 @@
     <a href="booking.html" class="mobile-menu-link" style="color:var(--charcoal);font-weight:500;">Book Now</a>
   </div>
 
-  <!-- ── BOOKING ── -->
+  <!-- BOOKING PAGE -->
   <main class="booking-page">
-
     <div class="booking-card">
 
+      <!-- Card header -->
       <div class="booking-card-header">
-        <div class="booking-brand">
-          Chic Nail <em>&amp;</em> Head Spa
+        <div class="booking-brand">Chic Nail <em>&amp;</em> Head Spa</div>
+        <div class="booking-location">Plain City, Ohio</div>
+      </div>
+
+      <!-- ── STEP 1: Select a service ── -->
+      <div id="step-select">
+        <div class="booking-prompt">Select a service:</div>
+        <div id="booking-categories">
+          <!-- rendered by JS -->
+          <div style="padding:2.5rem 1.75rem;text-align:center;color:#bbb;font-size:.85rem;">Loading services…</div>
         </div>
-        <div class="booking-powered">
-          Plain City, Ohio
+
+        <!-- Sticky CTA footer (shown when a service is selected) -->
+        <div class="booking-cta" id="booking-cta">
+          <div class="cta-info">
+            <span class="cta-label">Selected service</span>
+            <div class="cta-svc" id="cta-svc-name">—</div>
+            <div class="cta-price" id="cta-svc-price"></div>
+          </div>
+          <button class="cta-btn" id="cta-btn">Continue to Book →</button>
         </div>
       </div>
 
-      <iframe
-        src="https://manage2.mangoforsalon.com/nextview/onlinebooking/online.html?RVCNo=1552"
-        title="Book an appointment at Chic Nail &amp; Head Spa"
-        allow="payment"
-        loading="eager"
-        scrolling="yes"
-      ></iframe>
+      <!-- ── STEP 2: Schedule ── -->
+      <div id="step-schedule">
+        <div class="step-back" id="step-back-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to services
+        </div>
+        <div class="step-selected-banner" id="selected-banner">
+          <div class="svc-left">
+            <div class="svc-name" id="banner-svc-name"></div>
+            <div class="svc-note" id="banner-svc-note"></div>
+          </div>
+          <div class="svc-price" id="banner-svc-price"></div>
+        </div>
+        <iframe
+          id="schedule-frame"
+          class="schedule-frame"
+          src="about:blank"
+          title="Schedule your appointment"
+          allow="payment"
+          loading="lazy"
+          scrolling="yes"
+        ></iframe>
+      </div>
 
-    </div>
+    </div><!-- /booking-card -->
 
+    <!-- Meta info below card -->
     <div class="booking-meta">
       <div class="booking-meta-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
         <span>Questions? <a href="tel:+16143899999"><strong>(614) 389-9999</strong></a></span>
       </div>
       <div class="booking-meta-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span>Mon–Fri <strong>9–7</strong> &nbsp;·&nbsp; Sat <strong>9–6</strong> &nbsp;·&nbsp; Sun <strong>10–5</strong></span>
-      </div>
-      <div class="booking-meta-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>12076 Sycamore Trace, Plain City OH</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Mon–Fri <strong>9–7</strong> · Sat <strong>9–6</strong> · Sun <strong>10–5</strong></span>
       </div>
     </div>
-
   </main>
 
-  <!-- ── FOOTER ── -->
+  <!-- FOOTER -->
   <footer id="contact">
     <div class="footer-main">
-
       <div>
         <div class="footer-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</div>
         <p class="footer-tagline">Luxury · Care · Serenity</p>
@@ -318,23 +553,19 @@
           </a>
         </div>
       </div>
-
       <div>
         <span class="footer-col-label">Visit Us</span>
         <div class="footer-contact-item">
           <p id="footer-address">12076 Sycamore Trace<br>Plain City, Ohio 43064</p>
         </div>
         <div class="footer-contact-item">
-          <table class="footer-hours">
-            <tbody id="footer-hours-table">
+          <table class="footer-hours"><tbody id="footer-hours-table">
             <tr><td>Mon – Fri</td><td>9:00 AM – 7:00 PM</td></tr>
             <tr><td>Saturday</td><td>9:00 AM – 6:00 PM</td></tr>
             <tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr>
-            </tbody>
-          </table>
+          </tbody></table>
         </div>
       </div>
-
       <div>
         <span class="footer-col-label">Get In Touch</span>
         <div class="footer-contact-item">
@@ -344,11 +575,8 @@
           <p><a id="footer-email" href="mailto:Chicnailheadspa@gmail.com">Chicnailheadspa@gmail.com</a></p>
         </div>
       </div>
-
     </div>
-
     <hr class="footer-divider">
-
     <div class="footer-bottom">
       <ul class="footer-nav">
         <li><a href="index.html">Home</a></li>
@@ -362,14 +590,151 @@
   </footer>
 
   <script>
+    /* ── NAV ── */
     const hamburger = document.getElementById('nav-hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     hamburger.addEventListener('click', () => {
-      const isOpen = hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', isOpen);
-      mobileMenu.setAttribute('aria-hidden', !isOpen);
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      mobileMenu.setAttribute('aria-hidden', !open);
     });
+
+    /* ── BOOKING FLOW ── */
+    const BOOKING_URL = 'https://manage2.mangoforsalon.com/nextview/onlinebooking/online.html?RVCNo=1552';
+
+    let selectedService = null;
+
+    const stepSelect   = document.getElementById('step-select');
+    const stepSchedule = document.getElementById('step-schedule');
+    const cta          = document.getElementById('booking-cta');
+    const ctaSvcName   = document.getElementById('cta-svc-name');
+    const ctaSvcPrice  = document.getElementById('cta-svc-price');
+    const ctaBtn       = document.getElementById('cta-btn');
+    const backBtn      = document.getElementById('step-back-btn');
+    const bannerName   = document.getElementById('banner-svc-name');
+    const bannerNote   = document.getElementById('banner-svc-note');
+    const bannerPrice  = document.getElementById('banner-svc-price');
+    const frame        = document.getElementById('schedule-frame');
+
+    function selectService(item, catTitle) {
+      selectedService = { ...item, category: catTitle };
+      // Update CTA
+      ctaSvcName.textContent  = item.name;
+      ctaSvcPrice.textContent = item.price;
+      cta.classList.add('visible');
+      // Highlight selected row
+      document.querySelectorAll('.svc-row').forEach(r => r.classList.remove('selected'));
+      const rows = document.querySelectorAll('.svc-row');
+      rows.forEach(r => {
+        if (r.dataset.name === item.name) r.classList.add('selected');
+      });
+    }
+
+    function goToSchedule() {
+      if (!selectedService) return;
+      bannerName.textContent  = selectedService.name;
+      bannerNote.textContent  = selectedService.note || selectedService.category;
+      bannerPrice.textContent = selectedService.price;
+      frame.src = BOOKING_URL;
+      stepSelect.style.display   = 'none';
+      stepSchedule.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goBack() {
+      stepSchedule.style.display = 'none';
+      stepSelect.style.display   = 'block';
+      frame.src = 'about:blank';
+    }
+
+    ctaBtn.addEventListener('click', goToSchedule);
+    backBtn.addEventListener('click', goBack);
+
+    /* ── RENDER SERVICES ── */
+    function buildAccordion(services) {
+      const container = document.getElementById('booking-categories');
+      container.innerHTML = '';
+
+      services.forEach(cat => {
+        /* Category row */
+        const row = document.createElement('div');
+        row.className = 'cat-row';
+        row.setAttribute('role', 'button');
+        row.setAttribute('aria-expanded', 'false');
+        row.innerHTML = `
+          <span class="cat-name">${cat.title}</span>
+          <span class="cat-chevron">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </span>`;
+
+        /* Category body */
+        const body = document.createElement('div');
+        body.className = 'cat-body';
+
+        if (cat.section_note) {
+          const note = document.createElement('div');
+          note.className = 'cat-note';
+          note.textContent = cat.section_note;
+          body.appendChild(note);
+        }
+
+        cat.groups.forEach(group => {
+          if (group.title) {
+            const label = document.createElement('div');
+            label.className = 'group-label';
+            label.textContent = group.title;
+            body.appendChild(label);
+          }
+
+          group.items.forEach(item => {
+            const svcRow = document.createElement('div');
+            svcRow.className = 'svc-row';
+            svcRow.dataset.name = item.name;
+            svcRow.setAttribute('role', 'button');
+            svcRow.setAttribute('tabindex', '0');
+
+            const badgeHtml = item.badge
+              ? `<span class="svc-badge">${item.badge}</span>`
+              : '';
+
+            svcRow.innerHTML = `
+              <div class="svc-left">
+                <div class="svc-name">${item.name}${badgeHtml}</div>
+                ${item.note ? `<div class="svc-note">${item.note}</div>` : ''}
+              </div>
+              <div class="svc-price">${item.price}</div>`;
+
+            svcRow.addEventListener('click', () => selectService(item, cat.title));
+            svcRow.addEventListener('keydown', e => {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectService(item, cat.title); }
+            });
+            body.appendChild(svcRow);
+          });
+        });
+
+        /* Toggle accordion */
+        row.addEventListener('click', () => {
+          const isOpen = row.classList.toggle('open');
+          body.classList.toggle('open', isOpen);
+          row.setAttribute('aria-expanded', isOpen);
+        });
+
+        container.appendChild(row);
+        container.appendChild(body);
+      });
+    }
+
+    /* Load from content.json */
+    fetch('content.json')
+      .then(r => r.json())
+      .then(data => buildAccordion(data.services))
+      .catch(() => {
+        document.getElementById('booking-categories').innerHTML =
+          '<div style="padding:2rem 1.75rem;color:#c00;font-size:.85rem;">Unable to load services. Please call <a href="tel:+16143899999">(614) 389-9999</a> to book.</div>';
+      });
   </script>
   <script src="content-loader.js"></script>
 </body>
