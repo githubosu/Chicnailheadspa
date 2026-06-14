@@ -12,7 +12,6 @@
   <style>
     :root {
       --cream:      #fdf8f4;
-      --warm-white: #fff9f6;
       --gold:       #c9a96e;
       --gold-text:  #8a6322;
       --gold-light: #e8d5b0;
@@ -22,19 +21,12 @@
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans:  'Jost', system-ui, sans-serif;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-sans);
-      background: #f0ece8;
-      color: var(--charcoal);
-      line-height: 1.65;
-      font-size: 16px;
-      min-height: 100vh;
-    }
-    img { max-width: 100%; display: block; }
-    a   { color: inherit; text-decoration: none; }
+    body { font-family: var(--font-sans); background: #f0ece8; color: var(--charcoal); font-size: 16px; line-height: 1.6; min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-sans); cursor: pointer; }
+    input, textarea { font-family: var(--font-sans); }
 
     /* ── NAV ── */
     nav {
@@ -45,356 +37,172 @@
       border-bottom: 1px solid var(--border);
       box-shadow: 0 1px 20px rgba(44,36,32,.06);
     }
-    .nav-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 68px;
-    }
-    .nav-logo {
-      font-family: var(--font-serif); font-size: 1rem; font-weight: 400;
-      letter-spacing: .18em; text-transform: uppercase; color: var(--charcoal);
-    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .nav-logo { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--charcoal); }
     .nav-logo span { color: var(--gold); }
     .nav-links { display: none; gap: 2.5rem; list-style: none; }
     @media (min-width: 700px) { .nav-links { display: flex; } }
-    .nav-links a {
-      font-size: 1rem; font-weight: 400; letter-spacing: .25em;
-      text-transform: uppercase; color: var(--muted); transition: color .3s;
-    }
+    .nav-links a { font-size: 1rem; font-weight: 400; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); transition: color .3s; }
     .nav-links a:hover { color: var(--gold); }
-    .nav-links a.active { color: var(--charcoal); }
-    .nav-book {
-      font-family: var(--font-sans); font-size: 1rem; font-weight: 600;
-      letter-spacing: .18em; text-transform: uppercase;
-      padding: .6rem 1.4rem; background: var(--gold); color: var(--charcoal);
-      border: none; border-radius: 3px;
-      transition: background .25s, transform .15s;
-      box-shadow: 0 2px 12px rgba(201,169,110,.35); cursor: pointer;
-    }
+    .nav-book { font-size: 1rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; padding: .6rem 1.4rem; background: var(--gold); color: var(--charcoal); border: none; border-radius: 3px; transition: background .25s, transform .15s; box-shadow: 0 2px 12px rgba(201,169,110,.35); }
     .nav-book:hover { background: #d4b47a; transform: translateY(-1px); }
     @media (max-width: 699px) { .nav-book { display: none; } }
-
-    .nav-hamburger {
-      display: flex; flex-direction: column; justify-content: space-between;
-      width: 44px; height: 44px; padding: 15px 11px;
-      background: none; border: none; cursor: pointer;
-    }
+    .nav-hamburger { display: flex; flex-direction: column; justify-content: space-between; width: 44px; height: 44px; padding: 15px 11px; background: none; border: none; cursor: pointer; }
     @media (min-width: 700px) { .nav-hamburger { display: none; } }
-    .ham-line {
-      display: block; width: 100%; height: 1.5px;
-      background: var(--charcoal); border-radius: 2px;
-      transition: transform .3s ease, opacity .3s ease; transform-origin: center;
-    }
+    .ham-line { display: block; width: 100%; height: 1.5px; background: var(--charcoal); border-radius: 2px; transition: transform .3s ease, opacity .3s ease; transform-origin: center; }
     .nav-hamburger.open .ham-line:nth-child(1) { transform: translateY(6.25px) rotate(45deg); }
     .nav-hamburger.open .ham-line:nth-child(2) { opacity: 0; }
     .nav-hamburger.open .ham-line:nth-child(3) { transform: translateY(-6.25px) rotate(-45deg); }
-
-    .mobile-menu {
-      position: fixed; top: 68px; left: 0; right: 0; z-index: 199;
-      background: rgba(253,248,244,.97); backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
-      max-height: 0; overflow: hidden;
-      transition: max-height .35s cubic-bezier(.4,0,.2,1);
-    }
+    .mobile-menu { position: fixed; top: 68px; left: 0; right: 0; z-index: 199; background: rgba(253,248,244,.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
     .mobile-menu.open { max-height: 420px; }
-    .mobile-menu-link {
-      display: block; padding: 1rem 1.75rem; font-size: 1rem; font-weight: 400;
-      letter-spacing: .25em; text-transform: uppercase; color: var(--muted);
-      border-bottom: 1px solid var(--border); transition: color .2s;
-    }
+    .mobile-menu-link { display: block; padding: 1rem 1.75rem; font-size: 1rem; font-weight: 400; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); transition: color .2s; }
     .mobile-menu-link:last-child { border-bottom: none; }
     .mobile-menu-link:hover { color: var(--charcoal); }
 
-    /* ── PAGE WRAPPER ── */
-    .booking-page {
-      padding: 90px 1rem 4rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    /* ── PAGE ── */
+    .booking-page { padding: 90px 1rem 4rem; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
 
-    /* ── BOOKING CARD ── */
-    .booking-card {
-      width: 100%;
-      max-width: 640px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 60px rgba(44,36,32,.10), 0 2px 12px rgba(44,36,32,.05);
-      overflow: hidden;
-      position: relative;
-    }
+    /* ── CARD ── */
+    .booking-card { width: 100%; max-width: 600px; background: #fff; border-radius: 16px; box-shadow: 0 8px 60px rgba(44,36,32,.10), 0 2px 12px rgba(44,36,32,.05); overflow: hidden; }
 
     /* ── CARD HEADER ── */
-    .booking-card-header {
-      padding: 1.5rem 1.75rem 1.25rem;
-      border-bottom: 1px solid #f0ece8;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .booking-brand {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      font-weight: 300;
-      letter-spacing: .06em;
-      color: var(--charcoal);
-    }
+    .booking-card-header { padding: 1.4rem 1.75rem; border-bottom: 1px solid #f0ece8; display: flex; align-items: center; justify-content: space-between; }
+    .booking-brand { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 300; letter-spacing: .06em; color: var(--charcoal); }
     .booking-brand em { font-style: italic; color: var(--gold-text); }
-    .booking-location {
-      font-size: .65rem;
-      font-weight: 400;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: #bbb;
-      text-align: right;
-      flex-shrink: 0;
-    }
+    .booking-location { font-size: .62rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: #bbb; }
 
-    /* ── STEP 1: SERVICE SELECTION ── */
-    #step-select { display: block; }
-    #step-schedule { display: none; }
+    /* ── PROGRESS ── */
+    .booking-progress { display: flex; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid #f0ece8; gap: 0; }
+    .prog-step { display: flex; align-items: center; gap: .4rem; flex: 1; position: relative; }
+    .prog-step:not(:last-child)::after { content: ''; position: absolute; top: 50%; left: calc(22px + .4rem); right: 0; height: 1px; background: #e4dbd6; transform: translateY(-50%); }
+    .prog-num { width: 22px; height: 22px; border-radius: 50%; background: #e8e0d8; color: #aaa; font-size: .62rem; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; transition: background .3s, color .3s; }
+    .prog-step.active .prog-num { background: var(--gold); color: var(--charcoal); }
+    .prog-step.done .prog-num { background: var(--charcoal); color: #fff; }
+    .prog-step.done .prog-num::after { content: '✓'; }
+    .prog-label { font-size: .6rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: #ccc; white-space: nowrap; transition: color .3s; }
+    .prog-step.active .prog-label { color: var(--charcoal); font-weight: 500; }
+    .prog-step.done .prog-label { color: var(--muted); }
+    @media (max-width: 420px) { .prog-label { display: none; } }
 
-    .booking-prompt {
-      padding: 1.1rem 1.75rem;
-      font-size: .82rem;
-      font-weight: 400;
-      color: #666;
-      letter-spacing: .01em;
-      border-bottom: 1px solid #f0ece8;
-    }
+    /* ── STEP WRAPPER ── */
+    .step { display: none; }
+    .step.active { display: block; }
 
-    /* Category accordion rows */
-    .cat-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.1rem 1.75rem;
-      border-bottom: 1px solid #f0ece8;
-      cursor: pointer;
-      transition: background .15s;
-      user-select: none;
-    }
+    /* ── STEP HEADER ── */
+    .step-header { padding: 1.2rem 1.75rem .8rem; border-bottom: 1px solid #f5f0ec; }
+    .step-prompt { font-size: .8rem; font-weight: 400; color: #888; letter-spacing: .02em; }
+    .step-summary-line { display: flex; align-items: center; justify-content: space-between; margin-top: .3rem; }
+    .step-selected-chip { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--font-serif); font-size: 1rem; font-weight: 300; color: var(--gold-text); }
+    .chip-price { font-size: .75rem; font-weight: 400; color: var(--muted); font-family: var(--font-sans); }
+    .step-change { font-size: .65rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: underline; cursor: pointer; }
+    .step-change:hover { color: var(--gold-text); }
+
+    /* ── SERVICE ACCORDION ── */
+    .booking-prompt { padding: 1rem 1.75rem; font-size: .8rem; color: #888; border-bottom: 1px solid #f0ece8; }
+    .cat-row { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.75rem; border-bottom: 1px solid #f0ece8; cursor: pointer; transition: background .15s; user-select: none; }
     .cat-row:hover { background: #faf8f6; }
-    .cat-row.open  { background: #fdf9f6; }
-    .cat-name {
-      font-family: var(--font-sans);
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--charcoal);
-    }
+    .cat-row.open { background: #fdf9f6; }
+    .cat-name { font-size: .76rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--charcoal); }
     .cat-row.open .cat-name { color: var(--gold-text); }
-    .cat-chevron {
-      width: 18px; height: 18px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      transition: transform .25s ease;
-      color: #bbb;
-    }
+    .cat-chevron { color: #bbb; transition: transform .25s; }
     .cat-row.open .cat-chevron { transform: rotate(90deg); color: var(--gold); }
-
-    /* Service items inside expanded category */
-    .cat-body {
-      display: none;
-      border-bottom: 1px solid #f0ece8;
-    }
+    .cat-body { display: none; border-bottom: 1px solid #f0ece8; }
     .cat-body.open { display: block; }
-
-    .cat-note {
-      padding: .6rem 1.75rem;
-      font-size: .72rem;
-      font-weight: 300;
-      color: var(--muted);
-      letter-spacing: .04em;
-      background: #fdf9f6;
-      border-bottom: 1px solid #f5f0ec;
-    }
-
-    .group-label {
-      padding: .75rem 1.75rem .3rem;
-      font-size: .65rem;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      opacity: .7;
-    }
-
-    .svc-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: .9rem 1.75rem;
-      border-top: 1px solid #f5f0ec;
-      cursor: pointer;
-      transition: background .15s;
-      gap: 1rem;
-    }
+    .cat-note { padding: .5rem 1.75rem; font-size: .7rem; color: var(--muted); background: #fdf9f6; border-bottom: 1px solid #f5f0ec; }
+    .group-label { padding: .65rem 1.75rem .25rem; font-size: .6rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #bbb; }
+    .svc-row { display: flex; align-items: flex-start; justify-content: space-between; padding: .85rem 1.75rem; border-top: 1px solid #f5f0ec; cursor: pointer; transition: background .15s; gap: 1rem; }
     .svc-row:hover { background: #fdf8f4; }
-    .svc-row.selected {
-      background: #fdf3e6;
-      border-left: 3px solid var(--gold);
-      padding-left: calc(1.75rem - 3px);
-    }
-    .svc-left { flex: 1 1 auto; min-width: 0; }
-    .svc-name {
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: var(--charcoal);
-      line-height: 1.25;
-    }
+    .svc-row.selected { background: #fdf3e6; border-left: 3px solid var(--gold); padding-left: calc(1.75rem - 3px); }
+    .svc-left { flex: 1; min-width: 0; }
+    .svc-name { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 300; color: var(--charcoal); }
     .svc-row.selected .svc-name { color: var(--gold-text); }
-    .svc-note {
-      font-size: .72rem;
-      font-weight: 300;
-      color: var(--muted);
-      margin-top: .18rem;
-      letter-spacing: .02em;
-    }
-    .svc-badge {
-      display: inline-block;
-      font-size: .58rem;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--gold-text);
-      background: rgba(201,169,110,.12);
-      border: 1px solid rgba(201,169,110,.3);
-      border-radius: 2px;
-      padding: .1em .45em;
-      margin-left: .4em;
-      vertical-align: middle;
-    }
-    .svc-price {
-      font-family: var(--font-sans);
-      font-size: .82rem;
-      font-weight: 500;
-      color: var(--charcoal);
-      white-space: nowrap;
-      flex-shrink: 0;
-      padding-top: .15rem;
-    }
+    .svc-note { font-size: .7rem; color: var(--muted); margin-top: .12rem; }
+    .svc-badge { font-size: .55rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-text); background: rgba(201,169,110,.12); border: 1px solid rgba(201,169,110,.3); border-radius: 2px; padding: .08em .4em; margin-left: .35em; vertical-align: middle; }
+    .svc-price { font-size: .8rem; font-weight: 500; color: var(--charcoal); white-space: nowrap; flex-shrink: 0; padding-top: .15rem; }
     .svc-row.selected .svc-price { color: var(--gold-text); }
 
-    /* ── STICKY CTA FOOTER ── */
-    .booking-cta {
-      padding: 1rem 1.75rem;
-      background: #fff;
-      border-top: 1px solid #f0ece8;
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      position: sticky;
-      bottom: 0;
-      z-index: 10;
-      box-shadow: 0 -4px 20px rgba(44,36,32,.06);
-    }
-    .booking-cta.visible { display: flex; }
-    .cta-info { min-width: 0; }
-    .cta-label {
-      font-size: .65rem;
-      font-weight: 400;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: block;
-      margin-bottom: .15rem;
-    }
-    .cta-svc {
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: var(--charcoal);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .cta-price {
-      font-size: .78rem;
-      font-weight: 400;
-      color: var(--gold-text);
-    }
-    .cta-btn {
-      flex-shrink: 0;
-      font-family: var(--font-sans);
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      padding: .75rem 1.5rem;
-      background: var(--gold);
-      color: var(--charcoal);
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background .2s, transform .15s;
-      white-space: nowrap;
-    }
-    .cta-btn:hover { background: #d4b47a; transform: translateY(-1px); }
+    /* ── DATE & TIME ── */
+    .datetime-wrap { padding: 1.25rem 1.5rem; }
 
-    /* ── STEP 2: SCHEDULE ── */
-    .step-back {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .9rem 1.75rem;
-      font-size: .75rem;
-      font-weight: 400;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      cursor: pointer;
-      border-bottom: 1px solid #f0ece8;
-      transition: color .2s;
-    }
-    .step-back:hover { color: var(--charcoal); }
-    .step-back svg { flex-shrink: 0; }
+    /* Calendar */
+    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .cal-month-label { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 300; color: var(--charcoal); }
+    .cal-nav { background: none; border: 1px solid #e4dbd6; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--muted); transition: border-color .2s, color .2s; font-size: .9rem; }
+    .cal-nav:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-text); }
+    .cal-nav:disabled { opacity: .3; cursor: default; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+    .cal-dow { font-size: .6rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: #bbb; text-align: center; padding-bottom: .5rem; }
+    .cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 400; border-radius: 50%; cursor: pointer; transition: background .15s, color .15s; color: var(--charcoal); }
+    .cal-day.empty { pointer-events: none; }
+    .cal-day.past { color: #ccc; pointer-events: none; }
+    .cal-day.available:hover { background: #f5ede0; }
+    .cal-day.selected { background: var(--gold) !important; color: var(--charcoal) !important; font-weight: 500; }
+    .cal-day.today { font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
-    .step-selected-banner {
-      padding: .9rem 1.75rem;
-      background: #fdf3e6;
-      border-bottom: 1px solid #f5e8d0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .step-selected-banner .svc-name {
-      color: var(--gold-text);
-      font-size: 1.15rem;
-    }
-    .step-selected-banner .svc-note { color: #b08040; }
-    .step-selected-banner .svc-price { color: var(--gold-text); font-size: .9rem; }
+    /* Time slots */
+    .time-section { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #f0ece8; }
+    .time-section-label { font-size: .7rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: .75rem; }
+    .time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; }
+    @media (min-width: 400px) { .time-grid { grid-template-columns: repeat(5, 1fr); } }
+    .time-slot { padding: .45rem .3rem; border: 1px solid #e4dbd6; border-radius: 4px; font-size: .72rem; font-weight: 400; text-align: center; cursor: pointer; transition: border-color .15s, background .15s, color .15s; color: var(--charcoal); background: #fff; }
+    .time-slot:hover { border-color: var(--gold); background: #fdf8f4; }
+    .time-slot.selected { border-color: var(--gold); background: var(--gold); color: var(--charcoal); font-weight: 500; }
+    .time-note { font-size: .65rem; color: var(--muted); margin-top: .75rem; line-height: 1.5; }
 
-    .schedule-frame {
-      display: block;
-      width: 100%;
-      min-height: 740px;
-      border: none;
-    }
+    /* ── CONTACT FORM ── */
+    .form-wrap { padding: 1.25rem 1.5rem; }
+    .form-row { margin-bottom: 1.1rem; }
+    .form-row label { display: block; font-size: .65rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .35rem; }
+    .form-row input,
+    .form-row textarea { width: 100%; border: 1px solid #e4dbd6; border-radius: 4px; padding: .7rem .9rem; font-size: .9rem; font-weight: 300; color: var(--charcoal); background: #fff; outline: none; transition: border-color .2s; }
+    .form-row input:focus,
+    .form-row textarea:focus { border-color: var(--gold); }
+    .form-row textarea { resize: vertical; min-height: 80px; }
+    .form-row input.error,
+    .form-row textarea.error { border-color: #c55; }
+    .field-error { font-size: .65rem; color: #c55; margin-top: .25rem; display: none; }
+    .field-error.show { display: block; }
+    .form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 400px) { .form-two { grid-template-columns: 1fr; } }
 
-    /* ── META ROW BELOW CARD ── */
-    .booking-meta {
-      margin-top: 1.25rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: .75rem 2rem;
-    }
-    .booking-meta-item {
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      font-size: .75rem;
-      font-weight: 300;
-      letter-spacing: .04em;
-      color: #7a6e6a;
-    }
+    /* ── CONFIRMATION ── */
+    .confirm-wrap { padding: 1.25rem 1.5rem; }
+    .confirm-title { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 300; color: var(--charcoal); margin-bottom: .25rem; }
+    .confirm-sub { font-size: .78rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .confirm-card { background: #fdf9f6; border: 1px solid #eeddd5; border-radius: 8px; padding: 1.1rem 1.25rem; margin-bottom: 1.25rem; }
+    .confirm-row { display: flex; align-items: flex-start; gap: .75rem; padding: .55rem 0; border-bottom: 1px solid #f0ece8; }
+    .confirm-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .confirm-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(201,169,110,.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .05rem; }
+    .confirm-key { font-size: .6rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .1rem; }
+    .confirm-val { font-family: var(--font-serif); font-size: 1rem; font-weight: 300; color: var(--charcoal); line-height: 1.3; }
+    .confirm-price { font-size: .75rem; color: var(--gold-text); font-family: var(--font-sans); }
+    .confirm-disclaimer { font-size: .68rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; padding: .75rem 1rem; background: #f5f0ec; border-radius: 4px; }
+
+    /* ── SUCCESS STATE ── */
+    .success-wrap { padding: 2.5rem 1.75rem; text-align: center; }
+    .success-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(201,169,110,.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+    .success-title { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 300; color: var(--charcoal); margin-bottom: .5rem; }
+    .success-title em { font-style: italic; color: var(--gold-text); }
+    .success-sub { font-size: .85rem; color: var(--muted); line-height: 1.7; max-width: 340px; margin: 0 auto 1.5rem; }
+    .success-detail { font-size: .78rem; color: var(--charcoal); font-weight: 500; }
+    .success-book-again { margin-top: 1.5rem; font-size: .72rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: underline; cursor: pointer; }
+    .success-book-again:hover { color: var(--gold-text); }
+
+    /* ── STEP FOOTER ── */
+    .step-footer { padding: 1rem 1.5rem; border-top: 1px solid #f0ece8; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: #fff; position: sticky; bottom: 0; z-index: 5; }
+    .step-footer.no-back { justify-content: flex-end; }
+    .btn-back { background: none; border: none; font-size: .7rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: .35rem; padding: .5rem 0; transition: color .2s; }
+    .btn-back:hover { color: var(--charcoal); }
+    .btn-continue { font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: .75rem 1.75rem; background: var(--gold); color: var(--charcoal); border: none; border-radius: 4px; transition: background .2s, transform .15s; }
+    .btn-continue:hover:not(:disabled) { background: #d4b47a; transform: translateY(-1px); }
+    .btn-continue:disabled { opacity: .45; cursor: default; transform: none; }
+    .btn-submit { font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: .75rem 1.75rem; background: var(--charcoal); color: #fff; border: none; border-radius: 4px; transition: background .2s, transform .15s; }
+    .btn-submit:hover:not(:disabled) { background: #3d3230; transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .45; cursor: default; transform: none; }
+
+    /* ── META ROW ── */
+    .booking-meta { margin-top: 1.25rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem 2rem; }
+    .booking-meta-item { display: flex; align-items: center; gap: .4rem; font-size: .73rem; font-weight: 300; color: #7a6e6a; }
     .booking-meta-item svg { opacity: .5; flex-shrink: 0; }
     .booking-meta-item strong { font-weight: 500; color: var(--charcoal); }
     .booking-meta-item a { color: inherit; transition: color .2s; }
@@ -402,18 +210,12 @@
 
     /* ── FOOTER ── */
     footer { background: #1a110d; margin-top: 3rem; }
-    .footer-main {
-      max-width: 1100px; margin: 0 auto;
-      padding: 3.5rem 1.25rem 2.5rem;
-      display: grid; grid-template-columns: 1fr; gap: 2.5rem;
-    }
-    @media (min-width: 700px) {
-      .footer-main { grid-template-columns: 1.4fr 1fr 1fr; padding: 5rem 1.75rem 3.5rem; gap: 3rem; }
-    }
+    .footer-main { max-width: 1100px; margin: 0 auto; padding: 3.5rem 1.25rem 2.5rem; display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+    @media (min-width: 700px) { .footer-main { grid-template-columns: 1.4fr 1fr 1fr; padding: 5rem 1.75rem 3.5rem; gap: 3rem; } }
     .footer-logo { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .3rem; }
     .footer-logo span { color: var(--gold); }
     .footer-tagline { font-size: 1rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-bottom: 1.75rem; }
-    .footer-social { display: flex; gap: .65rem; align-items: center; }
+    .footer-social { display: flex; gap: .65rem; }
     .footer-social-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.07); transition: background .2s; }
     .footer-social-btn:hover { background: rgba(255,255,255,.15); }
     .footer-col-label { font-size: 1rem; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .9rem; }
@@ -423,20 +225,18 @@
     .footer-contact-item a:hover { color: var(--gold); }
     .footer-hours { width: 100%; border-collapse: collapse; }
     .footer-hours td { padding: .22rem 0; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.45); }
-    .footer-hours td:first-child { color: rgba(255,255,255,.25); width: 85px; font-size: 1rem; letter-spacing: .04em; }
+    .footer-hours td:first-child { color: rgba(255,255,255,.25); width: 85px; font-size: 1rem; }
     .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.06); margin: 0; }
     .footer-bottom { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; align-items: center; gap: .9rem; text-align: center; }
     @media (min-width: 700px) { .footer-bottom { flex-direction: row; justify-content: space-between; padding: 1.25rem 1.75rem; text-align: left; } }
     .footer-nav { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; justify-content: center; }
     .footer-nav a { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.22); transition: color .2s; }
     .footer-nav a:hover { color: var(--gold); }
-    .footer-copy { font-size: 1rem; letter-spacing: .06em; color: rgba(255,255,255,.18); }
+    .footer-copy { font-size: 1rem; color: rgba(255,255,255,.18); }
 
     :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
     :focus:not(:focus-visible) { outline: none; }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
   </style>
 </head>
 <body>
@@ -467,7 +267,7 @@
     <a href="booking.html" class="mobile-menu-link" style="color:var(--charcoal);font-weight:500;">Book Now</a>
   </div>
 
-  <!-- BOOKING PAGE -->
+  <!-- BOOKING -->
   <main class="booking-page">
     <div class="booking-card">
 
@@ -477,52 +277,199 @@
         <div class="booking-location">Plain City, Ohio</div>
       </div>
 
-      <!-- ── STEP 1: Select a service ── -->
-      <div id="step-select">
-        <div class="booking-prompt">Select a service:</div>
-        <div id="booking-categories">
-          <!-- rendered by JS -->
-          <div style="padding:2.5rem 1.75rem;text-align:center;color:#bbb;font-size:.85rem;">Loading services…</div>
+      <!-- Progress -->
+      <div class="booking-progress" id="booking-progress">
+        <div class="prog-step active" id="prog-1">
+          <div class="prog-num">1</div>
+          <div class="prog-label">Service</div>
         </div>
-
-        <!-- Sticky CTA footer (shown when a service is selected) -->
-        <div class="booking-cta" id="booking-cta">
-          <div class="cta-info">
-            <span class="cta-label">Selected service</span>
-            <div class="cta-svc" id="cta-svc-name">—</div>
-            <div class="cta-price" id="cta-svc-price"></div>
-          </div>
-          <button class="cta-btn" id="cta-btn">Continue to Book →</button>
+        <div class="prog-step" id="prog-2">
+          <div class="prog-num">2</div>
+          <div class="prog-label">Date &amp; Time</div>
+        </div>
+        <div class="prog-step" id="prog-3">
+          <div class="prog-num">3</div>
+          <div class="prog-label">Your Info</div>
+        </div>
+        <div class="prog-step" id="prog-4">
+          <div class="prog-num">4</div>
+          <div class="prog-label">Confirm</div>
         </div>
       </div>
 
-      <!-- ── STEP 2: Schedule ── -->
-      <div id="step-schedule">
-        <div class="step-back" id="step-back-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          Back to services
+      <!-- ── STEP 1: Service ── -->
+      <div class="step active" id="step-1">
+        <div class="booking-prompt">Select a service:</div>
+        <div id="booking-categories">
+          <div style="padding:2rem 1.75rem;text-align:center;color:#bbb;font-size:.82rem;">Loading…</div>
         </div>
-        <div class="step-selected-banner" id="selected-banner">
-          <div class="svc-left">
-            <div class="svc-name" id="banner-svc-name"></div>
-            <div class="svc-note" id="banner-svc-note"></div>
+        <div class="step-footer no-back" id="svc-footer" style="display:none;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Selected</div>
+            <div id="svc-footer-name" style="font-family:var(--font-serif);font-size:1rem;font-weight:300;color:var(--gold-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
           </div>
-          <div class="svc-price" id="banner-svc-price"></div>
+          <button class="btn-continue" id="btn-to-step2">Continue →</button>
         </div>
-        <iframe
-          id="schedule-frame"
-          class="schedule-frame"
-          src="about:blank"
-          title="Schedule your appointment"
-          allow="payment"
-          loading="lazy"
-          scrolling="yes"
-        ></iframe>
+      </div>
+
+      <!-- ── STEP 2: Date & Time ── -->
+      <div class="step" id="step-2">
+        <div class="step-header">
+          <div class="step-prompt">Choose your date &amp; time</div>
+          <div class="step-summary-line">
+            <span class="step-selected-chip" id="s2-svc-name">—</span>
+            <span class="step-change" id="change-svc">Change</span>
+          </div>
+        </div>
+        <div class="datetime-wrap">
+          <div class="cal-header">
+            <button class="cal-nav" id="cal-prev" aria-label="Previous month">‹</button>
+            <span class="cal-month-label" id="cal-month-label"></span>
+            <button class="cal-nav" id="cal-next" aria-label="Next month">›</button>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="time-section" id="time-section" style="display:none;">
+            <div class="time-section-label" id="time-section-label">Available times</div>
+            <div class="time-grid" id="time-grid"></div>
+            <div class="time-note">Times shown are based on regular hours. Availability confirmed when we receive your request.</div>
+          </div>
+        </div>
+        <div class="step-footer">
+          <button class="btn-back" id="btn-to-step1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Back
+          </button>
+          <button class="btn-continue" id="btn-to-step3" disabled>Continue →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: Contact Info ── -->
+      <div class="step" id="step-3">
+        <div class="step-header">
+          <div class="step-prompt">Your details</div>
+          <div class="step-summary-line">
+            <span class="step-selected-chip" id="s3-datetime">—</span>
+            <span class="step-change" id="change-datetime">Change</span>
+          </div>
+        </div>
+        <div class="form-wrap">
+          <div class="form-two">
+            <div class="form-row">
+              <label for="f-fname">First name <span style="color:#c55">*</span></label>
+              <input type="text" id="f-fname" name="fname" autocomplete="given-name" placeholder="Jane" />
+              <div class="field-error" id="err-fname">Please enter your first name.</div>
+            </div>
+            <div class="form-row">
+              <label for="f-lname">Last name <span style="color:#c55">*</span></label>
+              <input type="text" id="f-lname" name="lname" autocomplete="family-name" placeholder="Doe" />
+              <div class="field-error" id="err-lname">Please enter your last name.</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="f-phone">Phone number <span style="color:#c55">*</span></label>
+            <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="(614) 555-0100" />
+            <div class="field-error" id="err-phone">Please enter a valid phone number.</div>
+          </div>
+          <div class="form-row">
+            <label for="f-email">Email address <span style="color:#c55">*</span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email" placeholder="jane@example.com" />
+            <div class="field-error" id="err-email">Please enter a valid email address.</div>
+          </div>
+          <div class="form-row">
+            <label for="f-notes">Special requests <span style="color:#bbb;font-weight:300;">(optional)</span></label>
+            <textarea id="f-notes" name="notes" placeholder="Allergies, nail preferences, accessibility needs…"></textarea>
+          </div>
+        </div>
+        <div class="step-footer">
+          <button class="btn-back" id="btn-to-step2">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Back
+          </button>
+          <button class="btn-continue" id="btn-to-step4">Review →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 4: Confirm ── -->
+      <div class="step" id="step-4">
+        <div class="confirm-wrap">
+          <div class="confirm-title">Review your <em>booking</em></div>
+          <div class="confirm-sub">Please confirm the details below before submitting your request.</div>
+          <div class="confirm-card">
+            <div class="confirm-row">
+              <div class="confirm-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <div>
+                <div class="confirm-key">Service</div>
+                <div class="confirm-val" id="c-svc">—</div>
+                <div class="confirm-price" id="c-price"></div>
+              </div>
+            </div>
+            <div class="confirm-row">
+              <div class="confirm-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div>
+                <div class="confirm-key">Date &amp; Time</div>
+                <div class="confirm-val" id="c-datetime">—</div>
+              </div>
+            </div>
+            <div class="confirm-row">
+              <div class="confirm-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <div class="confirm-key">Name</div>
+                <div class="confirm-val" id="c-name">—</div>
+              </div>
+            </div>
+            <div class="confirm-row">
+              <div class="confirm-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.82 18a19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="confirm-key">Contact</div>
+                <div class="confirm-val" id="c-contact">—</div>
+              </div>
+            </div>
+            <div class="confirm-row" id="c-notes-row" style="display:none;">
+              <div class="confirm-icon">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div>
+                <div class="confirm-key">Notes</div>
+                <div class="confirm-val" id="c-notes">—</div>
+              </div>
+            </div>
+          </div>
+          <div class="confirm-disclaimer">
+            This submits a <strong>booking request</strong>. Our team will confirm your appointment by phone or email within a few hours. Walk-ins are always welcome based on availability.
+          </div>
+        </div>
+        <div class="step-footer">
+          <button class="btn-back" id="btn-to-step3b">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Back
+          </button>
+          <button class="btn-submit" id="btn-submit">Request Appointment</button>
+        </div>
+      </div>
+
+      <!-- ── SUCCESS ── -->
+      <div class="step" id="step-success">
+        <div class="success-wrap">
+          <div class="success-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-text)"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="success-title">Request <em>Received</em></div>
+          <div class="success-sub">Thank you! We've received your appointment request and will confirm by phone or email shortly.</div>
+          <div class="success-detail" id="success-detail"></div>
+          <div class="success-book-again" id="book-again">Book another appointment</div>
+        </div>
       </div>
 
     </div><!-- /booking-card -->
 
-    <!-- Meta info below card -->
     <div class="booking-meta">
       <div class="booking-meta-item">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
@@ -555,9 +502,7 @@
       </div>
       <div>
         <span class="footer-col-label">Visit Us</span>
-        <div class="footer-contact-item">
-          <p id="footer-address">12076 Sycamore Trace<br>Plain City, Ohio 43064</p>
-        </div>
+        <div class="footer-contact-item"><p id="footer-address">12076 Sycamore Trace<br>Plain City, Ohio 43064</p></div>
         <div class="footer-contact-item">
           <table class="footer-hours"><tbody id="footer-hours-table">
             <tr><td>Mon – Fri</td><td>9:00 AM – 7:00 PM</td></tr>
@@ -568,12 +513,8 @@
       </div>
       <div>
         <span class="footer-col-label">Get In Touch</span>
-        <div class="footer-contact-item">
-          <p><a id="footer-phone" href="tel:+16143899999">(614) 389-9999</a></p>
-        </div>
-        <div class="footer-contact-item">
-          <p><a id="footer-email" href="mailto:Chicnailheadspa@gmail.com">Chicnailheadspa@gmail.com</a></p>
-        </div>
+        <div class="footer-contact-item"><p><a id="footer-phone" href="tel:+16143899999">(614) 389-9999</a></p></div>
+        <div class="footer-contact-item"><p><a id="footer-email" href="mailto:Chicnailheadspa@gmail.com">Chicnailheadspa@gmail.com</a></p></div>
       </div>
     </div>
     <hr class="footer-divider">
@@ -600,77 +541,39 @@
       mobileMenu.setAttribute('aria-hidden', !open);
     });
 
-    /* ── BOOKING FLOW ── */
-    const BOOKING_URL = 'https://manage2.mangoforsalon.com/nextview/onlinebooking/online.html?RVCNo=1552';
+    /* ── BOOKING STATE ── */
+    const booking = { service: null, date: null, time: null, fname: '', lname: '', phone: '', email: '', notes: '' };
+    let calYear, calMonth;
 
-    let selectedService = null;
-
-    const stepSelect   = document.getElementById('step-select');
-    const stepSchedule = document.getElementById('step-schedule');
-    const cta          = document.getElementById('booking-cta');
-    const ctaSvcName   = document.getElementById('cta-svc-name');
-    const ctaSvcPrice  = document.getElementById('cta-svc-price');
-    const ctaBtn       = document.getElementById('cta-btn');
-    const backBtn      = document.getElementById('step-back-btn');
-    const bannerName   = document.getElementById('banner-svc-name');
-    const bannerNote   = document.getElementById('banner-svc-note');
-    const bannerPrice  = document.getElementById('banner-svc-price');
-    const frame        = document.getElementById('schedule-frame');
-
-    function selectService(item, catTitle) {
-      selectedService = { ...item, category: catTitle };
-      // Update CTA
-      ctaSvcName.textContent  = item.name;
-      ctaSvcPrice.textContent = item.price;
-      cta.classList.add('visible');
-      // Highlight selected row
-      document.querySelectorAll('.svc-row').forEach(r => r.classList.remove('selected'));
-      const rows = document.querySelectorAll('.svc-row');
-      rows.forEach(r => {
-        if (r.dataset.name === item.name) r.classList.add('selected');
-      });
-    }
-
-    function goToSchedule() {
-      if (!selectedService) return;
-      bannerName.textContent  = selectedService.name;
-      bannerNote.textContent  = selectedService.note || selectedService.category;
-      bannerPrice.textContent = selectedService.price;
-      frame.src = BOOKING_URL;
-      stepSelect.style.display   = 'none';
-      stepSchedule.style.display = 'block';
+    /* ── STEP NAVIGATION ── */
+    function showStep(n) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-' + (n === 5 ? 'success' : n)).classList.add('active');
+      // Progress
+      for (let i = 1; i <= 4; i++) {
+        const prog = document.getElementById('prog-' + i);
+        prog.classList.remove('active', 'done');
+        if (i < n) prog.classList.add('done');
+        else if (i === n) prog.classList.add('active');
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function goBack() {
-      stepSchedule.style.display = 'none';
-      stepSelect.style.display   = 'block';
-      frame.src = 'about:blank';
-    }
-
-    ctaBtn.addEventListener('click', goToSchedule);
-    backBtn.addEventListener('click', goBack);
-
-    /* ── RENDER SERVICES ── */
+    /* ── STEP 1: SERVICE SELECTION ── */
     function buildAccordion(services) {
       const container = document.getElementById('booking-categories');
       container.innerHTML = '';
-
       services.forEach(cat => {
-        /* Category row */
         const row = document.createElement('div');
         row.className = 'cat-row';
         row.setAttribute('role', 'button');
+        row.setAttribute('tabindex', '0');
         row.setAttribute('aria-expanded', 'false');
-        row.innerHTML = `
-          <span class="cat-name">${cat.title}</span>
+        row.innerHTML = `<span class="cat-name">${cat.title}</span>
           <span class="cat-chevron">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"/>
-            </svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </span>`;
 
-        /* Category body */
         const body = document.createElement('div');
         body.className = 'cat-body';
 
@@ -683,57 +586,265 @@
 
         cat.groups.forEach(group => {
           if (group.title) {
-            const label = document.createElement('div');
-            label.className = 'group-label';
-            label.textContent = group.title;
-            body.appendChild(label);
+            const lbl = document.createElement('div');
+            lbl.className = 'group-label';
+            lbl.textContent = group.title;
+            body.appendChild(lbl);
           }
-
           group.items.forEach(item => {
             const svcRow = document.createElement('div');
             svcRow.className = 'svc-row';
             svcRow.dataset.name = item.name;
             svcRow.setAttribute('role', 'button');
             svcRow.setAttribute('tabindex', '0');
-
-            const badgeHtml = item.badge
-              ? `<span class="svc-badge">${item.badge}</span>`
-              : '';
-
+            const badge = item.badge ? `<span class="svc-badge">${item.badge}</span>` : '';
             svcRow.innerHTML = `
               <div class="svc-left">
-                <div class="svc-name">${item.name}${badgeHtml}</div>
+                <div class="svc-name">${item.name}${badge}</div>
                 ${item.note ? `<div class="svc-note">${item.note}</div>` : ''}
               </div>
               <div class="svc-price">${item.price}</div>`;
-
-            svcRow.addEventListener('click', () => selectService(item, cat.title));
-            svcRow.addEventListener('keydown', e => {
-              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectService(item, cat.title); }
-            });
+            const pick = () => {
+              document.querySelectorAll('.svc-row').forEach(r => r.classList.remove('selected'));
+              svcRow.classList.add('selected');
+              booking.service = { ...item, category: cat.title };
+              document.getElementById('svc-footer-name').textContent = item.name;
+              document.getElementById('svc-footer').style.display = 'flex';
+            };
+            svcRow.addEventListener('click', pick);
+            svcRow.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
             body.appendChild(svcRow);
           });
         });
 
-        /* Toggle accordion */
-        row.addEventListener('click', () => {
-          const isOpen = row.classList.toggle('open');
-          body.classList.toggle('open', isOpen);
-          row.setAttribute('aria-expanded', isOpen);
-        });
-
+        const toggle = () => {
+          const open = row.classList.toggle('open');
+          body.classList.toggle('open', open);
+          row.setAttribute('aria-expanded', open);
+        };
+        row.addEventListener('click', toggle);
+        row.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
         container.appendChild(row);
         container.appendChild(body);
       });
     }
 
-    /* Load from content.json */
+    document.getElementById('btn-to-step2').addEventListener('click', () => {
+      if (!booking.service) return;
+      document.getElementById('s2-svc-name').textContent = booking.service.name + ' — ' + booking.service.price;
+      initCalendar();
+      showStep(2);
+    });
+
+    /* ── STEP 2: DATE & TIME ── */
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+    function initCalendar() {
+      const now = new Date();
+      calYear  = now.getFullYear();
+      calMonth = now.getMonth();
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      const today = new Date(); today.setHours(0,0,0,0);
+      const first = new Date(calYear, calMonth, 1);
+      const last  = new Date(calYear, calMonth + 1, 0);
+      const prevMonthStart = new Date(); prevMonthStart.setHours(0,0,0,0);
+
+      document.getElementById('cal-month-label').textContent = MONTHS[calMonth] + ' ' + calYear;
+      document.getElementById('cal-prev').disabled = (calYear === today.getFullYear() && calMonth === today.getMonth());
+
+      let html = DAYS.map(d => `<div class="cal-dow">${d}</div>`).join('');
+      for (let i = 0; i < first.getDay(); i++) html += `<div class="cal-day empty"></div>`;
+
+      for (let d = 1; d <= last.getDate(); d++) {
+        const date = new Date(calYear, calMonth, d);
+        const isPast = date < today;
+        const isSel  = booking.date &&
+          booking.date.getFullYear() === calYear &&
+          booking.date.getMonth() === calMonth &&
+          booking.date.getDate() === d;
+        const isToday = date.getTime() === today.getTime();
+        let cls = 'cal-day';
+        if (isPast) cls += ' past';
+        else cls += ' available';
+        if (isSel) cls += ' selected';
+        if (isToday) cls += ' today';
+        html += `<div class="${cls}" data-y="${calYear}" data-m="${calMonth}" data-d="${d}">${d}</div>`;
+      }
+
+      document.getElementById('cal-grid').innerHTML = html;
+      document.querySelectorAll('.cal-day.available').forEach(el => {
+        el.addEventListener('click', () => {
+          booking.date = new Date(+el.dataset.y, +el.dataset.m, +el.dataset.d);
+          booking.time = null;
+          document.getElementById('btn-to-step3').disabled = true;
+          renderCalendar();
+          renderTimeSlots(booking.date);
+        });
+      });
+    }
+
+    function renderTimeSlots(date) {
+      const dow = date.getDay();
+      let start, end;
+      if (dow === 0)      { start = 10 * 60; end = 17 * 60; }
+      else if (dow === 6) { start =  9 * 60; end = 18 * 60; }
+      else                { start =  9 * 60; end = 19 * 60; }
+
+      const section = document.getElementById('time-section');
+      const grid = document.getElementById('time-grid');
+      const label = document.getElementById('time-section-label');
+      label.textContent = DAYS[dow] + ' ' + date.getDate() + ' ' + MONTHS[date.getMonth()] + ' — available times';
+
+      let html = '';
+      for (let m = start; m < end; m += 30) {
+        const h = Math.floor(m / 60);
+        const min = m % 60;
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        const h12  = h % 12 || 12;
+        const label = h12 + ':' + String(min).padStart(2, '0') + ' ' + ampm;
+        const isSel = booking.time === label;
+        html += `<div class="time-slot${isSel ? ' selected' : ''}" data-time="${label}">${label}</div>`;
+      }
+      grid.innerHTML = html;
+      section.style.display = 'block';
+
+      grid.querySelectorAll('.time-slot').forEach(el => {
+        el.addEventListener('click', () => {
+          booking.time = el.dataset.time;
+          grid.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+          el.classList.add('selected');
+          document.getElementById('btn-to-step3').disabled = false;
+        });
+      });
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      if (calMonth === 0) { calMonth = 11; calYear--; } else calMonth--;
+      renderCalendar();
+    });
+    document.getElementById('cal-next').addEventListener('click', () => {
+      if (calMonth === 11) { calMonth = 0; calYear++; } else calMonth++;
+      renderCalendar();
+    });
+
+    document.getElementById('btn-to-step1').addEventListener('click', () => showStep(1));
+    document.getElementById('change-svc').addEventListener('click', () => showStep(1));
+
+    document.getElementById('btn-to-step3').addEventListener('click', () => {
+      const d = booking.date;
+      const dateStr = DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ' · ' + booking.time;
+      document.getElementById('s3-datetime').textContent = dateStr;
+      showStep(3);
+    });
+
+    /* ── STEP 3: CONTACT INFO ── */
+    document.getElementById('btn-to-step2').addEventListener('click', () => showStep(2));
+    document.getElementById('change-datetime').addEventListener('click', () => showStep(2));
+
+    function validateStep3() {
+      let ok = true;
+      const fields = [
+        { id: 'f-fname', err: 'err-fname', check: v => v.trim().length >= 1 },
+        { id: 'f-lname', err: 'err-lname', check: v => v.trim().length >= 1 },
+        { id: 'f-phone', err: 'err-phone', check: v => /[\d\s\-\(\)]{7,}/.test(v) },
+        { id: 'f-email', err: 'err-email', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      ];
+      fields.forEach(({ id, err, check }) => {
+        const input = document.getElementById(id);
+        const errEl = document.getElementById(err);
+        if (!check(input.value)) {
+          input.classList.add('error');
+          errEl.classList.add('show');
+          ok = false;
+        } else {
+          input.classList.remove('error');
+          errEl.classList.remove('show');
+        }
+      });
+      return ok;
+    }
+
+    document.getElementById('btn-to-step4').addEventListener('click', () => {
+      if (!validateStep3()) return;
+      booking.fname = document.getElementById('f-fname').value.trim();
+      booking.lname = document.getElementById('f-lname').value.trim();
+      booking.phone = document.getElementById('f-phone').value.trim();
+      booking.email = document.getElementById('f-email').value.trim();
+      booking.notes = document.getElementById('f-notes').value.trim();
+
+      const d = booking.date;
+      const dateStr = DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+
+      document.getElementById('c-svc').textContent    = booking.service.name;
+      document.getElementById('c-price').textContent  = booking.service.price + (booking.service.note ? ' · ' + booking.service.note : '');
+      document.getElementById('c-datetime').textContent = dateStr + ' at ' + booking.time;
+      document.getElementById('c-name').textContent   = booking.fname + ' ' + booking.lname;
+      document.getElementById('c-contact').textContent = booking.phone + ' · ' + booking.email;
+      if (booking.notes) {
+        document.getElementById('c-notes').textContent = booking.notes;
+        document.getElementById('c-notes-row').style.display = 'flex';
+      } else {
+        document.getElementById('c-notes-row').style.display = 'none';
+      }
+      showStep(4);
+    });
+
+    /* ── STEP 4: SUBMIT ── */
+    document.getElementById('btn-to-step3b').addEventListener('click', () => showStep(3));
+
+    document.getElementById('btn-submit').addEventListener('click', () => {
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const d = booking.date;
+      const dateStr = DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+      const subject = encodeURIComponent(`Appointment Request — ${booking.service.name} — ${booking.fname} ${booking.lname}`);
+      const body = encodeURIComponent(
+        `New appointment request:\n\n` +
+        `Service:  ${booking.service.name} (${booking.service.price})\n` +
+        `Date:     ${dateStr}\n` +
+        `Time:     ${booking.time}\n` +
+        `Name:     ${booking.fname} ${booking.lname}\n` +
+        `Phone:    ${booking.phone}\n` +
+        `Email:    ${booking.email}\n` +
+        (booking.notes ? `Notes:    ${booking.notes}\n` : '') +
+        `\nSent via chicnailheadspa.com booking form.`
+      );
+
+      // Open mail client with pre-filled booking details
+      window.location.href = `mailto:Chicnailheadspa@gmail.com?subject=${subject}&body=${body}`;
+
+      // Show success after short delay
+      setTimeout(() => {
+        const d = booking.date;
+        document.getElementById('success-detail').textContent =
+          `${booking.service.name} · ${MONTHS[d.getMonth()]} ${d.getDate()} at ${booking.time}`;
+        showStep(5);
+        document.getElementById('booking-progress').style.display = 'none';
+      }, 600);
+    });
+
+    document.getElementById('book-again').addEventListener('click', () => {
+      Object.assign(booking, { service: null, date: null, time: null, fname: '', lname: '', phone: '', email: '', notes: '' });
+      document.querySelectorAll('.svc-row').forEach(r => r.classList.remove('selected'));
+      document.getElementById('svc-footer').style.display = 'none';
+      document.getElementById('btn-to-step3').disabled = true;
+      document.getElementById('booking-progress').style.display = 'flex';
+      showStep(1);
+    });
+
+    /* ── LOAD SERVICES ── */
     fetch('content.json')
       .then(r => r.json())
       .then(data => buildAccordion(data.services))
       .catch(() => {
         document.getElementById('booking-categories').innerHTML =
-          '<div style="padding:2rem 1.75rem;color:#c00;font-size:.85rem;">Unable to load services. Please call <a href="tel:+16143899999">(614) 389-9999</a> to book.</div>';
+          '<div style="padding:2rem 1.75rem;color:#c55;font-size:.82rem;">Could not load services. Please call <a href="tel:+16143899999">(614) 389-9999</a> to book.</div>';
       });
   </script>
   <script src="content-loader.js"></script>
