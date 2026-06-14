@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Your Treatment — Chic Nail &amp; Head Spa</title>
+  <meta name="description" content="Build your perfect appointment — drag add-ons onto your main service at Chic Nail & Head Spa in Plain City, Ohio." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%232c2420'/><text x='16' y='24' font-size='20' font-family='Georgia%2C serif' font-style='italic' text-anchor='middle' fill='%23c9a96e'>C</text></svg>" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream:      #fdf8f4;
+      --warm-white: #fff9f6;
+      --gold:       #c9a96e;
+      --gold-text:  #8a6322;
+      --gold-light: #e8d5b0;
+      --charcoal:   #2c2420;
+      --muted:      #8a7570;
+      --border:     #eeddd5;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Jost', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--cream); color: var(--charcoal); font-size: 16px; line-height: 1.6; min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-sans); cursor: pointer; border: none; background: none; }
+    select { font-family: var(--font-sans); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 1.75rem;
+      background: rgba(253,248,244,.97);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 20px rgba(44,36,32,.06);
+    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .nav-logo { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--charcoal); }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: none; gap: 2.5rem; list-style: none; }
+    @media (min-width: 760px) { .nav-links { display: flex; } }
+    .nav-links a { font-size: 1rem; font-weight: 400; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); transition: color .3s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-book { font-size: 1rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; padding: .6rem 1.4rem; background: var(--gold); color: var(--charcoal); border-radius: 3px; transition: background .25s; box-shadow: 0 2px 12px rgba(201,169,110,.35); }
+    .nav-book:hover { background: #d4b47a; }
+    @media (max-width: 759px) { .nav-book { display: none; } }
+    .nav-hamburger { display: flex; flex-direction: column; justify-content: space-between; width: 44px; height: 44px; padding: 15px 11px; background: none; border: none; cursor: pointer; }
+    @media (min-width: 760px) { .nav-hamburger { display: none; } }
+    .ham-line { display: block; width: 100%; height: 1.5px; background: var(--charcoal); border-radius: 2px; transition: transform .3s, opacity .3s; transform-origin: center; }
+    .nav-hamburger.open .ham-line:nth-child(1) { transform: translateY(6.25px) rotate(45deg); }
+    .nav-hamburger.open .ham-line:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open .ham-line:nth-child(3) { transform: translateY(-6.25px) rotate(-45deg); }
+    .mobile-menu { position: fixed; top: 68px; left: 0; right: 0; z-index: 199; background: rgba(253,248,244,.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
+    .mobile-menu.open { max-height: 460px; }
+    .mobile-menu-link { display: block; padding: 1rem 1.75rem; font-size: 1rem; font-weight: 400; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); transition: color .2s; }
+    .mobile-menu-link:last-child { border-bottom: none; }
+    .mobile-menu-link:hover { color: var(--charcoal); }
+
+    /* ── HERO ── */
+    .build-hero { background: var(--charcoal); padding: 7rem 1.25rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    @media (min-width: 760px) { .build-hero { padding: 8.5rem 1.75rem 3.5rem; } }
+    .build-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,.10) 0%, transparent 70%); pointer-events: none; }
+    .build-hero-label { font-size: .75rem; font-weight: 400; letter-spacing: .38em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1.25rem; }
+    .build-hero-title { font-family: var(--font-serif); font-size: clamp(2.6rem, 8vw, 4.5rem); font-weight: 200; color: rgba(255,255,255,.92); line-height: 1.02; margin-bottom: 1rem; }
+    .build-hero-title em { font-style: italic; color: var(--gold-light); }
+    .build-hero-sub { font-size: .9rem; font-weight: 300; color: rgba(255,255,255,.5); letter-spacing: .04em; max-width: 460px; margin: 0 auto; line-height: 1.8; }
+
+    /* ── LAYOUT ── */
+    .build-main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+    @media (min-width: 760px) { .build-main { padding: 3.5rem 1.75rem 6rem; } }
+    .build-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 880px) { .build-grid { grid-template-columns: 1.25fr 1fr; gap: 2.5rem; align-items: start; } }
+
+    .panel-label { font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 1.1rem; display: flex; align-items: center; gap: .5rem; }
+    .panel-label svg { opacity: .7; }
+
+    /* ── MAIN SERVICE BUILDER (left) ── */
+    .service-picker { display: flex; gap: .6rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .service-select {
+      flex: 1; min-width: 180px;
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: .7rem .9rem; font-size: .9rem; font-weight: 300;
+      color: var(--charcoal); background: var(--warm-white);
+      outline: none; cursor: pointer; transition: border-color .2s;
+    }
+    .service-select:focus { border-color: var(--gold); }
+    .btn-add-service {
+      padding: .7rem 1.2rem; background: var(--charcoal); color: #fff;
+      border-radius: 6px; font-size: .72rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; transition: background .2s; white-space: nowrap;
+    }
+    .btn-add-service:hover { background: #3d3230; }
+
+    .service-cards { display: flex; flex-direction: column; gap: 1.1rem; }
+    .empty-state {
+      border: 2px dashed var(--border); border-radius: 12px;
+      padding: 2.5rem 1.5rem; text-align: center;
+      color: var(--muted); font-size: .85rem; font-weight: 300;
+    }
+    .empty-state svg { opacity: .35; margin-bottom: .75rem; }
+
+    .svc-card {
+      background: var(--warm-white); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      transition: border-color .2s, box-shadow .2s, transform .1s;
+    }
+    .svc-card.drop-active { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,169,110,.18); transform: scale(1.01); }
+    .svc-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--border); }
+    .svc-card-title { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 300; color: var(--charcoal); line-height: 1.15; }
+    .svc-card-cat { font-size: .62rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-text); margin-top: .2rem; }
+    .svc-card-note { font-size: .74rem; color: var(--muted); margin-top: .35rem; }
+    .svc-card-base { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 300; color: var(--gold-text); white-space: nowrap; }
+    .svc-card-remove { display: block; margin-top: .35rem; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: underline; cursor: pointer; text-align: right; transition: color .2s; }
+    .svc-card-remove:hover { color: #c55; }
+
+    .svc-dropzone { padding: 1rem 1.25rem; min-height: 76px; }
+    .dropzone-hint { font-size: .76rem; font-weight: 300; color: var(--muted); text-align: center; padding: .85rem; border: 1.5px dashed var(--border); border-radius: 8px; transition: border-color .2s, color .2s, background .2s; }
+    .svc-card.drop-active .dropzone-hint { border-color: var(--gold); color: var(--gold-text); background: rgba(201,169,110,.06); }
+
+    .addon-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .5rem; }
+    .addon-attached {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: rgba(201,169,110,.12); border: 1px solid rgba(201,169,110,.35);
+      border-radius: 20px; padding: .3rem .55rem .3rem .85rem;
+      font-size: .78rem; font-weight: 400; color: var(--charcoal);
+    }
+    .addon-attached .ap { color: var(--gold-text); font-weight: 500; }
+    .addon-attached .rm { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: rgba(201,169,110,.25); color: var(--gold-text); font-size: .9rem; line-height: 1; cursor: pointer; transition: background .15s; }
+    .addon-attached .rm:hover { background: rgba(201,100,80,.3); color: #a33; }
+
+    .svc-subtotal { display: flex; align-items: center; justify-content: space-between; padding: .8rem 1.25rem; border-top: 1px solid var(--border); background: #fdf6ef; }
+    .svc-subtotal-label { font-size: .66rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .svc-subtotal-val { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 400; color: var(--charcoal); }
+
+    /* ── ADD-ONS PALETTE (right) ── */
+    .palette { position: sticky; top: 88px; }
+    .palette-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+    .palette-hint { font-size: .76rem; font-weight: 300; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
+    .palette-hint strong { color: var(--gold-text); font-weight: 500; }
+    .addon-grid { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .addon-chip {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: 8px; padding: .6rem .85rem;
+      font-size: .82rem; font-weight: 400; color: var(--charcoal);
+      cursor: grab; user-select: none; touch-action: none;
+      transition: border-color .15s, box-shadow .15s, transform .1s, background .15s;
+    }
+    .addon-chip:hover { border-color: var(--gold); box-shadow: 0 2px 10px rgba(201,169,110,.18); }
+    .addon-chip:active { cursor: grabbing; }
+    .addon-chip.dragging { opacity: .35; }
+    .addon-chip .grip { color: var(--gold); opacity: .55; display: flex; }
+    .addon-chip .ac-price { color: var(--gold-text); font-weight: 500; font-size: .76rem; }
+    .addon-chip .ac-name { white-space: nowrap; }
+
+    /* drag ghost */
+    .drag-ghost {
+      position: fixed; z-index: 999; pointer-events: none;
+      background: #fff; border: 1px solid var(--gold);
+      border-radius: 8px; padding: .55rem .8rem;
+      font-size: .82rem; font-weight: 500; color: var(--charcoal);
+      box-shadow: 0 8px 30px rgba(44,36,32,.22);
+      display: inline-flex; align-items: center; gap: .5rem;
+      transform: translate(-50%, -50%) scale(1.04);
+    }
+    .drag-ghost .ac-price { color: var(--gold-text); font-size: .76rem; }
+
+    /* ── SUMMARY BAR ── */
+    .summary-bar {
+      position: sticky; bottom: 0; z-index: 50;
+      max-width: 1100px; margin: 0 auto;
+      background: var(--charcoal); color: #fff;
+      border-radius: 12px 12px 0 0;
+      padding: 1.1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      box-shadow: 0 -6px 30px rgba(44,36,32,.18);
+      flex-wrap: wrap;
+    }
+    .summary-info { display: flex; flex-direction: column; gap: .15rem; }
+    .summary-count { font-size: .66rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+    .summary-total { font-family: var(--font-serif); font-size: 1.9rem; font-weight: 300; color: var(--gold-light); line-height: 1; }
+    .summary-actions { display: flex; gap: .6rem; align-items: center; }
+    .summary-reset { font-size: .68rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); text-decoration: underline; cursor: pointer; transition: color .2s; }
+    .summary-reset:hover { color: #fff; }
+    .summary-book { font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: .8rem 1.6rem; background: var(--gold); color: var(--charcoal); border-radius: 6px; transition: background .2s, transform .15s; }
+    .summary-book:hover { background: #d4b47a; transform: translateY(-1px); }
+    .summary-book:disabled { opacity: .4; cursor: default; transform: none; }
+
+    /* toast */
+    .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--charcoal); color: #fff; font-size: .8rem; padding: .7rem 1.2rem; border-radius: 8px; box-shadow: 0 6px 24px rgba(44,36,32,.3); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 300; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── FOOTER ── */
+    footer { background: #1a110d; margin-top: 2rem; }
+    .footer-main { max-width: 1100px; margin: 0 auto; padding: 3.5rem 1.25rem 2.5rem; display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+    @media (min-width: 760px) { .footer-main { grid-template-columns: 1.4fr 1fr 1fr; padding: 5rem 1.75rem 3.5rem; gap: 3rem; } }
+    .footer-logo { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .3rem; }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline { font-size: 1rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-bottom: 1.75rem; }
+    .footer-social { display: flex; gap: .65rem; }
+    .footer-social-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.07); transition: background .2s; }
+    .footer-social-btn:hover { background: rgba(255,255,255,.15); }
+    .footer-col-label { font-size: 1rem; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .9rem; }
+    .footer-contact-item { margin-bottom: 1rem; }
+    .footer-contact-item p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.7; }
+    .footer-contact-item a { color: rgba(255,255,255,.5); transition: color .2s; }
+    .footer-contact-item a:hover { color: var(--gold); }
+    .footer-hours { width: 100%; border-collapse: collapse; }
+    .footer-hours td { padding: .22rem 0; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.45); }
+    .footer-hours td:first-child { color: rgba(255,255,255,.25); width: 85px; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.06); }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; padding: 1.25rem; display: flex; flex-direction: column; align-items: center; gap: .9rem; text-align: center; }
+    @media (min-width: 760px) { .footer-bottom { flex-direction: row; justify-content: space-between; padding: 1.25rem 1.75rem; text-align: left; } }
+    .footer-nav { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; justify-content: center; }
+    .footer-nav a { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.22); transition: color .2s; }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-copy { font-size: 1rem; color: rgba(255,255,255,.18); }
+
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</a>
+      <ul class="nav-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+      </button>
+      <a class="nav-book" href="booking.html">Book Now</a>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="index.html#services" class="mobile-menu-link">Services</a>
+    <a href="about.html" class="mobile-menu-link">About</a>
+    <a href="team.html" class="mobile-menu-link">Team</a>
+    <a href="gallery.html" class="mobile-menu-link">Gallery</a>
+    <a href="contact.html" class="mobile-menu-link">Contact</a>
+    <a href="booking.html" class="mobile-menu-link" style="color:var(--charcoal);font-weight:500;">Book Now</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="build-hero">
+    <span class="build-hero-label">Customize Your Visit</span>
+    <h1 class="build-hero-title">Build Your <em>Treatment</em></h1>
+    <p class="build-hero-sub">Pick a main service, then drag add-ons onto it to design your perfect appointment. Watch your total update as you go.</p>
+  </header>
+
+  <!-- BUILDER -->
+  <main class="build-main">
+    <div class="build-grid">
+
+      <!-- LEFT: main service cards -->
+      <section>
+        <div class="panel-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6L5.7 21l2.3-7.1-6-4.5h7.6z"/></svg>
+          Your Main Service
+        </div>
+        <div class="service-picker">
+          <select class="service-select" id="service-select" aria-label="Choose a main service">
+            <option value="">Choose a main service…</option>
+          </select>
+          <button class="btn-add-service" id="btn-add-service">Add</button>
+        </div>
+        <div class="service-cards" id="service-cards">
+          <div class="empty-state" id="empty-state">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <div>Add a main service above to start building.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: add-ons palette -->
+      <aside>
+        <div class="palette">
+          <div class="panel-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            Add-Ons
+          </div>
+          <div class="palette-card">
+            <p class="palette-hint"><strong>Drag</strong> an add-on onto a service card — or simply <strong>tap</strong> it to add it to your latest service.</p>
+            <div class="addon-grid" id="addon-grid">
+              <div style="color:var(--muted);font-size:.82rem;">Loading add-ons…</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- SUMMARY BAR -->
+  <div class="summary-bar">
+    <div class="summary-info">
+      <span class="summary-count" id="summary-count">No services yet</span>
+      <span class="summary-total" id="summary-total">$0</span>
+    </div>
+    <div class="summary-actions">
+      <span class="summary-reset" id="summary-reset">Reset</span>
+      <button class="summary-book" id="summary-book" disabled>Request This →</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-main">
+      <div>
+        <div class="footer-logo">CHIC NAIL <span>&amp;</span> HEAD SPA</div>
+        <p class="footer-tagline">Luxury · Care · Serenity</p>
+        <div class="footer-social">
+          <a id="footer-fb" href="https://www.facebook.com/chicnailandheadspa" target="_blank" rel="noopener" aria-label="Facebook" class="footer-social-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047v-2.66c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.265h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" fill="rgba(255,255,255,.55)"/></svg></a>
+          <a id="footer-ig" href="https://www.instagram.com/chicnailandheadspa/" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="rgba(255,255,255,.55)"/></svg></a>
+          <a id="footer-google" href="https://maps.app.goo.gl/8KmWubmG9RsnXehW9?g_st=ic" target="_blank" rel="noopener" aria-label="Google Business" class="footer-social-btn"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09zM12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23zM5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62zM12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="rgba(255,255,255,.55)"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-label">Visit Us</span>
+        <div class="footer-contact-item"><p id="footer-address">12076 Sycamore Trace<br>Plain City, Ohio 43064</p></div>
+        <div class="footer-contact-item"><table class="footer-hours"><tbody id="footer-hours-table"><tr><td>Mon – Fri</td><td>9:00 AM – 7:00 PM</td></tr><tr><td>Saturday</td><td>9:00 AM – 6:00 PM</td></tr><tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr></tbody></table></div>
+      </div>
+      <div>
+        <span class="footer-col-label">Get In Touch</span>
+        <div class="footer-contact-item"><p><a id="footer-phone" href="tel:+16143899999">(614) 389-9999</a></p></div>
+        <div class="footer-contact-item"><p><a id="footer-email" href="mailto:Chicnailheadspa@gmail.com">Chicnailheadspa@gmail.com</a></p></div>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <ul class="footer-nav"><li><a href="index.html">Home</a></li><li><a href="services.html">Menu</a></li><li><a href="team.html">Team</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul>
+      <p class="footer-copy">&copy; 2026 Chic Nail And Head Spa. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ── NAV ── */
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      mobileMenu.setAttribute('aria-hidden', !open);
+    });
+
+    /* ── STATE ── */
+    let ADDONS = [];                 // [{name, price, note}]
+    let MAIN_SERVICES = [];          // flat list of selectable main services
+    let cards = [];                  // [{uid, name, price, category, note, addons:[{name,price}]}]
+    let activeCardUid = null;        // last-touched card (for tap-to-add)
+    let uidSeq = 1;
+
+    /* ── PRICE HELPERS ── */
+    function priceNum(p) { const m = String(p).match(/(\d+(\.\d+)?)/); return m ? parseFloat(m[1]) : 0; }
+    function hasPlus(p)  { return /\+/.test(String(p)); }
+
+    /* ── LOAD content.json ── */
+    fetch('content.json')
+      .then(r => r.json())
+      .then(data => {
+        data.services.forEach(cat => {
+          if (cat.id === 'add-ons') {
+            cat.groups.forEach(g => g.items.forEach(it => ADDONS.push(it)));
+          } else {
+            cat.groups.forEach(g => g.items.forEach(it => {
+              MAIN_SERVICES.push({ ...it, category: cat.title, group: g.title || '' });
+            }));
+          }
+        });
+        buildServiceSelect(data.services);
+        buildAddonPalette();
+      })
+      .catch(() => {
+        document.getElementById('addon-grid').innerHTML =
+          '<div style="color:#c55;font-size:.82rem;">Could not load services. Please call <a href="tel:+16143899999">(614) 389-9999</a>.</div>';
+      });
+
+    /* ── BUILD MAIN-SERVICE SELECT (grouped) ── */
+    function buildServiceSelect(services) {
+      const sel = document.getElementById('service-select');
+      services.forEach(cat => {
+        if (cat.id === 'add-ons') return;
+        const og = document.createElement('optgroup');
+        og.label = cat.title;
+        cat.groups.forEach(g => {
+          g.items.forEach(it => {
+            const opt = document.createElement('option');
+            opt.value = `${cat.title}||${it.name}`;
+            opt.textContent = `${it.name} — ${it.price}`;
+            og.appendChild(opt);
+          });
+        });
+        sel.appendChild(og);
+      });
+    }
+
+    /* ── BUILD ADD-ON PALETTE ── */
+    function buildAddonPalette() {
+      const grid = document.getElementById('addon-grid');
+      grid.innerHTML = '';
+      ADDONS.forEach((a, i) => {
+        const chip = document.createElement('div');
+        chip.className = 'addon-chip';
+        chip.dataset.idx = i;
+        chip.setAttribute('role', 'button');
+        chip.setAttribute('tabindex', '0');
+        chip.setAttribute('aria-label', `Add ${a.name}, ${a.price}`);
+        chip.innerHTML = `
+          <span class="grip"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="1.6"/><circle cx="8" cy="12" r="1.6"/><circle cx="8" cy="18" r="1.6"/><circle cx="16" cy="6" r="1.6"/><circle cx="16" cy="12" r="1.6"/><circle cx="16" cy="18" r="1.6"/></svg></span>
+          <span class="ac-name">${a.name}</span>
+          <span class="ac-price">${a.price}</span>`;
+        attachDrag(chip, a);
+        chip.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tapAdd(a); }
+        });
+        grid.appendChild(chip);
+      });
+    }
+
+    /* ── ADD MAIN SERVICE ── */
+    document.getElementById('btn-add-service').addEventListener('click', addSelectedService);
+    document.getElementById('service-select').addEventListener('change', e => {
+      if (e.target.value) addSelectedService();
+    });
+
+    function addSelectedService() {
+      const sel = document.getElementById('service-select');
+      if (!sel.value) { showToast('Pick a service from the list first.'); return; }
+      const [category, name] = sel.value.split('||');
+      const svc = MAIN_SERVICES.find(s => s.category === category && s.name === name);
+      if (!svc) return;
+      const uid = uidSeq++;
+      cards.push({ uid, name: svc.name, price: svc.price, category: svc.category, note: svc.note || '', addons: [] });
+      activeCardUid = uid;
+      sel.value = '';
+      render();
+      showToast(`${svc.name} added — now drag add-ons onto it.`);
+    }
+
+    /* ── ADD-ON ATTACH / REMOVE ── */
+    function addAddonToCard(uid, addon) {
+      const card = cards.find(c => c.uid === uid);
+      if (!card) return;
+      card.addons.push({ name: addon.name, price: addon.price });
+      activeCardUid = uid;
+      render();
+    }
+    function tapAdd(addon) {
+      if (!cards.length) { showToast('Add a main service first.'); return; }
+      const uid = activeCardUid || cards[cards.length - 1].uid;
+      addAddonToCard(uid, addon);
+      showToast(`${addon.name} added.`);
+    }
+
+    /* ── RENDER ── */
+    function render() {
+      const wrap = document.getElementById('service-cards');
+      const empty = document.getElementById('empty-state');
+      if (!cards.length) {
+        wrap.innerHTML = '';
+        wrap.appendChild(empty);
+        updateSummary();
+        return;
+      }
+      wrap.innerHTML = '';
+      cards.forEach(card => {
+        const sub = priceNum(card.price) + card.addons.reduce((s, a) => s + priceNum(a.price), 0);
+        const plus = hasPlus(card.price) || card.addons.some(a => hasPlus(a.price));
+        const el = document.createElement('div');
+        el.className = 'svc-card';
+        el.dataset.uid = card.uid;
+
+        const chips = card.addons.map((a, i) => `
+          <span class="addon-attached">
+            ${a.name} <span class="ap">${a.price}</span>
+            <span class="rm" data-uid="${card.uid}" data-ai="${i}" role="button" aria-label="Remove ${a.name}">×</span>
+          </span>`).join('');
+
+        el.innerHTML = `
+          <div class="svc-card-head">
+            <div>
+              <div class="svc-card-title">${card.name}</div>
+              <div class="svc-card-cat">${card.category}</div>
+              ${card.note ? `<div class="svc-card-note">${card.note}</div>` : ''}
+            </div>
+            <div style="text-align:right;">
+              <div class="svc-card-base">${card.price}</div>
+              <span class="svc-card-remove" data-remove="${card.uid}">Remove</span>
+            </div>
+          </div>
+          <div class="svc-dropzone">
+            ${card.addons.length ? `<div class="addon-chips">${chips}</div>` : ''}
+            <div class="dropzone-hint">${card.addons.length ? 'Drop more add-ons here' : 'Drag add-ons here ✨'}</div>
+          </div>
+          <div class="svc-subtotal">
+            <span class="svc-subtotal-label">Subtotal${card.addons.length ? ' · +' + card.addons.length + ' add-on' + (card.addons.length>1?'s':'') : ''}</span>
+            <span class="svc-subtotal-val">$${sub}${plus ? '+' : ''}</span>
+          </div>`;
+
+        // active highlight
+        if (card.uid === activeCardUid) el.style.borderColor = 'var(--gold-light)';
+
+        // remove service
+        el.querySelector('[data-remove]').addEventListener('click', () => {
+          cards = cards.filter(c => c.uid !== card.uid);
+          if (activeCardUid === card.uid) activeCardUid = cards.length ? cards[cards.length-1].uid : null;
+          render();
+        });
+        // remove add-on
+        el.querySelectorAll('.rm').forEach(rm => {
+          rm.addEventListener('click', () => {
+            const c = cards.find(c => c.uid === +rm.dataset.uid);
+            c.addons.splice(+rm.dataset.ai, 1);
+            render();
+          });
+        });
+        // clicking a card makes it active
+        el.addEventListener('click', () => { activeCardUid = card.uid; });
+
+        wrap.appendChild(el);
+      });
+      updateSummary();
+    }
+
+    /* ── SUMMARY ── */
+    function updateSummary() {
+      let total = 0, addonCount = 0, plus = false;
+      cards.forEach(c => {
+        total += priceNum(c.price);
+        if (hasPlus(c.price)) plus = true;
+        c.addons.forEach(a => { total += priceNum(a.price); addonCount++; if (hasPlus(a.price)) plus = true; });
+      });
+      document.getElementById('summary-total').textContent = '$' + total + (plus ? '+' : '');
+      const cEl = document.getElementById('summary-count');
+      if (!cards.length) cEl.textContent = 'No services yet';
+      else cEl.textContent = `${cards.length} service${cards.length>1?'s':''}` + (addonCount ? ` · ${addonCount} add-on${addonCount>1?'s':''}` : '');
+      document.getElementById('summary-book').disabled = !cards.length;
+    }
+
+    /* ── DRAG & DROP (pointer-based, works mouse + touch) ── */
+    function attachDrag(chip, addon) {
+      chip.addEventListener('pointerdown', e => {
+        if (e.button && e.button !== 0) return;
+        const startX = e.clientX, startY = e.clientY;
+        let ghost = null, dragging = false, lastTarget = null;
+
+        const onMove = ev => {
+          const dx = ev.clientX - startX, dy = ev.clientY - startY;
+          if (!dragging && Math.hypot(dx, dy) < 6) return;  // tap threshold
+          if (!dragging) {
+            dragging = true;
+            chip.classList.add('dragging');
+            ghost = document.createElement('div');
+            ghost.className = 'drag-ghost';
+            ghost.innerHTML = `<span>${addon.name}</span><span class="ac-price">${addon.price}</span>`;
+            document.body.appendChild(ghost);
+            try { chip.setPointerCapture(e.pointerId); } catch (_) {}
+          }
+          ghost.style.left = ev.clientX + 'px';
+          ghost.style.top  = ev.clientY + 'px';
+
+          const under = document.elementFromPoint(ev.clientX, ev.clientY);
+          const targetCard = under ? under.closest('.svc-card') : null;
+          if (targetCard !== lastTarget) {
+            if (lastTarget) lastTarget.classList.remove('drop-active');
+            if (targetCard) targetCard.classList.add('drop-active');
+            lastTarget = targetCard;
+          }
+        };
+
+        const onUp = ev => {
+          document.removeEventListener('pointermove', onMove);
+          document.removeEventListener('pointerup', onUp);
+          if (ghost) ghost.remove();
+          chip.classList.remove('dragging');
+          if (lastTarget) lastTarget.classList.remove('drop-active');
+
+          if (dragging) {
+            const under = document.elementFromPoint(ev.clientX, ev.clientY);
+            const targetCard = under ? under.closest('.svc-card') : null;
+            if (targetCard && targetCard.dataset.uid) {
+              addAddonToCard(+targetCard.dataset.uid, addon);
+              showToast(`${addon.name} added.`);
+            }
+          } else {
+            // treated as a tap
+            tapAdd(addon);
+          }
+        };
+
+        document.addEventListener('pointermove', onMove);
+        document.addEventListener('pointerup', onUp);
+      });
+    }
+
+    /* ── RESET ── */
+    document.getElementById('summary-reset').addEventListener('click', () => {
+      if (!cards.length) return;
+      cards = []; activeCardUid = null; render();
+      showToast('Cleared.');
+    });
+
+    /* ── REQUEST (mailto) ── */
+    document.getElementById('summary-book').addEventListener('click', () => {
+      if (!cards.length) return;
+      let total = 0, plus = false;
+      const lines = cards.map(c => {
+        let sub = priceNum(c.price); if (hasPlus(c.price)) plus = true;
+        let txt = `• ${c.name} (${c.price})`;
+        c.addons.forEach(a => { sub += priceNum(a.price); if (hasPlus(a.price)) plus = true; txt += `\n    + ${a.name} (${a.price})`; });
+        total += sub;
+        return txt;
+      }).join('\n');
+      const subj = encodeURIComponent('Treatment Request — Chic Nail & Head Spa');
+      const body = encodeURIComponent(
+        `I'd like to book the following treatment:\n\n${lines}\n\nEstimated total: $${total}${plus ? '+' : ''}\n\n` +
+        `Preferred date/time: \nName: \nPhone: \n\n(Built with the Chic "Build Your Treatment" tool.)`
+      );
+      window.location.href = `mailto:Chicnailheadspa@gmail.com?subject=${subj}&body=${body}`;
+    });
+
+    /* ── TOAST ── */
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 1900);
+    }
+  </script>
+  <script src="content-loader.js"></script>
+</body>
+</html>
